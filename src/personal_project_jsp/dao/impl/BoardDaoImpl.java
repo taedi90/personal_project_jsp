@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,17 +26,30 @@ public class BoardDaoImpl implements BoardDao {
 		String title = rs.getString("title");
 		String category = rs.getString("category");
 		String content = rs.getString("content");
-		String wriDate = rs.getString("wri_date");
-		String modDate = rs.getString("mod_date");
+		Date wriDate = rs.getDate("wri_date");
+		Date modDate = rs.getDate("mod_date");
 		String thumb = rs.getString("thumb");
 
 		return new Board(no, id, title, category, content, wriDate, modDate, thumb);
 	}
 	
+	private Map<String, Object> getMap(ResultSet rs1, ArrayList<Board> boardArr,int idx, int num) throws SQLException {
+		// 조회값에 대한 데이터를 반환할 map 생성
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("maxPost", rs1.getInt(1)); // 전체글 수
+		map.put("nowPost", (idx-1)*num + boardArr.size()); // 현재글 (누적 idx)
+		map.put("maxPageIdx", Math.ceil(rs1.getInt(1) / num )); // 총 페이지 인덱스
+		map.put("nowPageIdx", idx); // 현재 페이지 인덱스
+		map.put("list", boardArr); // 현재 페이지 글 리스트
+		
+		return map;
+	}
+	
 	@Override
-	public Map<String, Object> selectBoardByAll(int idx, int num) {
+	public Map<String, Object> selectBoardByAll(int idx, int num, String order) {
 		String sql1 = "select count(*) FROM board";
-		String sql2 = "select R1.* FROM(SELECT * FROM board order by no desc) R1 LIMIT ?, ?";
+		String sql2 = "select R1.* FROM(SELECT * FROM board order by no " + order + " ) R1 LIMIT ?, ?";
 		ArrayList<Board> boardArr = null;
 		Map<String, Object> map = null;
 		
@@ -46,8 +60,7 @@ public class BoardDaoImpl implements BoardDao {
 			if(rs1.next() && rs1.getInt(1) <= 0) {
 				return null;
 			}
-			
-			pstmt2.setInt(1, idx - 1);
+			pstmt2.setInt(1, (idx-1)*num);
 			pstmt2.setInt(2, num);
 			try(ResultSet rs2 = pstmt2.executeQuery();){
 				if(rs2.next()) {
@@ -56,11 +69,7 @@ public class BoardDaoImpl implements BoardDao {
 						boardArr.add(getBoard(rs2));
 					}while(rs2.next());
 				}
-				map = new HashMap<>();
-				map.put("total", rs1.getInt(1));
-				map.put("now", boardArr.size());
-				map.put("accum", (idx-1)*num + boardArr.size());
-				map.put("list", boardArr);
+				map = getMap(rs1, boardArr, idx, num);
 				return map;
 			}
 
@@ -78,19 +87,19 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public Map<String, Object> selectBoardByCategory(Category category, int idx, int num) {
+	public Map<String, Object> selectBoardByCategory(Category category, int idx, int num, String order) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Map<String, Object> selectBoardByTitle(Category category, int idx, int num) {
+	public Map<String, Object> selectBoardByTitle(Category category, int idx, int num, String order) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Map<String, Object> selectBoardById(Category category, int idx, int num) {
+	public Map<String, Object> selectBoardById(Category category, int idx, int num, String order) {
 		// TODO Auto-generated method stub
 		return null;
 	}

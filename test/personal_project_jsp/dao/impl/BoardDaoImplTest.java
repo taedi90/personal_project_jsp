@@ -40,9 +40,7 @@ public class BoardDaoImplTest {
 	@Test
 	public void testSelectBoardByAll() {
 		System.out.println("testSelectBoardByAll");
-		Map<String, Object> map = dao.selectBoardByAll(1, 25);
-		System.out.println("map >>" + map.get("total"));
-		System.out.println("map >>" + map.get("now"));
+		Map<String, Object> map = dao.selectBoardByAll(1, 25, "desc");
 		System.out.println("map >>" + map.get("list"));
 		
 		fail("Not yet implemented");

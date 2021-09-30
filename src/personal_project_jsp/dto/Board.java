@@ -1,13 +1,15 @@
 package personal_project_jsp.dto;
 
+import java.util.Date;
+
 public class Board {
 	private long no;
 	private String id;
 	private String title;
 	private String category;
 	private String content;
-	private String wriDate;
-	private String modDate;
+	private Date wriDate;
+	private Date modDate;
 	private String thumb;
 
 	public Board() {
@@ -21,7 +23,7 @@ public class Board {
 		this.content = content;
 	}
 
-	public Board(long no, String id, String title, String category, String content, String wriDate, String modDate,
+	public Board(long no, String id, String title, String category, String content, Date wriDate, Date modDate,
 			String thumb) {
 		this.no = no;
 		this.id = id;
@@ -73,19 +75,19 @@ public class Board {
 		this.content = content;
 	}
 
-	public String getWriDate() {
+	public Date getWriDate() {
 		return wriDate;
 	}
 
-	public void setWriDate(String wriDate) {
+	public void setWriDate(Date wriDate) {
 		this.wriDate = wriDate;
 	}
 
-	public String getModDate() {
+	public Date getModDate() {
 		return modDate;
 	}
 
-	public void setModDate(String modDate) {
+	public void setModDate(Date modDate) {
 		this.modDate = modDate;
 	}
 
