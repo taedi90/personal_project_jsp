@@ -1,11 +1,13 @@
 package personal_project_jsp.dto;
 
+import java.util.Date;
+
 public class User {
 	private String id;
 	private String name;
 	private String password;
 	private String email;
-	private String reg_date;
+	private Date regDate;
 	private int rootPermission;
 	
 	public User() {
@@ -16,6 +18,15 @@ public class User {
 		this.name = name;
 		this.password = password;
 		this.email = email;
+	}
+	
+	public User(String id, String name, String password, String email, int rootPermission) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.password = password;
+		this.email = email;
+		this.rootPermission = rootPermission;
 	}
 
 	public String getId() {
@@ -50,18 +61,26 @@ public class User {
 		this.email = email;
 	}
 
-	public String getReg_date() {
-		return reg_date;
+	public Date getRegDate() {
+		return regDate;
 	}
 
-	public void setReg_date(String reg_date) {
-		this.reg_date = reg_date;
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+
+	public int getRootPermission() {
+		return rootPermission;
+	}
+
+	public void setRootPermission(int rootPermission) {
+		this.rootPermission = rootPermission;
 	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email + ", reg_date="
-				+ reg_date + "]";
+				+ regDate + "]";
 	}
 	
 	

@@ -9,11 +9,14 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import personal_project_jsp.dao.CategoryDao;
 import personal_project_jsp.dto.Category;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CategoryDaoImplTest {
 	
 	private static CategoryDao dao;

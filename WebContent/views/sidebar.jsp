@@ -32,8 +32,16 @@
 <hr>
 </ul>
 
+<c:if test='${user ne null}'>
+	<button id="logout" onclick = "location.href = 'views/logout.jsp' ">로그아웃</button>
+	<br>${user}님 안녕하세요!
+</c:if>
 
-<button id="open">로그인(미구현)</button>
+<c:if test='${user eq null}'>
+	<button id="open">로그인</button>
+</c:if>
+
+
 
 
 <script>
