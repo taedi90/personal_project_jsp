@@ -17,7 +17,6 @@ public class JdbcUtil {
 		try (InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(propPath);){
 			props.load(is);
 			String url = props.getProperty("url");
-			System.out.println(url);
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(url, props);
 		} catch (IOException e) {

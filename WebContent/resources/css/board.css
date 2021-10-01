@@ -5,39 +5,44 @@
 	flex-wrap: nowrap;
 	align-items: center;
 	justify-content: space-between;
-	border-bottom: solid 2px;
+	border-bottom: solid 0.2rem;
 }
 
 #boardTop * {
-	margin: 0px 3px 3px 3px;
+	margin: 0px 0.3rem 0.3rem 0.3rem;
+
 }
 
 #status {
-	
+	font-size: var(--font-sm);
+	color: var(--txt-color-3);
 }
 
 #option {
 	display: flex;
-	flex-wrap: nowrap;
+	flex-wrap: wrap;
 }
 
-.spacerX {
-	width: 100% !important;
+select {
+	font-size: var(--font-sm);
 }
 
 #boardMain {
 	border-bottom: solid 1px;
-	margin: 10px 0 10px 0;
+	margin: 1rem 0 1rem 0;
 }
 
+
+/* 게시물 제목 부분 */
 .postCard {
-	border-top: solid 1px;
-	padding: 10px 5px 10px 5px;
+	border-top: solid 0.1rem;
+	padding: 1rem 0.5rem 1rem 0.5rem;
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
+	cursor: pointer;
 }
 
 .postDesc {
@@ -45,43 +50,79 @@
 }
 
 .postDesc * {
-	margin: 0.2em 0 0.2em 0;
+	margin: 0.2rem 0 0.2rem 0;
 }
 
 .postThumb {
-	height: 80px;
-	width: 80px;
-	background-color: antiquewhite;
+	height: 8rem;
+	width: 8rem;
+	background-color: var(--bg-color-1);
 }
 
 .category {
-	font-size: 0.7rem;
+	font-size: var(--font-xs);
 	color: grey;
-	margin: 0.2em 0 0.2em 0;
+	margin: 0.2rem 0 0.2rem 0;
 }
 
 .title {
-	font-size: 1.2rem;
+	font-size: var(--font-base);
 	font-weight: bold;
 }
 
 .author {
-	font-size: 0.8rem;
+	font-size: var(--font-sm);
 	font-weight: bold;
 }
 
 .date {
-	font-size: 0.8rem;
+	font-size: var(--font-sm);
 }
 
+/* 게시물 내용 부분 */
 .postBody {
+	border-bottom: solid 0.1rem;
+	padding: 1rem 0.5rem 1rem 0.5rem;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+}
+.postContainer {
+	width: 100%;
+	font-size: var(--font-base);
+}
+.modDate {
+	font-size: var(--font-sm);
+	color: var(--txt-color-3);
+}
+.postContentTitle{
+	font-size: var(--font-base);
+	font-weight: bold;
+}
+.postContent{
+	font-size: var(--font-base);
+}
+
+
+#boardBottom {
+	padding-top: 1rem;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	border-top: solid 0.2rem;
+	font-size: var(--font-base);
+}
+
+.pageSwap {
+	font-weight: lighter;
+	cursor: pointer;
+}
+
+.nowPage {
+	color: var(--bg-color-1);
 	
 }
 
-#boardBottom {
-	padding-top: 10px;
-	display: flex;
-	flex-wrap: nowrap;
-	justify-content: center;
-	border-top: solid 2px;
+#prev, #next {
+	cursor: pointer;
 }

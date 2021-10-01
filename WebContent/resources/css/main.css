@@ -1,182 +1,162 @@
-@font-face {
-	font-family: 'Y_Spotlight';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/Y_Spotlight.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
+
+@media (min-width: 768.1px) {
+    html { font-size: 62.5%; }
+}
+@media (max-width: 768px)  {
+    html { font-size: 54.6875%; }
 }
 
-:root { -
-	-bg-color-1: #715d74; -
-	-bg-color-2: #a08aa3; -
-	-bg-color-3: #d1bad4; -
-	-bg-color-4: #d1bad470;; -
-	-bg-color-5: #ffffff; -
-	-txt-color-1: white; -
-	-txt-color-2: white; -
-	-txt-color-3: black; -
-	-txt-color-4: black; -
-	-txt-color-5: black;
+html {
+    --bg-color-1: #715d74;
+    --bg-color-2: #a08aa3;
+    --bg-color-3: #d1bad4;
+    --bg-color-4: #d1bad470;;
+    --bg-color-5: #ffffff;
+    --txt-color-1: black;
+    --txt-color-2: rgb(59, 59, 59);
+    --txt-color-3: grey;
+    --txt-color-4: rgb(175, 175, 175);
+    --txt-color-5: white;
+    --font-xs: 1.2rem;
+    --font-sm: 1.4rem;
+    --font-base: 1.6rem;
+    --font-lg: 1.8rem;
+    --font-xl: 2rem;
 }
 
 body {
-	padding: 0px;
-	margin: 0px;
-	font-family: 'Y_Spotlight', -apple-system, BlinkMacSystemFont,
-		'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
-		'Helvetica Neue', sans-serif;
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 #wrap {
-	display: flex;
-	flex-wrap: wrap;
-	height: 100vh;
-	max-width: 100vw;
-	align-items: baseline;
-	background-color: var(- -bg-color-5);
+    display: flex;
+    flex-wrap: wrap;
+    height: 100vh;
+    max-width: 100vw;
+    align-items: baseline;
+    background-color: var(--bg-color-5);
 }
 
+
 #header {
-	width: 100vw;
-	height: 40px;
-	background-color: var(- -bg-color-5);
-	color: var(- -txt-color-5);
-	display: flex;
-	align-items: center;
-	position: fixed;
-	border-bottom: solid 5px var(- -bg-color-1);
-	box-shadow: 0px 0px 7px black;
-	z-index: 2;
+    width: 100vw;
+    height: 4rem;
+    background-color: var(--bg-color-5);
+    color: var(--txt-color-1);
+    display: flex;
+    align-items: center;
+    position: fixed;
+    border-bottom: solid 0.5rem var(--bg-color-1);
+    box-shadow: 0 0 0.7rem black;
+    z-index: 2;
 }
 
 #header * {
-	margin-left: 10px;
+    margin-left: 1rem;
+    font-size: var(--font-lg);
 }
 
 #container {
-	width: 100vw;
-	height: calc(100% - 70px);
-	display: flex;
-	flex-wrap: nowrap;
-	padding-top: 40px;
+    width: 100vw;
+    height: calc(100% - 7rem);
+    display: flex;
+    flex-wrap: nowrap;
+    padding-top: 4rem;
 }
 
 #sidebar {
-	min-width: 250px;
-	width: 250px;
-	background-color: var(- -bg-color-4);
-	padding: 20px;
-	overflow-y: scroll;
-	-ms-overflow-style: none;
-	z-index: 1;
+    min-width: 20rem;
+    width: 20rem;
+    background-color: var(--bg-color-4);
+    padding: 2rem;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    z-index: 1;
+    font-size: var(--font-base);
 }
-
 #sidebar::-webkit-scrollbar {
-	display: none;
+    display:none;
 }
 
 #main {
-	width: 100%;
-	background-color: var(- -bg-color-5);
-	padding: 20px;
-	overflow-y: scroll;
+    width: 100%;
+    background-color: var(--bg-color-5);
+    padding: 2rem;
+    overflow-y: scroll;
 }
 
 #footer {
-	background-color: var(- -bg-color-2);
-	color: var(- -txt-color-2);
-	width: 100vw;
-	height: 30px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+    background-color: var(--bg-color-2);
+    color: var(--txt-color-5);
+    width: 100vw;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-xs);
 }
+
 
 .hidden {
-	display: none !important;
+    display: none !important;
 }
 
-.appear {
-	animation: appear 0.3s linear 1;
+.appear{animation: appear 0.3s linear 1 ;}
+@keyframes appear{
+    0%{transform: translateX(-100%);}
+    100%{transform: translateX(0%);}
 }
 
-@
-keyframes appear { 0%{
-	transform: translateX(-100%);
+.disappear{animation: disappear 0.2s linear 1 ;}
+@keyframes disappear{
+    0%{transform: translateX(0%);}
+    100%{transform: translateX(-100%);}
 }
 
-100
-%
-{
-transform
-:
-translateX(
-0%
-);
-}
-}
-.disappear {
-	animation: disappear 0.2s linear 1;
-}
-
-@
-keyframes disappear { 0%{
-	transform: translateX(0%);
-}
-
-100
-%
-{
-transform
-:
-translateX(
--100%
-);
-}
-}
 button {
-	all: unset;
-	background-color: var(- -bg-color-5);
-	color: var(- -txt-color-5);
-	border: solid 1px black;
-	padding: 2px 10px;
-	border-radius: 5px;
-	cursor: pointer;
+    all: unset;
+    background-color: var(--bg-color-5);
+    color: var(--txt-color-1);
+    border: solid 0.1rem black;
+    padding: 0.2rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
 }
 
 button:hover {
-	background-color: var(- -bg-color-1);
-	border: solid 1px var(- -bg-color-1);
-	color: var(- -txt-color-1);
+    background-color: var(--bg-color-1);
+    border: solid 0.1rem var(--bg-color-1);
+    color: var(--txt-color-5);
 }
 
 .modal {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	z-index: 99;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
 }
 
 .modal_overlay {
-	background-color: rgba(0, 0, 0, 0.6);
-	width: 100%;
-	height: 100%;
-	position: absolute;
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    position: absolute;
 }
 
 .modal_content {
-	background-color: white;
-	padding: 50px 100px;
-	text-align: center;
-	position: relative;
-	width: 200px;
-	border-radius: 8px;
-	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
-		rgba(0, 0, 0, 0.23);
+    background-color: white;
+    padding: 5rem 10rem;
+    text-align: center;
+    position: relative;
+    width: 20rem;
+    border-radius: 0.8rem;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.19), 0.6rem 0.6rem rgba(0, 0, 0, 0.23);
 }
+

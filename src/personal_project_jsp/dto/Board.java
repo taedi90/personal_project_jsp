@@ -16,7 +16,6 @@ public class Board {
 	}
 
 	public Board(String id, String title, String category, String content) {
-		super();
 		this.id = id;
 		this.title = title;
 		this.category = category;

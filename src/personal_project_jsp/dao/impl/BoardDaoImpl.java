@@ -106,7 +106,24 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public int insertBoard(Board board) {
-		// TODO Auto-generated method stub
+		String sql = "insert into board(id, title, category, content) values ( ?, ?, ?, ? )";
+		
+		try(Connection con = JdbcUtil.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				){
+
+			pstmt.setString(1, board.getId());
+			pstmt.setString(2, board.getTitle());
+			pstmt.setString(3, board.getCategory());
+			pstmt.setString(4, board.getContent());
+			
+			return  pstmt.executeUpdate();
+
+
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
 		return 0;
 	}
 
