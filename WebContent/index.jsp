@@ -14,6 +14,7 @@
 	<title>자유 게시판</title>
 	<link href="resources/css/main.css" rel="stylesheet">
 	<link href="resources/css/board.css" rel="stylesheet">
+	<link href="resources/css/sidebar.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	
 </head>
@@ -53,25 +54,7 @@
         </div>
         <div id="container">
             <div id="sidebar" class="hidden">
-                검색 <br>
-                아이디, 제목 <br>
-                검색하기 <br>
-                <ul> 카테고리
-                    <li>전체</li>
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li>4</li>
-                </ul>
-                관리자 <br>
-                게시물 관리 <br>
-                회원 관리 <br>
-
-                <button id="open">Login</button>
-
-                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                끝
+				<jsp:include page="views/sidebar.jsp" flush="true"></jsp:include>
             </div>
             <div id="main">
             	<jsp:include page="views/board.jsp?num=10&order=desc" flush="true"></jsp:include>

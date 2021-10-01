@@ -88,13 +88,45 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public Map<String, Object> selectBoardByCategory(Category category, int idx, int num, String order) {
-		// TODO Auto-generated method stub
+		String sql1 = "select count(*) FROM board where category = ?";
+		String sql2 = "select R1.* FROM(SELECT * FROM board where category = ? order by no " + order + " ) R1 LIMIT ?, ?";
+		ArrayList<Board> boardArr = null;
+		Map<String, Object> map = null;
+		
+		try(Connection con = JdbcUtil.getConnection();
+				PreparedStatement pstmt1 = con.prepareStatement(sql1);
+				PreparedStatement pstmt2 = con.prepareStatement(sql2);){
+			
+			pstmt1.setString(1, category.getCategory());
+			ResultSet rs1 = pstmt1.executeQuery();
+			if(rs1.next() && rs1.getInt(1) <= 0) {
+				return null;
+			}
+			
+			pstmt2.setString(1, category.getCategory());
+			pstmt2.setInt(2, (idx-1)*num);
+			pstmt2.setInt(3, num);
+			try(ResultSet rs2 = pstmt2.executeQuery();){
+				if(rs2.next()) {
+					boardArr = new ArrayList<>();
+					do {
+						boardArr.add(getBoard(rs2));
+					}while(rs2.next());
+				}
+				map = getMap(rs1, boardArr, idx, num);
+				return map;
+			}
+
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 
 	@Override
 	public Map<String, Object> selectBoardByTitle(Category category, int idx, int num, String order) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

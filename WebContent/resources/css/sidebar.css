@@ -1,0 +1,17 @@
+ul {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+}
+li {
+    cursor: pointer;
+    font-size: var(--font-lg);
+}
+li:hover{
+    font-weight: bold;
+}
+
+ul hr{
+    border: none;
+    border-top: 0.4rem dotted var(--txt-color-5);
+}

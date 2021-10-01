@@ -1,5 +1,3 @@
-
-
 <%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -8,6 +6,7 @@
 <%@ page import="personal_project_jsp.dao.BoardDao" %>
 <%@ page import="personal_project_jsp.dao.impl.BoardDaoImpl" %>
 <%@ page import="personal_project_jsp.dto.Board" %>
+<%@ page import="personal_project_jsp.dto.Category" %>
 	
 <%
 
@@ -15,28 +14,25 @@
 	int idx = request.getParameter("idx") == null ? 1 : Integer.parseInt(request.getParameter("idx"));
 	int num = request.getParameter("num") == null ? 10 : Integer.parseInt(request.getParameter("num"));
 	String order = request.getParameter("order") == null ? "desc" : request.getParameter("order");
+	String category = request.getParameter("category") == null ? "전체" : request.getParameter("category");
 	
 	BoardDao dao = BoardDaoImpl.getInstance();
+	Map<String, Object> map = null;
 	
-	Map<String, Object> map = dao.selectBoardByAll(idx, num, order);
+	if(category == "전체"){
+		map = dao.selectBoardByAll(idx, num, order);
+	}else{
+		Category ca = new Category(category);
+		map = dao.selectBoardByCategory(ca, idx, num, order);
+	}
+
 %>
 
-<%-- <!DOCTYPE html>
-<html lang="ko">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시판</title>
-<!--     <link href="../resources/css/main.css" rel="stylesheet">
-    <link href="../resources/css/board.css" rel="stylesheet"> -->
-</head>
-
-<body> --%>
-
 	<c:set var="map" value="<%= map %>"/>
-
+	<c:set var="category" value="<%= category %>"/>
+	<div><span id="category">${category}</span></div>
+	
+<c:if test='${map.get("maxPost") > 0}'>
     <div>
         <div id="boardTop">
             <div id="status">
@@ -69,10 +65,10 @@
 		<c:forEach var="i" items='${map.get("list")}' varStatus="status">
 			<div id="post${status.index}" class="postCard">
 				<div class="postDesc">
-                    <p class="category">${i.getCategory()}</p>
-                    <p class="title">${i.getTitle()}</p>
-                    <p class="author">${i.getId()}</p>
-                    <p class="date"><fmt:formatDate value="${i.getWriDate()}" pattern="yyyy월 MM월 dd일"/></p>
+                    <p class="postCategory">${i.getCategory()}</p>
+                    <p class="postTitle">${i.getTitle()}</p>
+                    <p class="postAuthor">${i.getId()}</p>
+                    <p class="postDate"><fmt:formatDate value="${i.getWriDate()}" pattern="yyyy월 MM월 dd일"/></p>
                 </div>
                 <div class="postThumb">
                     ${i.getThumb()}
@@ -81,7 +77,7 @@
             <div id="post${status.index}_con" class="postBody hidden">
                 <div class="postContainer">
                 	<hr>
-                	<p class="modDate">최종 수정일 : ${i.getModDate()}</p>
+                	<p class="postModDate">최종 수정일 : ${i.getModDate()}</p>
 
                 	<p class="postContentTitle">본문</p>
                 	<p class="postContent">${i.getContent()}</p>
@@ -121,7 +117,13 @@
 
         </div>
     </div>
+</c:if>
     
+<c:if test='${map.get("maxPost") == null}'>
+<hr />
+	<div id="noContents">게시물이 없습니다.</div>
+<hr />
+</c:if>
     
     
     <script>
@@ -240,8 +242,3 @@
     
     </script>
     
-    
-
-<%-- </body>
-
-</html> --%>

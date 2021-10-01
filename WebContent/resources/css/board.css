@@ -1,5 +1,15 @@
 @charset "UTF-8";
 
+#category {
+	font-size: var(--font-xl);
+}
+#noContents{
+	width: 100%;
+	font-size: var(--font-xl);
+	color: var(--txt-color-3);
+	text-align: center;
+	padding: 3rem 0 3rem 0;
+}
 #boardTop {
 	display: flex;
 	flex-wrap: nowrap;
@@ -59,23 +69,23 @@ select {
 	background-color: var(--bg-color-1);
 }
 
-.category {
+.postCategory {
 	font-size: var(--font-xs);
 	color: grey;
 	margin: 0.2rem 0 0.2rem 0;
 }
 
-.title {
+.postTitle {
 	font-size: var(--font-base);
 	font-weight: bold;
 }
 
-.author {
+.postAuthor {
 	font-size: var(--font-sm);
 	font-weight: bold;
 }
 
-.date {
+.postDate {
 	font-size: var(--font-sm);
 }
 
@@ -91,7 +101,7 @@ select {
 	width: 100%;
 	font-size: var(--font-base);
 }
-.modDate {
+.postModDate {
 	font-size: var(--font-sm);
 	color: var(--txt-color-3);
 }

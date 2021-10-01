@@ -6,12 +6,14 @@ import java.util.Map;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import personal_project_jsp.dao.BoardDao;
 import personal_project_jsp.dto.Board;
+import personal_project_jsp.dto.Category;
 
 public class BoardDaoImplTest {
 	
@@ -54,7 +56,12 @@ public class BoardDaoImplTest {
 
 	@Test
 	public void testSelectBoardByCategory() {
-		fail("Not yet implemented");
+		System.out.println("testSelectBoardByCategory");
+		Category category = new Category("수다");
+		System.out.println(category);
+		Map<String, Object> map = dao.selectBoardByCategory(category, 1, 25, "desc");
+		System.out.println("map >>" + map.get("list"));
+		Assert.assertNotNull(map);
 	}
 
 	@Test
@@ -70,7 +77,7 @@ public class BoardDaoImplTest {
 	@Test
 	public void testInsertBoard() {
 		Board board = new Board("root","테스트","수다","이 내용은 나도 몰라요");
-		for(int i = 1; i <= 1000; i++) {
+		for(int i = 1; i <= 2; i++) {
 			board.setTitle("제목" + i);	
 			dao.insertBoard(board);
 		}
