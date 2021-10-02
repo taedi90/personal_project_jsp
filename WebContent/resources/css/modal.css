@@ -11,14 +11,26 @@
     z-index: 99;
 }
 
-.modal_overlay {
+.loginModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+}
+
+.modalOverlay {
     background-color: rgba(0, 0, 0, 0.6);
     width: 100%;
     height: 100%;
     position: absolute;
 }
 
-.modal_content {
+.modalContent {
     background-color: white;
     padding: 2.5rem 5rem;
     text-align: center;
@@ -28,35 +40,40 @@
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.19), 0.6rem 0.6rem rgba(0, 0, 0, 0.23);
     font-size: var(--font-base);
 }
-.modal_close {
+
+#modalBody {
+    margin-bottom: 2rem;
+}
+
+.modalClose {
     width: 100%;
     display: flex;
     justify-content: end;
 }
-.modal_close .closeModal {
+.modalClose .closeModal {
     cursor: pointer;
 }
 
-.form_row {
+.formRow {
     display: flex;
     flex-wrap: nowrap;
     margin-bottom: 0.5rem;
 }
-.form_col1 {
+.formCol1 {
     text-align: left;
     width: 7rem;
 }
-.form_col2 {
+.formCol2 {
     width: calc(100% - 7rem);
 }
-.form_col2 input{
+.formCol2 input{
     width: 100%;
     border-left-width: 0;
     border-right-width: 0;
     border-top-width: 0;
     border-bottom-width: 0.1rem;
 }
-.form_col2 input:focus{
+.formCol2 input:focus{
     outline: none;
     background-color: var(--txt-color-4);
 }

@@ -77,6 +77,7 @@ body {
     -ms-overflow-style: none;
     z-index: 1;
     font-size: var(--font-base);
+    text-align: center;
 }
 #sidebar::-webkit-scrollbar {
     display:none;
@@ -133,4 +134,9 @@ button:hover {
     color: var(--txt-color-5);
 }
 
-
+object {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}

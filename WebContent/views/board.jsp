@@ -30,10 +30,10 @@
 
 	<c:set var="map" value="<%= map %>"/>
 	<c:set var="category" value="<%= category %>"/>
-	<div><span id="category">${category}</span></div>
+	<div id="categoryWrap"><span id="category">${category}</span></div>
 	
 <c:if test='${map.get("maxPost") > 0}'>
-    <div>
+    <div id="boardWrap">
         <div id="boardTop">
             <div id="status">
                 <span id="nowPost">${map.get("nowPost")}</span> / ${map.get("maxPost")}
@@ -42,7 +42,7 @@
             <div id="option">
                 <div>
                 	<c:set var="num" value="<%= num %>"/>
-                    <select id="num" name="num">
+                    <select id="num" name="num" onchange="if(this.value) numChange()">
                         <option value="10" <c:if test="${num == 10}">selected</c:if>>10개씩 보기</option>
                         <option value="20" <c:if test="${num == 20}">selected</c:if>>20개씩 보기</option>
                         <option value="30" <c:if test="${num == 30}">selected</c:if>>30개씩 보기</option>
@@ -50,7 +50,7 @@
                 </div>
                 <div>
                 	<c:set var="order" value="<%= order %>"/>
-                    <select id="order" name="order">
+                    <select id="order" name="order" onchange="if(this.value) orderChange()">
                         <option value="desc"  <c:if test="${order == 'desc'}">selected</c:if>>최근작성순</option>
                         <option value="asc" <c:if test="${order == 'asc'}">selected</c:if>>작성일자순</option>
                     </select>
@@ -63,7 +63,7 @@
         
         <!-- 게시물 출력 -->
 		<c:forEach var="i" items='${map.get("list")}' varStatus="status">
-			<div id="post${status.index}" class="postCard">
+			<div id="post${status.index}" class="postCard" data-no="${i.getNo()}" data-id="${i.getId()}" data-idx="${status.index}" onclick="postClick(this.dataset.idx)">
 				<div class="postDesc">
                     <p class="postCategory">${i.getCategory()}</p>
                     <p class="postTitle">${i.getTitle()}</p>
@@ -81,8 +81,8 @@
 
                 	<p class="postContentTitle">본문</p>
                 	<p class="postContent">${i.getContent()}</p>
-                	<button>수정</button>
-                	<button>삭제</button>
+                	<button data-no="${i.getNo()}" data-id="${i.getId()}">수정</button>
+                	<button data-no="${i.getNo()}" data-id="${i.getId()}">삭제</button>
                 	<p></p>
                 </div>
             </div>
@@ -94,7 +94,7 @@
         
         <c:set var="startIdx" value='${ map.get("nowPageIdx") - (map.get("nowPageIdx")%10 == 0 ? 10 : map.get("nowPageIdx")%10) + 1}' />
         <c:if test='${startIdx > 1}'>
-       		<div id="prev" value="${startIdx - 1}">이전</div>&nbsp;&nbsp;
+       		<div id="prev" onclick="prev(${startIdx - 1})">이전</div>&nbsp;&nbsp;
        	</c:if>
         <c:forEach var="i" begin='${startIdx}' end='${startIdx + 9 > map.get("maxPageIdx")? map.get("maxPageIdx"):startIdx + 9}'>
 
@@ -104,7 +104,7 @@
 					<div class="nowPage">${i}</div>
 				</c:when>
 				<c:otherwise>
-					<div class="pageSwap">${i}</div>
+					<div class="pageSwap" onclick="pageSwap(${i})">${i}</div>
 				</c:otherwise>
 			</c:choose>
 			<c:if test="${i ne startIdx + 9}">&nbsp;|&nbsp;</c:if>
@@ -112,7 +112,7 @@
         	
         </c:forEach>
         <c:if test='${startIdx + 9 < map.get("maxPageIdx")}'>
-       		&nbsp;&nbsp;<div id="next" value="${startIdx + 10}">다음</div>
+       		&nbsp;&nbsp;<div id="next" onclick="next(${startIdx + 10})">다음</div>
        	</c:if>
 
         </div>
@@ -124,121 +124,5 @@
 	<div id="noContents">게시물이 없습니다.</div>
 <hr />
 </c:if>
-    
-    
-    <script>
-    
-    
-    $(function(){
-        $("#num").change(function(){
-        	console.log("num 버튼 토글" +  $("#nowPost").text() + parseInt($("#num").val()));
-            $.ajax({
-                url : 'views/board.jsp', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
-                mathod : 'post',
-                data : {
-                    idx : Math.ceil($("#nowPost").text() / $("#num").val()),
-                    num : $("#num").val(),
-                    order : $("#order").val()
-                },			
-                success : function(data){ //DB접근 후 가져온 데이터
-                    $('#main').html(data);
-                }		
-            })
-        })
-    })	
-    
-    $(function(){
-        $("#order").change(function(){
-        	console.log("order 버튼 토글");
-            $.ajax({
-                url : 'views/board.jsp', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
-                mathod : 'post',
-                data : {
-                    idx : 1,
-                    num : $("#num").val(),
-                    order : $("#order").val()
-                },			
-                success : function(data){ //DB접근 후 가져온 데이터
-                    $('#main').html(data);
-                }		
-            })
-        })
-    })	
-    
-    $(function(){
-        $(".pageSwap").click(function(){
-        	console.log("페이지 인덱스 클릭" + $(this).text());
-        	
-            $.ajax({
-                url : 'views/board.jsp', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
-                mathod : 'post',
-                data : {
-                    idx : $(this).text(),
-                    num : $("#num").val(),
-                    order : $("#order").val()
-                },			
-                success : function(data){ //DB접근 후 가져온 데이터
-                    $('#main').html(data);
-                    $('#main').animate({scrollTop:0}, 200);
-                }		
-            })
-        })
-    })	
-    
-    $(function(){
-        $("#next").click(function(){
-        	console.log("페이지 인덱스 클릭" + $(this).text());
-        	
-            $.ajax({
-                url : 'views/board.jsp', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
-                mathod : 'post',
-                data : {
-                    idx : $(this).attr("value"),
-                    num : $("#num").val(),
-                    order : $("#order").val()
-                },			
-                success : function(data){ //DB접근 후 가져온 데이터
-                    $('#main').html(data);
-                    $('#main').animate({scrollTop:0}, 200);
-                }		
-            })
-        })
-    })	
-    
-    $(function(){
-        $("#prev").click(function(){
-        	console.log("페이지 인덱스 클릭" + $(this).text());
-        	
-            $.ajax({
-                url : 'views/board.jsp', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
-                mathod : 'post',
-                data : {
-                    idx : $(this).attr("value"),
-                    num : $("#num").val(),
-                    order : $("#order").val()
-                },			
-                success : function(data){ //DB접근 후 가져온 데이터
-                    $('#main').html(data);
-                    $('#main').animate({scrollTop:0}, 200);
-                }		
-            })
-        })
-    })	
-    
-    $(function(){
-        $(".postCard").click(function(){
-        	console.log("게시물 클릭");
-        	const item = "#" + $(this).attr('id') + "_con";
-        	if($(item).hasClass("hidden")){
-            	$(".postBody").addClass("hidden");
-                $(item).removeClass("hidden");
-        	}else{
-        		$(".postBody").addClass("hidden");
-        	}
-            
-        })
-    })	
-    
-    
-    </script>
+
     

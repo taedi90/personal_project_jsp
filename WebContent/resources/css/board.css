@@ -1,5 +1,13 @@
 @charset "UTF-8";
 
+#categoryWrap{
+	margin-top: 3rem;
+}
+
+#boardWrap {
+	margin-bottom: 10rem;
+}
+
 #category {
 	font-size: var(--font-xl);
 }
