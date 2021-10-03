@@ -31,7 +31,13 @@
 
 	<c:set var="map" value="<%= map %>"/>
 	<c:set var="category" value="<%= category %>"/>
-	<div id="categoryWrap"><span id="category">${category}</span></div>
+	<div id="categoryWrap">
+		<span id="category">${category}</span>
+        <div class="writePostButton">
+            <button type="button" onclick="writePost()">글쓰기</button>
+        </div>
+
+	</div>
 	
 <c:if test='${map.get("maxPost") > 0}'>
     <div id="boardWrap">

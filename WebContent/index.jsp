@@ -26,12 +26,11 @@
         <div id="header">
             <button id="btnSidebar">☰</button>
             <h3><a href="">자유게시판</a></h3>
-            <button onclick="javascript:writePost();">글쓰기</button>
             <c:if test='${user ne null}'>
-                <div id="loginStat" class="">${name}님 안녕하세요!</div>
+                <div id="loginStat" class="afterLogin">${name}님 안녕하세요!</div>
             </c:if>
             <c:if test='${user eq null}'>
-                <div id="loginStat" class="hidden"></div>
+                <div id="loginStat" class="afterLogin hidden"></div>
             </c:if>
 
         </div>

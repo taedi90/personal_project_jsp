@@ -15,7 +15,7 @@
 						<label for="id">아이디</label>
 					</div>
 					<div class="formCol2">
-						<input id="id" name="id" type="text" required>
+						<input id="id" name="id" type="text" required style="ime-mode:inactive;" placeholder="아이디">
 					</div>
 				</div>
 				<div id="idChkRes" class="formRow registerOption hidden">
@@ -25,7 +25,7 @@
 						<label for="password">패스워드</label>
 					</div>
 					<div class="formCol2">
-						<input id="password" name="password" type="password" required>
+						<input id="password" name="password" type="password" required placeholder="password"> 
 					</div>
 				</div>
 				<div class="registerOption hidden">
@@ -34,7 +34,7 @@
 							<label for="name">이름</label>
 						</div>
 						<div class="formCol2">
-							<input id="name" name="name" type="text">
+							<input id="name" name="name" type="text" style="ime-mode:active;" placeholder="이름">
 						</div>
 					</div>
 					<div class="formRow">
@@ -42,7 +42,7 @@
 							<label for="email">이메일</label>
 						</div>
 						<div class="formCol2">
-							<input id="email" name="email" type="email">
+							<input id="email" name="email" type="email" style="ime-mode:inactive;" placeholder="email">
 						</div>
 					</div>
 					<button type="button" class="loginFormBtns" onclick="registerProc()">회원가입</button>
