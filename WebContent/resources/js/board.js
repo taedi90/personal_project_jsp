@@ -1,19 +1,22 @@
 'use strict';
 let lastCategory = '전체';
+let lastNum = 10;
 
+// 게시물 수 변경
 function numChange(){
     let data = {
-        idx : Math.ceil($("#nowPost").text() / $("#num").val()),
+        idx : Math.ceil(($("#nowPost").text() - lastNum + 1) / $("#num").val()),
         num : $("#num").val(),
         order : $("#order").val(),
         category : lastCategory,
-        keyword : ($("#keyword").val() == '' ? null : $("#keyword").val())
+        keyword : $("#keyword").text()
 
     }
     let res = postAjax("views/board.jsp", data);
 
     $('#main').html(res);
     $('#main').animate({scrollTop:0}, 200);
+    lastNum = $("#num").val();
 }
 
 function orderChange(){
@@ -22,7 +25,7 @@ function orderChange(){
         num : $("#num").val(),
         order : $("#order").val(),
         category : lastCategory,
-        keyword : ($("#keyword").val() == '' ? null : $("#keyword").val())
+        keyword : $("#keyword").text()
     }
     let res = postAjax("views/board.jsp", data);
 
@@ -39,7 +42,7 @@ function categoryChange(category){
         num : $("#num").val(),
         order : $("#order").val(),
         category : lastCategory,
-        keyword : ($("#keyword").val() == '' ? null : $("#keyword").val())
+        keyword : $("#keyword").text()
     }
     let res = postAjax("views/board.jsp", data);
 
@@ -54,7 +57,7 @@ function pageSwap(idx){
         num : $("#num").val(),
         order : $("#order").val(),
         category : lastCategory,
-        keyword : ($("#keyword").val() == '' ? null : $("#keyword").val())
+        keyword : $("#keyword").text()
     }
     let res = postAjax("views/board.jsp", data);
 
@@ -69,7 +72,7 @@ function next(idx){
         num : $("#num").val(),
         order : $("#order").val(),
         category : lastCategory,
-        keyword : ($("#keyword").val() == '' ? null : $("#keyword").val())
+        keyword : $("#keyword").text()
     }
 
     let res = postAjax("views/board.jsp", data);
@@ -85,7 +88,7 @@ function prev(idx){
         num : $("#num").val(),
         order : $("#order").val(),
         category : lastCategory,
-        keyword : ($("#keyword").val() == '' ? null : $("#keyword").val())
+        keyword : $("#keyword").text()
     }
     let res = postAjax("views/board.jsp", data);
 
@@ -118,6 +121,7 @@ function searchPostFunc(keyword) {
         idx : 1,
         num : $("#num").val(),
         order : $("#order").val(),
+        category : "전체",
         keyword : keyword
     }
     let res = postAjax("views/board.jsp", data);

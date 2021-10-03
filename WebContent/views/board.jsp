@@ -21,6 +21,8 @@
 	String keyword = request.getParameter("keyword");
 	int keywordLength = 0;
 
+	// 내 글 검색인지 확인
+	String myPost = request.getParameter("myPost");
 
 
 	BoardDao dao = BoardDaoImpl.getInstance();
