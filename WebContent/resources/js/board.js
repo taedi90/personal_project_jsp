@@ -1,5 +1,5 @@
 'use strict';
-let lastCategory = undefined;
+let lastCategory = '전체';
 
 function numChange(){
     let data = {
@@ -29,12 +29,7 @@ function orderChange(){
 
 function categoryChange(category){
 
-    if (category === "전체") {
-        lastCategory = undefined;
-    }else {
-        lastCategory = category;
-    }
-
+    lastCategory = category;
 
     let data = {
         idx : 1,

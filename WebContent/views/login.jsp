@@ -7,7 +7,7 @@
 		<div class="modalClose">
 			<span class="btnCloseLogin">❌</span>
 		</div>
-		<h2 id="loginFormTitle">로그인</h2>  <!-- 또는 회원가입 -->
+		<div id="loginFormTitle">로그인</div>  <!-- 또는 회원가입 -->
 		<div id="loginWrap" class="form"></div>
 			<form name="loginForm">
 				<div class="formRow">
@@ -19,7 +19,6 @@
 					</div>
 				</div>
 				<div id="idChkRes" class="formRow registerOption hidden">
-					<!-- 사용 가능한 아이디입니다. -->
 				</div>
 				<div class="formRow">
 					<div class="formCol1">
@@ -46,12 +45,12 @@
 							<input id="email" name="email" type="email">
 						</div>
 					</div>
-					<button type="button" onclick="registerProc()">회원가입</button>
-					<div><a href="javascript:registerOff();">로그인으로</a></div>
+					<button type="button" class="loginFormBtns" onclick="registerProc()">회원가입</button>
+					<div class="loginFormSwap"><a href="javascript:registerOff();">로그인으로</a></div>
 				</div>
 				<div class="loginOption">
-					<button type="button" onclick="loginProc()">로그인</button>
-					<div>또는&nbsp;<a href="javascript:registerOn();">회원가입</a></div>
+					<button type="button" class="loginFormBtns" onclick="loginProc()">로그인</button>
+					<div class="loginFormSwap">또는&nbsp;<a href="javascript:registerOn();">회원가입</a></div>
 				</div>
 			</form>
 		</div>
@@ -68,7 +67,7 @@
 		</div>
 		<div id="modalButton">
 			<button type="button" class="button type0 closeModal" >확인</button>
-			<button type="button" class="button type1">예</button>
+			<button type="button" class="button type1" onclick="yesFunc()">예</button>
 			<button type="button" class="button type1 closeModal">아니오</button>
 
 		</div>

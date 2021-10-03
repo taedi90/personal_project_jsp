@@ -23,6 +23,31 @@
     z-index: 99;
 }
 
+#loginFormTitle {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+#idChkRes {
+    font-size: var(--font-sm);
+    display: flex;
+    justify-content: center;
+}
+
+.idChkWarn {
+    color: var(--txt-color-warn);
+}
+
+.loginFormBtns {
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.loginFormSwap {
+    font-size: var(--font-sm);
+}
+
 .modalOverlay {
     background-color: rgba(0, 0, 0, 0.6);
     width: 100%;

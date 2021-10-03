@@ -3,6 +3,7 @@ package personal_project_jsp.dao.impl;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -88,9 +89,10 @@ public class UserDaoImplTest {
 		User user = new User();
 		user.setId("test");
 		user.setPassword("4567");
-		int res = dao.loginChk(user);
-		System.out.println("res>> " + res);
-		Assert.assertNotEquals(0, res);
+		Map<String, Object> map = dao.loginChk(user);
+		System.out.println("res>> " + map.get("res"));
+		System.out.println("res>> " + map.get("name"));
+		Assert.assertNotEquals(0, map.get("res"));
 		
 	}
 

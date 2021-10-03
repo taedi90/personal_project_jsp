@@ -13,8 +13,9 @@
     <link href="resources/css/board.css" rel="stylesheet">
     <link href="resources/css/sidebar.css" rel="stylesheet">
     <link href="resources/css/modal.css" rel="stylesheet">
+    <link href="resources/css/writePost.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous" defer></script>
 </head>
 
 <body>
@@ -24,8 +25,14 @@
     <div id="wrap">
         <div id="header">
             <button id="btnSidebar">☰</button>
-            <h3>자유게시판</h3>
+            <h3><a href="">자유게시판</a></h3>
             <button onclick="javascript:writePost();">글쓰기</button>
+            <c:if test='${user ne null}'>
+                <div id="loginStat" class="">${name}님 안녕하세요!</div>
+            </c:if>
+            <c:if test='${user eq null}'>
+                <div id="loginStat" class="hidden"></div>
+            </c:if>
 
         </div>
         <div id="container">
@@ -46,7 +53,9 @@
     <!-- <script src="resources/js/fetch.js" defer></script> -->
     <!-- <script src="resources/js/ajax.js" defer></script> -->
     <script src="resources/js/jAjax.js" defer></script>
-
+    <!-- SmartEditor2 라이브러리 -->
+    <script type="text/javascript" src="se2/js/HuskyEZCreator.js" charset="utf-8" defer></script>
+    <script type="text/javascript" src = "resources/js/writePost.js" defer></script>
 </body>
 
 </html>

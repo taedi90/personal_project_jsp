@@ -1,0 +1,24 @@
+.title input {
+    margin-top: 3rem;
+    font-size: 2.5rem;
+    width: 90%;
+    border: none;
+}
+
+.title input:focus{
+    outline: none;
+}
+
+.writeRow {
+    margin-top: 2rem;
+}
+
+.writePostBottom {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+#cancelPost, #savePost {
+    font-size: var(--font-base);
+    margin-bottom: 10rem;
+}

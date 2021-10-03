@@ -13,6 +13,20 @@
 	ArrayList<Category> arr = dao.selectCategoryByAll();
 %>
 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>글쓰기</title>
+<!-- SmartEditor2 라이브러리 -->
+<script type="text/javascript" src="../se2/js/HuskyEZCreator.js"
+	charset="utf-8"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<link href="../resources/css/main.css" rel="stylesheet">
+<link href="../resources/css/writePost.css" rel="stylesheet">
+</head>
+<body>
+
 <form id="writePost">
 
 	<label for=""></label>
@@ -42,9 +56,21 @@
 	</div>
 
 	<div class="writePostBottom writeRow">
-		<button type="button" id="cancelPost" onclick="cancelPostFunc()">뒤로가기</button>
-		<button type="button" id="savePost" onclick="savePostFunc()">등록하기</button>	
+		<button type="button" id="cancelPost">뒤로가기</button>
+		<button type="button" id="savePost">등록하기</button>	
 	</div>
 
 
 </form>
+
+
+
+
+
+
+
+</body>
+</html>
+
+<script type="text/javascript" src = "../resources/js/writePost.js"></script>
+<script src="../resources/js/jAjax.js" defer></script>

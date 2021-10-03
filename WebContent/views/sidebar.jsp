@@ -17,7 +17,7 @@
 	검색(미구현)<br>
 
 	<ul> 카테고리<hr>
-		<li class="category">전체</li>
+		<li class="category"onclick="categoryChange('전체')">전체</li>
 		<c:set var="arr" value="<%= arr %>"/>
 		<c:forEach var="i" items="${arr}">
 			<li class="category" onclick="categoryChange('${i.getCategory()}')">${i.getCategory()}</li>
@@ -34,12 +34,13 @@
 	</ul>
 
 	<c:if test='${user ne null}'>
-		<button id="logout" onclick = "location.href = 'views/logout.jsp' ">로그아웃</button>
-		<br>${user}님 안녕하세요!
+		<button id="btnOpenLogin" class="hidden">로그인</button>
+		<button id="btnOpenLogout">로그아웃</button>
 	</c:if>
 
 	<c:if test='${user eq null}'>
 		<button id="btnOpenLogin">로그인</button>
+		<button id="btnOpenLogout" class="hidden">로그아웃</button>
 	</c:if>
 </div>
 

@@ -10,7 +10,7 @@ public interface UserDao {
 	
 	ArrayList<User> selectUserByAll();
 	
-	int loginChk(User user);
+	Map loginChk(User user);
 	int idChk(User user);
 	int insertUser(User user);
 	int updateUser(User user);

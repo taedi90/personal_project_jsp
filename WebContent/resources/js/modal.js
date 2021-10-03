@@ -22,8 +22,15 @@ closeModals.forEach(i => {
     i.addEventListener("click",closeModal);
 })
 
+
+function yesFunc(){
+    closeModal();
+    joinFunc();
+}
+let joinFunc = undefined;
+
 // 창 열기
-function openModal(message, type) {
+function openModal(message = '', type = 0, func = function(){}) {
 
 
     modalBody.textContent = message;
@@ -32,6 +39,7 @@ function openModal(message, type) {
     if(type === 1){
         modalButtons.forEach(i => i.classList.add("hidden"));
         type1.forEach(i => i.classList.remove("hidden"));
+        joinFunc = func;
     }else{
         modalButtons.forEach(i => i.classList.add("hidden"));
         type0.forEach(i => i.classList.remove("hidden"));

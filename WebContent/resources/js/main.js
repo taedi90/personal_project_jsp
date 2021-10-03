@@ -21,8 +21,11 @@ btnSidebar.addEventListener("click", toggleSidebar);
 const main = document.getElementById("main");
 
 function writePost(){
-    main.innerHTML='<object type="text/html" data="views/writePost.jsp" ></object>';
-    //let res = postAjax('views/writePost.jsp');
-    //main.innerHTML=res;
+    //main.innerHTML='<object type="text/html" data="views/writePost.jsp" ></object>';
+    let res = postAjax('views/writePost.jsp');
+    main.innerHTML=res;
     //$('#main').html(res);
+
+    // writer 초기화
+    editorInit();
 }

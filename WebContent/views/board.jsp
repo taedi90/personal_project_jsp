@@ -7,6 +7,7 @@
 <%@ page import="personal_project_jsp.dao.impl.BoardDaoImpl" %>
 <%@ page import="personal_project_jsp.dto.Board" %>
 <%@ page import="personal_project_jsp.dto.Category" %>
+<%@ page session ="true" %>
 	
 <%
 
@@ -19,7 +20,7 @@
 	BoardDao dao = BoardDaoImpl.getInstance();
 	Map<String, Object> map = null;
 	
-	if(category == "전체"){
+	if(category.equals("전체")){
 		map = dao.selectBoardByAll(idx, num, order);
 	}else{
 		Category ca = new Category(category);

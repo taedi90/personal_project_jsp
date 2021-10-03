@@ -12,6 +12,7 @@ function postAjax(url = '', data = {}) {
         },		
         error: function(e) { 
             console.error(e); 
+            res = 0;
         } 
     });
     return res;

@@ -56,8 +56,9 @@ public class UserDaoImpl implements UserDao {
 	}
 	
 	@Override
-	public int loginChk(User user) {
-		String sql = "select count(*) from user where id = ? and password = ?";
+	public Map loginChk(User user) {
+		String sql = "select count(*), name from user where id = ? and password = ?";
+		Map<String, Object> map = new HashMap<>();
 		
 		try(Connection con = JdbcUtil.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);
@@ -67,15 +68,18 @@ public class UserDaoImpl implements UserDao {
 			pstmt.setString(2, user.getPassword());
 			
 			try(ResultSet rs = pstmt.executeQuery();){
-				if(rs.next()) {
-					return rs.getInt(1);
+				if(rs.next()) {					
+					map.put("res", rs.getInt(1)); // 전체글 수
+					map.put("name", rs.getString("name")); // 현재글 (누적 idx)
+					return map;
 				}
 			}
 
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return 0;
+		map.put("res", 0);
+		return map;
 	}
 
 
