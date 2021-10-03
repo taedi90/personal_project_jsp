@@ -214,7 +214,7 @@ passwordInput.addEventListener("change", confirmChkFunc);
 // 패스워드 문법 검사
 const passwordRegExChk = /^[a-z0-9]{4,13}$/;
 function passwordRegExChkFunc() {
-    if(!idRegEx.test(passwordInput.value)){
+    if(!passwordRegExChk.test(passwordInput.value)){
         return true; // 오류
     }
     return false; // 통과!
