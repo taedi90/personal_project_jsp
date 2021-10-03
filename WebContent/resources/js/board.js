@@ -6,7 +6,9 @@ function numChange(){
         idx : Math.ceil($("#nowPost").text() / $("#num").val()),
         num : $("#num").val(),
         order : $("#order").val(),
-        category : lastCategory
+        category : lastCategory,
+        keyword : ($("#keyword").val() == '' ? null : $("#keyword").val())
+
     }
     let res = postAjax("views/board.jsp", data);
 
@@ -19,7 +21,8 @@ function orderChange(){
         idx : 1,
         num : $("#num").val(),
         order : $("#order").val(),
-        category : lastCategory
+        category : lastCategory,
+        keyword : ($("#keyword").val() == '' ? null : $("#keyword").val())
     }
     let res = postAjax("views/board.jsp", data);
 
@@ -35,7 +38,8 @@ function categoryChange(category){
         idx : 1,
         num : $("#num").val(),
         order : $("#order").val(),
-        category : lastCategory
+        category : lastCategory,
+        keyword : ($("#keyword").val() == '' ? null : $("#keyword").val())
     }
     let res = postAjax("views/board.jsp", data);
 
@@ -49,7 +53,8 @@ function pageSwap(idx){
         idx : idx,
         num : $("#num").val(),
         order : $("#order").val(),
-        category : lastCategory
+        category : lastCategory,
+        keyword : ($("#keyword").val() == '' ? null : $("#keyword").val())
     }
     let res = postAjax("views/board.jsp", data);
 
@@ -63,8 +68,10 @@ function next(idx){
         idx : idx,
         num : $("#num").val(),
         order : $("#order").val(),
-        category : lastCategory
+        category : lastCategory,
+        keyword : ($("#keyword").val() == '' ? null : $("#keyword").val())
     }
+
     let res = postAjax("views/board.jsp", data);
 
     $('#main').html(res);
@@ -77,7 +84,8 @@ function prev(idx){
         idx : idx,
         num : $("#num").val(),
         order : $("#order").val(),
-        category : lastCategory
+        category : lastCategory,
+        keyword : ($("#keyword").val() == '' ? null : $("#keyword").val())
     }
     let res = postAjax("views/board.jsp", data);
 
@@ -102,4 +110,18 @@ function postClick(idx){
         }
     }
 
+}
+
+// 검색 (간단하게만..)
+function searchPostFunc(keyword) {
+    let data = {
+        idx : 1,
+        num : $("#num").val(),
+        order : $("#order").val(),
+        keyword : keyword
+    }
+    let res = postAjax("views/board.jsp", data);
+
+    $('#main').html(res);
+    $('#main').animate({scrollTop:0}, 200);
 }

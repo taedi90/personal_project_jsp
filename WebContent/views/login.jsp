@@ -4,45 +4,53 @@
 <div class="loginModal hidden">
 	<div class="modalOverlay"></div>
 	<div class="modalContent">
-		<div class="modalClose">
-			<span class="btnCloseLogin">❌</span>
+		<div class="loginModalClose">
+			<img class="btnCloseLogin" src="resources/imgs/x.svg">
 		</div>
 		<div id="loginFormTitle">로그인</div>  <!-- 또는 회원가입 -->
 		<div id="loginWrap" class="form"></div>
 			<form name="loginForm">
 				<div class="formRow">
+
 					<div class="formCol1">
-						<label for="id">아이디</label>
+						<input id="id" name="id" type="text" required placeholder="id" autocomplete='off'>
 					</div>
 					<div class="formCol2">
-						<input id="id" name="id" type="text" required style="ime-mode:inactive;" placeholder="아이디">
+						<img id="chkOkId" class="hidden" src="resources/imgs/check.svg">
 					</div>
 				</div>
-				<div id="idChkRes" class="formRow registerOption hidden">
+				<div id="idChkRes" class="chkRes formRow registerOption hidden">
 				</div>
 				<div class="formRow">
 					<div class="formCol1">
-						<label for="password">패스워드</label>
+						<input id="password" name="password" type="password" required placeholder="password"> 
 					</div>
 					<div class="formCol2">
-						<input id="password" name="password" type="password" required placeholder="password"> 
+						<img id="chkOkConfirm" class="hidden" src="resources/imgs/check.svg">
 					</div>
 				</div>
 				<div class="registerOption hidden">
 					<div class="formRow">
 						<div class="formCol1">
-							<label for="name">이름</label>
+							<input id="confirm" name="confirm" type="password" required placeholder="confirm"> 
 						</div>
 						<div class="formCol2">
-							<input id="name" name="name" type="text" style="ime-mode:active;" placeholder="이름">
+						</div>
+					</div>
+					<div id="confirmChkRes" class="chkRes formRow registerOption hidden">
+					</div>
+					<div class="formRow">
+						<div class="formCol1">
+							<input id="name" name="name" type="text" placeholder="이름">
+						</div>
+						<div class="formCol2">
 						</div>
 					</div>
 					<div class="formRow">
 						<div class="formCol1">
-							<label for="email">이메일</label>
+							<input id="email" name="email" type="email" placeholder="email">
 						</div>
 						<div class="formCol2">
-							<input id="email" name="email" type="email" style="ime-mode:inactive;" placeholder="email">
 						</div>
 					</div>
 					<button type="button" class="loginFormBtns" onclick="registerProc()">회원가입</button>

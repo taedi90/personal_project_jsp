@@ -10,6 +10,7 @@ const openLoginModal = () => {
     loginModal.classList.remove("hidden");
     document.body.style.overflow = "hidden"; // 스크롤 방지
     registerOff(); // 초기 화면은 로그인 창
+    confirmChkFunc();
 }
 btnOpenLogin.addEventListener("click", openLoginModal);
 
@@ -48,6 +49,7 @@ function registerOn(){
     register = 1;
 
     idChkFunc(); // 아이디 체크
+    confirmChkFunc();
 }
 
 
@@ -67,14 +69,20 @@ function registerOff(){
     document.getElementById("loginFormTitle").innerHTML = "로그인";
 
     register = 0;
+
+    idChkFunc(); // 아이디 체크
+    confirmChkFunc();
 }
 
 // 아이디 체크(유효성 체크, 중복체크)
 const idInput = document.getElementById("id"); // 아이디 입력창
 const idChkRes = document.getElementById("idChkRes"); // 아이디 입력관련 메세지 출력 요소
+let idChk = 0;
 
 const idChkFunc = () => {
     idChkRes.classList.add("hidden");
+    document.getElementById("chkOkId").classList.add("hidden");
+    idChk = 0;
 
     // 불필요한 문자 제거
     notAllowedCharChk();
@@ -93,11 +101,10 @@ const idChkFunc = () => {
     }
 
     // 2. 유효성 체크(숫자,영어,특문 일부 외에 모두 제외)
-    // false일때도 수행되는 이유를 모르겠음..
     if(idRegExChk()){
         idChkRes.classList.remove("hidden"); // 메세지 출력
         idChkRes.classList.add("idChkWarn"); // 오류 메세지는 붉은 글자 처리
-        idChkRes.textContent = "영문자 또는 숫자 4~20자만 사용 가능합니다.";
+        idChkRes.textContent = "소문자 또는 숫자 4~20자만 사용 가능합니다.";
 
         return;
     }
@@ -108,14 +115,12 @@ const idChkFunc = () => {
         idChkRes.classList.add("idChkWarn");
         idChkRes.textContent = "아이디 중복!";
     }else{
-        idChkRes.classList.remove("hidden");
-        idChkRes.classList.remove("idChkWarn");
-        idChkRes.textContent = "사용 가능한 아이디입니다!";
-
+        document.getElementById("chkOkId").classList.remove("hidden");
+        idChk = 1;
     }
 
 }
-idInput.addEventListener("keyup", idChkFunc);
+idInput.addEventListener("change", idChkFunc);
 
 
 // 공백 여부 체크
@@ -126,12 +131,15 @@ function nullChk(input) {
     return false;
 }
 
+
 // 사용 불가능한 글자 제외
 const notAllowedChar = /[^a-z0-9]/gi;
 function notAllowedCharChk(){
     let id = idInput.value;
     idInput.value = id.replace(notAllowedChar,'');
 }
+idInput.addEventListener("keyup", notAllowedCharChk);
+
 
 // 아이디 문법 검사
 const idRegEx = /^[a-z]+[a-z0-9]{3,19}$/;
@@ -148,12 +156,68 @@ function idRegExChk() {
 
 // 아이디 중복 체크
 function idExistChk() {
+    let id = idInput.value;
     let data = postAjax('controller/idChkProc.jsp', {id: id});
     if(data[0].res === '0') {
         return false; // 사용 가능한 아이디
     }else{
         return true; // 사용 불가능한 아이디
     }
+}
+
+
+
+
+// 비밀번호 확인
+const confirmChkRes = document.getElementById("confirmChkRes"); // 비밀번호 입력관련 메세지 출력 요소
+const passwordInput = document.getElementById("password"); // 비밀번호 입력창
+const confirmInput = document.getElementById("confirm"); // 비밀번호 확인 입력창
+let passChk = 0;
+function confirmChkFunc() {
+    document.getElementById("chkOkConfirm").classList.add("hidden");
+    confirmChkRes.classList.add("hidden");
+    passChk = 0;
+
+    // 로그인 상황이면 메세지 띄우지 않기
+    if(register === 0){
+        return;
+    }
+
+    // 필드가 비었을 경우에는 안내하지 않기
+    if(nullChk(passwordInput.value)){
+        return;
+    }
+
+    //유효성확인 (숫자,영어 4자리 이상)
+    if (passwordRegExChkFunc()) {
+        confirmChkRes.classList.remove("hidden");
+        confirmChkRes.classList.add("idChkWarn");
+        confirmChkRes.textContent = "숫자, 소문자 4~13자리 구성";
+        return;
+    }
+
+    //일치여부 확인
+    if(passwordInput.value === confirmInput.value){
+        document.getElementById("chkOkConfirm").classList.remove("hidden");
+        passChk = 1;
+    }else{
+        confirmChkRes.classList.remove("hidden");
+        confirmChkRes.classList.remove("idChkWarn");
+        confirmChkRes.textContent = "비밀번호를 동일하게 입력해주세요!";
+    }
+
+}
+confirmInput.addEventListener("change", confirmChkFunc);
+passwordInput.addEventListener("change", confirmChkFunc);
+
+
+// 패스워드 문법 검사
+const passwordRegExChk = /^[a-z0-9]{4,13}$/;
+function passwordRegExChkFunc() {
+    if(!idRegEx.test(passwordInput.value)){
+        return true; // 오류
+    }
+    return false; // 통과!
 }
 
 
@@ -189,7 +253,7 @@ function loginProc() {
         openModal(data[0].comment);
 
         // 가입하지 않은 아이디라면 회원가입 화면으로 유도
-        if(idExistChk()){
+        if(!idExistChk()){
             registerOn();
         }
     }
@@ -231,17 +295,20 @@ function registerProc(){
     let email = document.loginForm.email.value;
 
     // 값 확인
-    if(nullChk(id) || nullChk(password) || nullChk(name) || nullChk(email)){
+    if(nullChk(name) || nullChk(email)){
         return;
     }
 
-    // 아이디 문법 검사
-    if(idRegExChk()){
+    // 아이디 검사
+    idChkFunc();
+    if (idChk != 1){
         return;
-    }   
+    }
 
-    // 아이디 중복 검사
-    if(idExistChk()){
+
+    // 비밀번호검사
+    confirmChkFunc();
+    if (passChk != 1){
         return;
     }
 

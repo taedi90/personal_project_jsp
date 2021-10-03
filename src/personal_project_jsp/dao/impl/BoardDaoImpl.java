@@ -12,6 +12,7 @@ import java.util.Map;
 import personal_project_jsp.dao.BoardDao;
 import personal_project_jsp.dto.Board;
 import personal_project_jsp.dto.Category;
+import personal_project_jsp.dto.User;
 import personal_project_jsp.util.JdbcUtil;
 
 public class BoardDaoImpl implements BoardDao {
@@ -143,14 +144,80 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public Map<String, Object> selectBoardByTitle(Category category, int idx, int num, String order) {
+	public Map<String, Object> selectBoardByKeyword(String keyword, int idx, int num, String order) {
+		String sql1 = "select count(*) FROM board where content like '%" + keyword + "%' or title like '%" + keyword + "%'";
+		String sql2 = "select R1.* FROM(SELECT * FROM board where content like '%" + keyword + "%' or title like '%" + keyword + "%' order by no " + order + " ) R1 LIMIT ?, ?";
+		ArrayList<Board> boardArr = null;
+		Map<String, Object> map = null;
+		
+		System.out.println("디비에서 키워드" + keyword);
+		
+		try(Connection con = JdbcUtil.getConnection();
+				PreparedStatement pstmt1 = con.prepareStatement(sql1);
+				PreparedStatement pstmt2 = con.prepareStatement(sql2);
+				ResultSet rs1 = pstmt1.executeQuery();){
+
+			if(rs1.next() && rs1.getInt(1) <= 0) {
+				return null;
+			}
+			
+			pstmt2.setInt(1, (idx-1)*num);
+			pstmt2.setInt(2, num);
+			
+			System.out.println(pstmt2.toString());
+			try(ResultSet rs2 = pstmt2.executeQuery();){
+				if(rs2.next()) {
+					boardArr = new ArrayList<>();
+					do {
+						boardArr.add(getBoard(rs2));
+					}while(rs2.next());
+				}
+				map = getMap(rs1, boardArr, idx, num);
+				return map;
+			}
+
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
 		
 		return null;
 	}
 
 	@Override
-	public Map<String, Object> selectBoardById(Category category, int idx, int num, String order) {
-		// TODO Auto-generated method stub
+	public Map<String, Object> selectBoardById(User user, int idx, int num, String order) {
+		String sql1 = "select count(*) FROM board where id = ?";
+		String sql2 = "select R1.* FROM(SELECT * FROM board where id = ? order by no " + order + " ) R1 LIMIT ?, ?";
+		ArrayList<Board> boardArr = null;
+		Map<String, Object> map = null;
+		
+		try(Connection con = JdbcUtil.getConnection();
+				PreparedStatement pstmt1 = con.prepareStatement(sql1);
+				PreparedStatement pstmt2 = con.prepareStatement(sql2);){
+			
+			pstmt1.setString(1, user.getId());
+			ResultSet rs1 = pstmt1.executeQuery();
+			if(rs1.next() && rs1.getInt(1) <= 0) {
+				return null;
+			}
+			
+			pstmt2.setString(1, user.getId());
+			pstmt2.setInt(2, (idx-1)*num);
+			pstmt2.setInt(3, num);
+			try(ResultSet rs2 = pstmt2.executeQuery();){
+				if(rs2.next()) {
+					boardArr = new ArrayList<>();
+					do {
+						boardArr.add(getBoard(rs2));
+					}while(rs2.next());
+				}
+				map = getMap(rs1, boardArr, idx, num);
+				return map;
+			}
+
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 
@@ -161,7 +228,7 @@ public class BoardDaoImpl implements BoardDao {
 		try(Connection con = JdbcUtil.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				){
-
+			System.out.println(board);
 			pstmt.setString(1, board.getId());
 			pstmt.setString(2, board.getTitle());
 			pstmt.setString(3, board.getCategory().getCategory());

@@ -17,8 +17,9 @@
 	String comment = null;
 
 	
-	
+
 	String id = (String)session.getAttribute("user");
+	System.out.println(id);
 	String title = request.getParameter("title");
 	Category category = new Category(request.getParameter("category"));
 	String content = request.getParameter("content");
@@ -43,7 +44,7 @@
 	
 	Board board = new Board();
 	board.setCategory(category);
-	//board.setId(id);
+	board.setId(id);
 	board.setTitle(title);
 	board.setContent(content);
 	

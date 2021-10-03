@@ -14,26 +14,28 @@
 %>
 
 <div id="sidebarWrap">
-	<input type="text" placeholder="검색">
+	<input type="text" class="searchInput" placeholder="검색" onkeyup="if(window.event.keyCode==13){searchPostFunc(this.value)}">
 
 	<br>
 
 	<div class="afterLogin <c:if test='${user eq null}'>hidden</c:if>">
-
 		내 글 보기
 	</div>
 
 	<br>
 
-	<ul> 카테고리
-		<hr>
-		<li class="category"onclick="categoryChange('전체')">전체</li>
+	카테고리
+	<br><b>. . .</b>
+
+	<ul> 
+		<li class="category" onclick="categoryChange('전체')">전체</li>
 		<c:set var="arr" value="<%= arr %>"/>
 		<c:forEach var="i" items="${arr}">
 			<li class="category" onclick="categoryChange('${i.getCategory()}')">${i.getCategory()}</li>
 		</c:forEach>
 	</ul>
-		
+	<b>. . .</b>
+
 	<!-- <br>
 	<ul> 관리자(미구현)
 	<hr>

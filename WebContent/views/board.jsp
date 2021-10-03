@@ -17,12 +17,31 @@
 	String order = request.getParameter("order") == null ? "desc" : request.getParameter("order");
 	String category = request.getParameter("category") == null ? "전체" : request.getParameter("category");
 	
+	// 키워드 검색인지 확인
+	String keyword = request.getParameter("keyword");
+	int keywordLength = 0;
+
+
+
 	BoardDao dao = BoardDaoImpl.getInstance();
 	Map<String, Object> map = null;
 	
-	if(category.equals("전체")){
+	System.out.println(keyword);
+
+	if(keyword != null){
+		keyword = keyword.trim();
+		keywordLength = keyword.length();
+	}
+	
+	
+	if(keywordLength > 0){
+		System.out.println("키워드로 검색");
+		map = dao.selectBoardByKeyword(keyword, idx, num, order);
+	}else if(category.equals("전체")){
+		System.out.println("전체 리스트 검색");
 		map = dao.selectBoardByAll(idx, num, order);
 	}else{
+		System.out.println("카테고리 검색");
 		Category ca = new Category(category);
 		map = dao.selectBoardByCategory(ca, idx, num, order);
 	}
@@ -31,8 +50,15 @@
 
 	<c:set var="map" value="<%= map %>"/>
 	<c:set var="category" value="<%= category %>"/>
+
 	<div id="categoryWrap">
-		<span id="category">${category}</span>
+		<c:if test="<%= keywordLength <= 0 %>">
+			<span id="category">${category}</span>
+		</c:if>
+		<c:if test="<%= keywordLength > 0 %>">
+			<div id="keyword" class="hidden"><%= keyword %></div>
+			<span id="category">`<%= keyword %>` 검색 결과</span>
+		</c:if>
         <div class="writePostButton">
             <button type="button" onclick="writePost()">글쓰기</button>
         </div>

@@ -26,10 +26,23 @@
 #loginFormTitle {
     font-size: 2rem;
     font-weight: bold;
-    margin-bottom: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 4rem;
 }
 
-#idChkRes {
+.loginModalClose {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.btnCloseLogin{
+    object-fit: contain;
+    width: 3rem;
+}
+
+
+.chkRes {
     font-size: var(--font-sm);
     display: flex;
     justify-content: center;
@@ -84,23 +97,27 @@
     flex-wrap: nowrap;
     margin-bottom: 0.5rem;
 }
+
 .formCol1 {
-    text-align: left;
-    width: 7rem;
+    width: calc(100% - 4.2rem);
 }
-.formCol2 {
-    width: calc(100% - 7rem);
-}
-.formCol2 input{
+.formCol1 input{
     width: 100%;
     border-left-width: 0;
     border-right-width: 0;
     border-top-width: 0;
     border-bottom-width: 0.1rem;
+    font-size: var(--font-lg);
 }
-.formCol2 input:focus{
+.formCol1 input:focus{
     outline: none;
     background-color: var(--txt-color-4);
+}
+
+.formCol2 {
+    text-align: left;
+    width: 3rem;
+    margin-left: 1rem;
 }
 
 .form button {

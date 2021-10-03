@@ -4,12 +4,13 @@
 	 y="0px" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve">
 <style type="text/css">
 	.st0{stroke:#000000;stroke-miterlimit:10;}
-	.st1{fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;}
 </style>
 <g>
-	<circle class="st0" cx="212.7" cy="204.9" r="122.1"/>
-	<circle class="st1" cx="212.7" cy="204.9" r="85.5"/>
+	<g>
+		
+			<rect x="215.5" y="59" transform="matrix(0.7215 0.6925 -0.6925 0.7215 242.7491 -103.479)" class="st0" width="69" height="382"/>
+	</g>
 	
-		<rect x="317.9" y="251.1" transform="matrix(0.7373 -0.6755 0.6755 0.7373 -141.1333 316.2852)" class="st0" width="36.6" height="177"/>
+		<rect x="215.5" y="59" transform="matrix(-0.6925 0.7215 -0.7215 -0.6925 603.479 242.7491)" class="st0" width="69" height="382"/>
 </g>
 </svg>

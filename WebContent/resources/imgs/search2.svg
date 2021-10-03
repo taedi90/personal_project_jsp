@@ -7,9 +7,13 @@
 	.st1{fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;}
 </style>
 <g>
-	<circle class="st0" cx="212.7" cy="204.9" r="122.1"/>
-	<circle class="st1" cx="212.7" cy="204.9" r="85.5"/>
+	<g>
+		<circle class="st0" cx="197.1" cy="189" r="100.8"/>
+		<circle class="st1" cx="197.1" cy="189" r="70.6"/>
+		
+			<rect x="283.9" y="227.2" transform="matrix(0.7373 -0.6755 0.6755 0.7373 -124.283 280.8404)" class="st0" width="30.2" height="146.1"/>
+	</g>
 	
-		<rect x="317.9" y="251.1" transform="matrix(0.7373 -0.6755 0.6755 0.7373 -141.1333 316.2852)" class="st0" width="36.6" height="177"/>
+		<rect x="320.3" y="283.1" transform="matrix(0.7397 -0.6729 0.6729 0.7397 -145.0822 321.4765)" class="st0" width="45.5" height="130.4"/>
 </g>
 </svg>

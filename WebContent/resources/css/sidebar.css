@@ -7,15 +7,26 @@ ul {
     text-align: center;
     padding: 0;
 }
-li {
+li.category {
     cursor: pointer;
     font-size: var(--font-lg);
 }
-li:hover{
+li.category:hover{
     font-weight: bold;
 }
 
-ul hr{
-    border: none;
-    border-top: 0.4rem dotted var(--txt-color-5);
+.searchInput{
+    padding: 0.5rem 0.5rem 0.5rem 3rem;
+    background: url('../imgs/search3.svg') no-repeat 2% 50%;
+    background-size: contain;
+    background-color: white;
+    border: 0.1rem solid;
+    border-radius: 0; /* iOS 둥근모서리 제거 */
+    -webkit-appearance: none; /* 네이티브 외형 감추기 */
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.searchInput:focus {
+    outline: none;
 }
