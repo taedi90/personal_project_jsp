@@ -20,78 +20,115 @@ btnSidebar.addEventListener("click", toggleSidebar);
 
 const main = document.getElementById("main");
 
+
+// 게시글 작성
 function writePost(){
-    //main.innerHTML='<object type="text/html" data="views/writePost.jsp" ></object>';
+    if(loginChk()){
+        openModal("로그인 정보가 없습니다. 지금 로그인 하시겠습니까?", 1, openLoginModal);
+        return;
+    }
+
     let res = postAjax('views/writePost.jsp', {option: "new"});
     main.innerHTML=res;
-    //$('#main').html(res);
-
-    // writer 초기화
     editorInit();
 }
+
+function loginChk(){
+    let data = postAjax('controller/loginChkProc.jsp');
+    if (data == 0){
+        return true; // 로그인 오류가 true
+    }else if (data[0].res == 1){
+        return false;
+    }else{
+        return true;
+    }
+
+}
+
+
 
 // 게시글 수정
 let postNo = undefined;
 function modifyPostFunc(no){
     postNo = no;
+
+    if(loginChk()){
+        openModal("로그인 정보가 없습니다. 지금 로그인 하시겠습니까?", 1, openLoginModal);
+        return;
+    }
+
+    // 게시글 수정 & 삭제 권한 확인
+    if(authPostChk()){
+        return;
+    }
+
+
     openModal("수정하시겠습니까?", 1, modifyPostConfirm);
 }
 
 function modifyPostConfirm() {
-    let data = postAjax("controller/authPostProc.jsp", {no: postNo});
-    if (data == 0){
-        openModal("오류");
-        return
-    }else if (data[0].res == 1){
-        console.log(data[0].res + "메세지" + data[0].comment);
-        //수정하러가기
-        let param =  {
-            no: postNo,
-            option: "modify"
-        };
+    // 게시글 수정
+    let param =  {
+        no: postNo,
+        option: "modify"
+    };
 
-        data = postAjax("views/writePost.jsp", param);
-        main.innerHTML = data;
-        editorInit();
-    }else if (data[0].res == 2){
+    let data = postAjax("views/writePost.jsp", param);
+    main.innerHTML = data;
+    editorInit();
+}
+
+
+
+// 게시글 삭제
+function deletePostFunc(no){
+    postNo = no;
+
+    // 로그인 여부 확인
+    if(loginChk()){
         openModal("로그인 정보가 없습니다. 지금 로그인 하시겠습니까?", 1, openLoginModal);
+        return;
+    }
+
+    // 게시글 삭제 권한 확인
+    if(authPostChk()){
+        return;
+    }
+
+    
+    openModal("삭제하시겠습니까?", 1, deletePostConfirm);
+}
+
+// 게시물 삭제 "예" 선택시
+function deletePostConfirm() {
+    let param =  {
+        no: postNo
+    };
+
+    let data = postAjax("controller/deletePostProc.jsp", param);
+    if (data[0].res == 1){
+        openModal(data[0].comment);
+        data = postAjax("views/board.jsp");
+        main.innerHTML=data;
     }else{
         openModal(data[0].comment);
     }
 }
 
-// 게시글 삭제
-function deletePostFunc(no){
-    postNo = no;
-    openModal("삭제하시겠습니까?", 1, deletePostConfirm);
-}
 
-function deletePostConfirm() {
+function authPostChk(){
     let data = postAjax("controller/authPostProc.jsp", {no: postNo});
     if (data == 0){
-        openModal("오류");
-        return
+        openModal("서버 통신 오류");
+        return true;
     }else if (data[0].res == 1){
-        console.log(data[0].res + "메세지" + data[0].comment);
-        //삭제하기
-        let param =  {
-            no: postNo
-        };
-
-        data = postAjax("controller/deletePostProc.jsp", param);
-        if (data[0].res == 1){
-            openModal(data[0].comment);
-            data = postAjax("views/board.jsp");
-            main.innerHTML=data;
-        }else{
-            openModal(data[0].comment);
-        }
-
-
-
+        // 게시글 수정 권한 있을 경우
+        return false;
     }else if (data[0].res == 2){
         openModal("로그인 정보가 없습니다. 지금 로그인 하시겠습니까?", 1, openLoginModal);
+        return true
     }else{
         openModal(data[0].comment);
+        return true;
     }
 }

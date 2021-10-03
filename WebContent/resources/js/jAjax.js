@@ -7,7 +7,6 @@ function postAjax(url = '', data = {}) {
         data : data,			
         success : function(d){ //DB접근 후 가져온 데이터
             console.log(d);
-            console.log("통신 성공");
             res = d;
         },		
         error: function(e) { 

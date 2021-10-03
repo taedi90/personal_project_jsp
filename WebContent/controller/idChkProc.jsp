@@ -4,6 +4,7 @@
 <%@ page import="personal_project_jsp.dao.UserDao" %>
 <%@ page import="personal_project_jsp.dao.impl.UserDaoImpl" %>
 <%@ page import="personal_project_jsp.dto.User" %>
+<% response.setContentType("application/json"); %>
 <%@ page session ="true" %>
 
 <c:if test='<%= request.getMethod().equals("GET") %>'>
@@ -25,4 +26,3 @@
 [
 	{"res":"${res}"}
 ]	
-<% response.setContentType("application/json"); %>
