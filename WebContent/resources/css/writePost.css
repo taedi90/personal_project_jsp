@@ -1,19 +1,21 @@
-.title input {
-    margin-top: 3rem;
+.writePostTitle input {
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
     font-size: 2.5rem;
     width: 90%;
     border: none;
 }
 
-.title input:focus{
+.writePostTitle input:focus{
     outline: none;
 }
 
-.writeRow {
-    margin-top: 2rem;
+.writePostCategory {
+    margin-top: 3rem;
 }
 
 .writePostBottom {
+    margin-top: 2rem;
     margin-top: 2rem;
     text-align: center;
 }

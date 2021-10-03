@@ -26,7 +26,10 @@
 	
 	
 	// 값이 모두 다 들어왔는지 확인 (로그인 체크 포함)
-	if(id == null || title == null || content == null){
+	if(id == null){
+		res = 0;
+		comment = "로그인 필요";
+	}else if(title == null || content == null) {
 		res = 0;
 		comment = "(등록 실패) 기본 값 누락";
 	}
@@ -40,33 +43,23 @@
 	
 	Board board = new Board();
 	board.setCategory(category);
-	board.setId(id);
-
+	//board.setId(id);
 	board.setTitle(title);
-	
-	
-	
-	
+	board.setContent(content);
 	
 	BoardDao dao = BoardDaoImpl.getInstance();	
 	
 	
 	// option은 modify수정 new신규
-	if(request.getParameter("option").equals("modify")){
-		// 본인 글이 맞는지 확인(게시물 변경)
-	
-		Long no = Long.parseLong(request.getParameter("no"));
+	if(((String)session.getAttribute("writeMod")).equals("modify")){
+		
+		Long no = Long.parseLong((String)session.getAttribute("postNo"));
 		board.setNo(no);
 		//update
+		res = dao.updateBoard(board);
 		
-		
-	}else if(request.getParameter("option").equals("new")){
-		
-		res = dao.insertBoard(board);
-	
 	}else{
-		res = 0;
-		comment = "(등록 실패) 올바르지 않은 옵션 오류";
+		res = dao.insertBoard(board);
 	}
 	
 	
@@ -74,15 +67,13 @@
 
 
 	// 정상처리되면 원래화면으로 넘어가고 에러는 기존화면(js에서 처리)
+	if(res == 1){
+		comment = "등록 완료!";
+	}else{
+		res = 0;
+		comment = "등록 실패!";
+	}
 	
-	
-
-
-
-
-
-
-
 %>
 
 <c:set var="res" value="<%= res %>"/>

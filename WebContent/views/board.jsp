@@ -66,7 +66,7 @@
 		<c:forEach var="i" items='${map.get("list")}' varStatus="status">
 			<div id="post${status.index}" class="postCard" data-no="${i.getNo()}" data-id="${i.getId()}" data-idx="${status.index}" onclick="postClick(this.dataset.idx)">
 				<div class="postDesc">
-                    <p class="postCategory">${i.getCategory()}</p>
+                    <p class="postCategory">${i.getCategory().getCategory()}</p>
                     <p class="postTitle">${i.getTitle()}</p>
                     <p class="postAuthor">${i.getId()}</p>
                     <p class="postDate"><fmt:formatDate value="${i.getWriDate()}" pattern="yyyy월 MM월 dd일"/></p>
@@ -82,8 +82,8 @@
 
                 	<p class="postContentTitle">본문</p>
                 	<p class="postContent">${i.getContent()}</p>
-                	<button data-no="${i.getNo()}" data-id="${i.getId()}">수정</button>
-                	<button data-no="${i.getNo()}" data-id="${i.getId()}">삭제</button>
+                	<button data-no="${i.getNo()}" onclick="modifyPostFunc(this.dataset.no)">수정</button>
+                	<button data-no="${i.getNo()}" onclick="deletePostFunc(this.dataset.no)">삭제</button>
                 	<p></p>
                 </div>
             </div>

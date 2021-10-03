@@ -6,7 +6,7 @@ public class Board {
 	private long no;
 	private String id;
 	private String title;
-	private String category;
+	private Category category;
 	private String content;
 	private Date wriDate;
 	private Date modDate;
@@ -15,14 +15,14 @@ public class Board {
 	public Board() {
 	}
 
-	public Board(String id, String title, String category, String content) {
+	public Board(String id, String title, Category category, String content) {
 		this.id = id;
 		this.title = title;
 		this.category = category;
 		this.content = content;
 	}
 
-	public Board(long no, String id, String title, String category, String content, Date wriDate, Date modDate,
+	public Board(long no, String id, String title, Category category, String content, Date wriDate, Date modDate,
 			String thumb) {
 		this.no = no;
 		this.id = id;
@@ -58,11 +58,11 @@ public class Board {
 		this.title = title;
 	}
 
-	public String getCategory() {
+	public Category getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 

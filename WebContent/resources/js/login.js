@@ -128,14 +128,14 @@ function loginProc() {
     if (data === 0){
         return;
     }else if(data[0].res === '1') {
-        alert(data[0].comment);
+        openModal(data[0].comment);
         document.getElementById("loginStat").classList.remove("hidden");
         document.getElementById("loginStat").textContent = data[1].name + "님 안녕하세요!"
         btnOpenLogin.classList.add("hidden");
         btnOpenLogout.classList.remove("hidden");
         closeLoginModal();
     }else {
-        alert(data[0].comment);
+        openModal(data[0].comment);
         registerOn();
 
 
@@ -193,14 +193,14 @@ function registerProc(){
     if (data === 0){
         return;
     }else if (data[0].res == 1) {
-        alert(data[0].comment);
+        openModal(data[0].comment);
         document.getElementById("loginStat").classList.remove("hidden");
         document.getElementById("loginStat").textContent = data[1].name + "님 안녕하세요!"
         btnOpenLogin.classList.add("hidden");
         btnOpenLogout.classList.remove("hidden");
         closeLoginModal();
     }else{
-        alert(data[0].comment);
+        openModal(data[0].comment);
     }
 
 }

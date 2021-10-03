@@ -24,7 +24,7 @@ public class BoardDaoImpl implements BoardDao {
 		long no = rs.getLong("no");
 		String id = rs.getString("id");
 		String title = rs.getString("title");
-		String category = rs.getString("category");
+		Category category = new Category(rs.getString("category"));
 		String content = rs.getString("content");
 		Date wriDate = rs.getDate("wri_date");
 		Date modDate = rs.getDate("mod_date");
@@ -82,8 +82,26 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public Board selectBoardByNo(Board board) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * FROM board where no = ?";
+		
+		try(Connection con = JdbcUtil.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);){
+			
+			
+			pstmt.setLong(1, board.getNo());
+			try(ResultSet rs = pstmt.executeQuery();){
+				if(rs.next()) {
+					board = getBoard(rs);
+				}
+
+				return board;
+			}
+
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return board;
 	}
 
 	@Override
@@ -146,7 +164,7 @@ public class BoardDaoImpl implements BoardDao {
 
 			pstmt.setString(1, board.getId());
 			pstmt.setString(2, board.getTitle());
-			pstmt.setString(3, board.getCategory());
+			pstmt.setString(3, board.getCategory().getCategory());
 			pstmt.setString(4, board.getContent());
 			
 			return  pstmt.executeUpdate();
@@ -161,14 +179,40 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public int deleteBoard(Board board) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+		String sql = "delete from board where no = ?";
+		
+		try(Connection con = JdbcUtil.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				){
+				
+				pstmt.setLong(1, board.getNo());
+				
+				return pstmt.executeUpdate();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			return 0;
+					
+		}
 
 	@Override
 	public int updateBoard(Board board) {
-		// TODO Auto-generated method stub
+		String sql = "update board set title = ?, category = ?, content = ?  where no = ?";
+		try(Connection con = JdbcUtil.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			){
+			
+			pstmt.setString(1, board.getTitle());
+			pstmt.setString(2, board.getCategory().getCategory());
+			pstmt.setString(3, board.getContent());
+			pstmt.setLong(4, board.getNo());
+			
+			return pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
+				
 	}
 
 

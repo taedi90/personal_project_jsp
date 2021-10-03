@@ -11,8 +11,7 @@
 
 
 
-<%	
-	
+<%
 	UserDao dao = UserDaoImpl.getInstance();
 	User user = new User();
 	user.setId(request.getParameter("id"));
@@ -29,7 +28,6 @@
 		res = 0;
 		comment = "아이디 또는 비밀번호를 확인해주세요.";
 	}
-
 %>
 
 

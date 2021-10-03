@@ -56,6 +56,32 @@ public class UserDaoImpl implements UserDao {
 	}
 	
 	@Override
+	public User getUserInfo(User user) {
+		String sql = "select count(*), name, email, reg_date, root_permission from user where id = ?";
+		
+		try(Connection con = JdbcUtil.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			){
+			
+			pstmt.setString(1, user.getId());
+			
+			try(ResultSet rs = pstmt.executeQuery();){
+				if(rs.next()) {		
+					user.setEmail(rs.getString("email"));
+					user.setName(rs.getString("name"));
+					user.setRegDate(rs.getDate("reg_date"));
+					user.setRootPermission(rs.getInt("root_permission"));
+					return user;
+				}
+			}
+
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
+	
+	@Override
 	public Map loginChk(User user) {
 		String sql = "select count(*), name from user where id = ? and password = ?";
 		Map<String, Object> map = new HashMap<>();
@@ -69,8 +95,8 @@ public class UserDaoImpl implements UserDao {
 			
 			try(ResultSet rs = pstmt.executeQuery();){
 				if(rs.next()) {					
-					map.put("res", rs.getInt(1)); // 전체글 수
-					map.put("name", rs.getString("name")); // 현재글 (누적 idx)
+					map.put("res", rs.getInt(1));
+					map.put("name", rs.getString("name"));
 					return map;
 				}
 			}
@@ -165,5 +191,6 @@ public class UserDaoImpl implements UserDao {
 		}
 		return 0;
 	}
+
 
 }
