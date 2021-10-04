@@ -14,6 +14,8 @@
     <link href="resources/css/sidebar.css" rel="stylesheet">
     <link href="resources/css/modal.css" rel="stylesheet">
     <link href="resources/css/writePost.css" rel="stylesheet">
+    <link href="resources/css/login.css" rel="stylesheet">
+    <link href="resources/css/uploadThumb.css" rel="stylesheet">
     <script src="resources/js/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous" defer></script>
 </head>

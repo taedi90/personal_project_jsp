@@ -93,6 +93,13 @@
 			</div> 
 		</div> 
 	</div>
+	
+	<div>
+		<button>썸네일 업로드</button> <button>썸네일 바꾸기</button>
+		<!-- 수정일때는 여기에 수정버튼 -->
+	</div>
+
+	
 
 	<div class="writePostBottom">
 		<button type="button" id="cancelPost" onclick="cancelPostFunc()">뒤로가기</button>
