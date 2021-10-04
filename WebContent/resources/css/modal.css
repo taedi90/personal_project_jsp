@@ -7,7 +7,8 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    /*align-items: center;*/
+    align-items: self-start;
     z-index: 99;
 }
 
@@ -19,7 +20,8 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    /*align-items: center;*/
+    align-items: self-start;
     z-index: 99;
 }
 
@@ -33,12 +35,14 @@
 .loginModalClose {
     width: 100%;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
+    text-align: right;
 }
 
 .btnCloseLogin{
     object-fit: contain;
     width: 3rem;
+    height: 3rem;
 }
 
 
@@ -77,6 +81,7 @@
     border-radius: 0.8rem;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.19), 0.6rem 0.6rem rgba(0, 0, 0, 0.23);
     font-size: var(--font-base);
+    margin-top: 10rem;
 }
 
 #modalBody {

@@ -23,6 +23,8 @@ html {
     --font-base: 1.6rem;
     --font-lg: 1.8rem;
     --font-xl: 2rem;
+
+    touch-action: pan-y;
 }
 
 a { color: var(--txt-color-1); }

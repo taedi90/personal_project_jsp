@@ -14,6 +14,7 @@
 %>
 
 <div id="sidebarWrap">
+
 	<input type="text" class="searchInput" placeholder="검색" onkeyup="if(window.event.keyCode==13){searchPostFunc(this.value)}">
 
 	<br>
@@ -22,10 +23,11 @@
 		내 글 보기
 	</div>
 
-	<br>
+	<p>&nbsp;</p>
 
 	카테고리
-	<br><b>. . .</b>
+	<br>
+	<b>. . .</b>
 
 	<ul> 
 		<li class="category" onclick="categoryChange('전체')">전체</li>
@@ -34,7 +36,6 @@
 			<li class="category" onclick="categoryChange('${i.getCategory()}')">${i.getCategory()}</li>
 		</c:forEach>
 	</ul>
-	<b>. . .</b>
 
 	<!-- <br>
 	<ul> 관리자(미구현)
@@ -44,7 +45,9 @@
 	<hr>
 	</ul> -->
 
-	<br><br>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	
 
 	<c:if test='${user ne null}'>
 		<button id="btnOpenLogin" class="beforeLogin hidden">로그인</button>
@@ -55,4 +58,9 @@
 		<button id="btnOpenLogin" class="beforeLogin">로그인</button>
 		<button id="btnOpenLogout" class="afterLogin hidden">로그아웃</button>
 	</c:if>
+	
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	
+	<p><img src="resources/imgs/slide.svg" style="width: 5rem"></p> 
 </div>

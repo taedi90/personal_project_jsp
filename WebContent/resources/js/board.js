@@ -19,13 +19,14 @@ function numChange(){
     lastNum = $("#num").val();
 }
 
+// 정렬 변경
 function orderChange(){
     let data = {
         idx : 1,
         num : $("#num").val(),
         order : $("#order").val(),
         category : lastCategory,
-        keyword : $("#keyword").text()
+        //keyword : $("#keyword").text()
     }
     let res = postAjax("views/board.jsp", data);
 
@@ -33,6 +34,7 @@ function orderChange(){
     $('#main').animate({scrollTop:0}, 200);
 }
 
+// 카테고리 변경
 function categoryChange(category){
 
     lastCategory = category;
@@ -42,12 +44,13 @@ function categoryChange(category){
         num : $("#num").val(),
         order : $("#order").val(),
         category : lastCategory,
-        keyword : $("#keyword").text()
+        //keyword : $("#keyword").text()
     }
     let res = postAjax("views/board.jsp", data);
 
     $('#main').html(res);
     $('#main').animate({scrollTop:0}, 200);
+    sidebar.classList.add("hidden");
 }
 
 // 다른 페이지글 
@@ -57,7 +60,7 @@ function pageSwap(idx){
         num : $("#num").val(),
         order : $("#order").val(),
         category : lastCategory,
-        keyword : $("#keyword").text()
+        //keyword : $("#keyword").text()
     }
     let res = postAjax("views/board.jsp", data);
 
@@ -128,4 +131,5 @@ function searchPostFunc(keyword) {
 
     $('#main').html(res);
     $('#main').animate({scrollTop:0}, 200);
+    sidebar.classList.add("hidden");
 }
