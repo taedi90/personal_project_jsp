@@ -46,47 +46,50 @@
 	<c:set var="title" value="<%= board.getTitle() %>"/>
 	<c:set var="category" value="<%= board.getCategory().getCategory() %>"/>
 	<c:set var="content" value="<%= board.getContent() %>"/>			
+	<c:set var="thumb" value="<%= board.getThumb() %>"/>			
 
 </c:if>
 
 
-
 <form id="writePost" name="writePost">
 
-	<label for=""></label>
-	<div class="writePostCategory">
-		<!-- <label for="selectCatrgory">카테고리</label> -->
-		<select id="selectCategory" name="category">
-		
-		<c:if test="${res eq 1}">
-			<c:forEach var="i" items="${arr}">
-				<c:if test="${i.getCategory() eq category}">
-					<option value="${i.getCategory()}" selected>${i.getCategory()}</option>
-				</c:if>
-				<c:if test="${i.getCategory() ne category}">
-					<option value="${i.getCategory()}">${i.getCategory()}</option>				
-				</c:if>
-			</c:forEach>
-		
-		</c:if>
-		<c:if test="${res ne 1}">
-			<c:forEach var="i" items="${arr}">
-				<option value="${i.getCategory()}">${i.getCategory()}</option>
-			</c:forEach>
-		</c:if>
-
+	<div id="wpThumbHolder"  style='<c:if test="${thumb ne null}">background: white url("${thumb}") no-repeat right top/contain;</c:if>'>
+                		
+		<div class="writePostCategory">
+			<!-- <label for="selectCatrgory">카테고리</label> -->
+			<select id="selectCategory" name="category">
+			
+			<c:if test="${res eq 1}">
+				<c:forEach var="i" items="${arr}">
+					<c:if test="${i.getCategory() eq category}">
+						<option value="${i.getCategory()}" selected>${i.getCategory()}</option>
+					</c:if>
+					<c:if test="${i.getCategory() ne category}">
+						<option value="${i.getCategory()}">${i.getCategory()}</option>				
+					</c:if>
+				</c:forEach>
+			
+			</c:if>
+			<c:if test="${res ne 1}">
+				<c:forEach var="i" items="${arr}">
+					<option value="${i.getCategory()}">${i.getCategory()}</option>
+				</c:forEach>
+			</c:if>
 	
-		</select>
+		
+			</select>
+		</div>
+		<div class="writePostTitle">
+			<input id="title" name="title" type="text" placeholder="제목을 입력해주세요." <c:if test="${res eq 1}">value="${title}"</c:if>>
+		</div>
 	</div>
-	<div class="writePostTitle">
-		<input id="title" name="title" type="text" placeholder="제목을 입력해주세요." <c:if test="${res eq 1}">value="${title}"</c:if>>
-	</div>
+
 
 
 	<!-- SmartEditor2 --> 
 	<div class="jsx-2303464893 editor"> 
 		<div class="fr-box fr-basic fr-top" role="application"> 
-			<div class="fr-wrapper show-placeholder" dir="auto" style="overflow: scroll;"> 
+			<div class="fr-wrapper show-placeholder" dir="auto" style="overflow: visible;"> 
 				<textarea name="content" id="smartEditor" style="width: 100%; height: 412px;">
 					<c:if test="${res eq 1}">${content}</c:if>
 				</textarea> 
@@ -95,8 +98,8 @@
 	</div>
 	
 	<div>
-		<button>썸네일 업로드</button> <button>썸네일 바꾸기</button>
-		<!-- 수정일때는 여기에 수정버튼 -->
+		<button type="button" onclick="openUploadModal()">썸네일 업로드</button> 
+		<input id="thumbSrc" name="thumb" type="text" hidden>
 	</div>
 
 	

@@ -24,6 +24,7 @@ html {
     --font-lg: 1.8rem;
     --font-xl: 2rem;
 
+    min-width: 375px;
     touch-action: pan-y;
 }
 

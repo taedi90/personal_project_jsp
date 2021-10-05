@@ -87,6 +87,11 @@ select {
 	width: 8rem;
 	background-color: var(--bg-color-4);
 }
+.postThumb img {
+	height: 100%;
+	width: 100%;
+	background: white;
+}
 
 .postCategory {
 	font-size: var(--font-xs);

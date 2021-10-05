@@ -13,7 +13,7 @@
 				<div class="formRow">
 
 					<div class="formCol1">
-						<input id="id" name="id" type="text" required placeholder="id" autocomplete='off'>
+						<input id="id" name="id" type="text" required placeholder="id" autocomplete='username'>
 					</div>
 					<div class="formCol2">
 						<img id="chkOkId" class="hidden" src="resources/imgs/check.svg">
@@ -23,7 +23,7 @@
 				</div>
 				<div class="formRow">
 					<div class="formCol1">
-						<input id="password" name="password" type="password" required placeholder="password"> 
+						<input id="password" name="password" type="password" required placeholder="password" autocomplete="current-password"> 
 					</div>
 					<div class="formCol2">
 						<img id="chkOkConfirm" class="hidden" src="resources/imgs/check.svg">
@@ -32,7 +32,7 @@
 				<div class="registerOption hidden">
 					<div class="formRow">
 						<div class="formCol1">
-							<input id="confirm" name="confirm" type="password" required placeholder="confirm"> 
+							<input id="confirm" name="confirm" type="password" required placeholder="confirm" autocomplete="new-password"> 
 						</div>
 						<div class="formCol2">
 						</div>
@@ -41,14 +41,14 @@
 					</div>
 					<div class="formRow">
 						<div class="formCol1">
-							<input id="name" name="name" type="text" placeholder="이름">
+							<input id="name" name="name" type="text" placeholder="이름" autocomplete="name">
 						</div>
 						<div class="formCol2">
 						</div>
 					</div>
 					<div class="formRow">
 						<div class="formCol1">
-							<input id="email" name="email" type="email" placeholder="email">
+							<input id="email" name="email" type="email" placeholder="email" autocomplete="email">
 						</div>
 						<div class="formCol2">
 						</div>

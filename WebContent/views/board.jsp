@@ -106,7 +106,9 @@
                     <p class="postDate"><fmt:formatDate value="${i.getWriDate()}" pattern="yyyy월 MM월 dd일"/></p>
                 </div>
                 <div class="postThumb">
-                    ${i.getThumb()}
+                	<c:if test="${i.getThumb() != null}">
+                		<img src="${i.getThumb()}"/>
+                    </c:if>
                 </div>
             </div>
             <div id="post${status.index}_con" class="postBody hidden">

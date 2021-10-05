@@ -1,9 +1,9 @@
 'use strict';
 
 // 모달창
+const modal = document.querySelector(".modal");
 const modalBody = document.getElementById("modalBody");
 const modalButton = document.getElementById("modalButton");
-const modal = document.querySelector(".modal");
 const overlay = modal.querySelector(".modalOverlay");
 const closeModals = modal.querySelectorAll(".closeModal");
 const modalButtons = modal.querySelectorAll(".button");

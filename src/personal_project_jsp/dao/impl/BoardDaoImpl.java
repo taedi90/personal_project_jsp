@@ -223,7 +223,7 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public int insertBoard(Board board) {
-		String sql = "insert into board(id, title, category, content) values ( ?, ?, ?, ? )";
+		String sql = "insert into board(id, title, category, content, thumb) values ( ?, ?, ?, ?, ?)";
 		
 		try(Connection con = JdbcUtil.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
@@ -233,6 +233,7 @@ public class BoardDaoImpl implements BoardDao {
 			pstmt.setString(2, board.getTitle());
 			pstmt.setString(3, board.getCategory().getCategory());
 			pstmt.setString(4, board.getContent());
+			pstmt.setString(5, board.getThumb() == null ? "" : board.getThumb());
 			
 			return  pstmt.executeUpdate();
 
@@ -264,7 +265,7 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public int updateBoard(Board board) {
-		String sql = "update board set title = ?, category = ?, content = ?  where no = ?";
+		String sql = "update board set title = ?, category = ?, content = ?, thumb = ? where no = ?";
 		try(Connection con = JdbcUtil.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			){
@@ -272,7 +273,9 @@ public class BoardDaoImpl implements BoardDao {
 			pstmt.setString(1, board.getTitle());
 			pstmt.setString(2, board.getCategory().getCategory());
 			pstmt.setString(3, board.getContent());
-			pstmt.setLong(4, board.getNo());
+			pstmt.setString(4, board.getThumb() == null ? "" : board.getThumb());
+			pstmt.setLong(5, board.getNo());
+			
 			
 			return pstmt.executeUpdate();
 		} catch(SQLException e) {

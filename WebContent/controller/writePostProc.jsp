@@ -23,6 +23,7 @@
 	String title = request.getParameter("title");
 	Category category = new Category(request.getParameter("category"));
 	String content = request.getParameter("content");
+	String thumb = request.getParameter("thumb");
 
 	
 	
@@ -47,6 +48,9 @@
 	board.setId(id);
 	board.setTitle(title);
 	board.setContent(content);
+	board.setThumb(thumb);
+	
+	System.out.println("포스트 작성 요청 받은 값 \n" + board);
 	
 	BoardDao dao = BoardDaoImpl.getInstance();	
 	
@@ -72,7 +76,6 @@
 		comment = "등록 완료!";
 	}else{
 		res = 0;
-		comment = "등록 실패!";
 	}
 	
 %>

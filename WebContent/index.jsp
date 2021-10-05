@@ -23,6 +23,8 @@
 <body>
     <!-- 로그인 & 모달창 -->
     <jsp:include page="views/login.jsp" flush="true"></jsp:include>
+    <jsp:include page="views/modal.jsp" flush="true"></jsp:include>
+    <jsp:include page="views/uploadThumb.jsp" flush="true"></jsp:include>
 
     <div id="wrap">
         <div id="header">
@@ -51,14 +53,12 @@
     <script type="text/javascript" src="resources/js/board.js" defer></script>
     <script type="text/javascript" src="resources/js/login.js" defer></script>
     <script type="text/javascript" src="resources/js/modal.js" defer></script>
-    <script type="text/javascript" src="resources/js/modal.js" defer></script>
     <script type="text/javascript" src="resources/js/sidebar.js" defer></script>
-    <!-- <script src="resources/js/fetch.js" defer></script> -->
-    <!-- <script src="resources/js/ajax.js" defer></script> -->
     <script type="text/javascript" src="resources/js/jAjax.js" defer></script>
     <!-- SmartEditor2 라이브러리 -->
     <script type="text/javascript" src="se2/js/HuskyEZCreator.js" charset="utf-8" defer></script>
     <script type="text/javascript" src = "resources/js/writePost.js" defer></script>
+    <script type="text/javascript" src="resources/js/thumbUpload.js" defer></script>
 </body>
 
 </html>

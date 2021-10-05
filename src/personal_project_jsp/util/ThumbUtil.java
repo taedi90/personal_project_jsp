@@ -31,8 +31,8 @@ public class ThumbUtil {
 			// 원본 이미지 사이즈 가져오기 
 			imageWidth = image.getWidth(null); 
 			imageHeight = image.getHeight(null); 
-			System.out.println("imageWidth : " + imageWidth); 
-			System.out.println("imageHeight : " + imageHeight); 
+			//System.out.println("imageWidth : " + imageWidth); 
+			//System.out.println("imageHeight : " + imageHeight); 
 			
 			// 이미지 리사이즈 
 			// Image.SCALE_DEFAULT : 기본 이미지 스케일링 알고리즘 사용 
@@ -41,10 +41,11 @@ public class ThumbUtil {
 			// Image.SCALE_SMOOTH : 속도보다 이미지 부드러움을 우선 
 			// Image.SCALE_AREA_AVERAGING : 평균 알고리즘 사용 
 			Image resizeImage = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH); 
-			System.out.println("reimageWidth : " + resizeImage.getWidth(null)); 
-			System.out.println("reimageHeight : " + resizeImage.getHeight(null)); 
+			//System.out.println("reimageWidth : " + resizeImage.getWidth(null)); 
+			//System.out.println("reimageHeight : " + resizeImage.getHeight(null)); 
 			// 새 이미지 저장하기 
-			BufferedImage newImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB); 
+			//BufferedImage newImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB); 
+			BufferedImage newImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB); 
 			Graphics g = newImage.getGraphics(); g.drawImage(resizeImage, 0, 0, null); 
 			g.dispose(); 
 			ImageIO.write(newImage, imgFormat, new File(imgTargetPath)); 
