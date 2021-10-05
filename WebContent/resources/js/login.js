@@ -246,6 +246,8 @@ function loginProc() {
         for(let i = 0; i < beforeLogins.length; i++){
             beforeLogins.item(i).classList.add("hidden");
         }
+
+        location.reload();
         document.getElementById("loginStat").textContent = data[1].name + "님 안녕하세요!"
 
         closeLoginModal();
@@ -324,6 +326,7 @@ function registerProc(){
         return;
     }else if (data[0].res == 1) {
         openModal(data[0].comment);
+        location.reload();
         document.getElementById("loginStat").classList.remove("hidden");
         document.getElementById("loginStat").textContent = data[1].name + "님 안녕하세요!"
         btnOpenLogin.classList.add("hidden");

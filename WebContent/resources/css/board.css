@@ -160,3 +160,78 @@ select {
 #prev, #next {
 	cursor: pointer;
 }
+
+
+.commentBox, .writeComment, .commentPlus {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin: 1rem 2% 1rem 2%;
+
+}
+
+.postCommentTitle{
+	font-size: var(--font-base);
+	font-weight: bold;
+	text-align: left;
+	padding-left: 2%;
+}
+
+/* 댓글 */
+.comment {
+	display: inline-block;
+	font-size: var(--font-sm);
+	border: solid 0.1rem var(--txt-color-4);
+	width: 100%
+}
+
+.commentsComment {
+	display: inline-block;
+	font-size: var(--font-sm);
+	border: solid 0.1rem var(--txt-color-4);
+	margin-left: 3rem;
+}
+
+.addCommentsComment {
+	padding-left: 2rem;
+	text-align: left;
+}
+
+/* 댓글 작성 정보 */
+.commentInfo {
+	padding: 0.2rem 0.3rem;
+	background-color: var(--txt-color-4);
+	text-align: left;
+}
+
+
+.commentContents {
+	padding: 1rem;
+	text-align: left;
+}
+
+.postComment {
+	text-align: center;
+	padding-top: 2rem;
+}
+
+
+
+
+
+.writeComment textarea {
+	width: 100%;
+	resize: none;
+}
+.writeComment textarea:focus{
+	outline: none;
+}
+
+.btnCommentPlus, .btnAddComment {
+	width: 100%;
+	padding: 1rem 2rem;
+	text-align: center;
+	font-size: var(--font-base);
+	border-radius: 0;
+	background-color: var(--bg-color-4);
+}

@@ -8,46 +8,161 @@
     <title>게시판</title>
     <!--     <link href="../resources/css/main.css" rel="stylesheet">
     <link href="../resources/css/board.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="resources/css/uploadThumb.css">
     <link rel="stylesheet" href="resources/css/main.css">
+    <link rel="stylesheet" href="resources/css/board.css">
+
 </head>
 
 <body>
 
-    <div class="uploadModal">
-        <div class="uploadModalOverlay"></div>
-        <div class="uploadModalContent">
-            <div id="uploadModalBody">
-                <div class="uploadModalClose">
-                    <img class="btnCloseUpload" src="resources/imgs/x.svg">
-                </div>
+    <div id="categoryWrap">
+			<span id="category">댓글 만드는 중</span>
+        <div class="writePostButton">
+            <button type="button" onclick="writePost()">글쓰기</button>
+        </div>
 
-
-                <form action="../controller/board/uploadThumb.jsp" method="post" enctype="multipart/form-data">
-                    <div class="dropBox">
-                        <div id="firstView" class="firstView">
-                            <label class="selectBtn " for="hiddenInput">
-                                *.jpg & *.png
-                            </label>
-                            <input type="file" class="btnFile dDone" name="thumb" id="hiddenInput" hidden
-                            accept=".jpg, .jpeg, .gif, .png">
-                        </div>
-                        <div id="secondView" class="secondView hidden">
-                            <button class="submitBtn" type="button">업로드</button>
-                        </div>
-                        <div class="alwaysView">
-                            <p class="uploadStat">파일을 여기에 끌어다 놓을 수 있습니다.</p>
-                        </div>
-                </form>
+	</div>
+	
+<c:if test='${map.get("maxPost") > 0}'>
+    <div id="boardWrap">
+        <div id="boardTop">
+            <div id="status">
+                <span id="nowPost">${map.get("nowPost")}</span> / ${map.get("maxPost")}
             </div>
 
+            <div id="option">
+                <div>
+                	<c:set var="num" value="<%= num %>"/>
+                    <select id="num" name="num" onchange="if(this.value) numChange()">
+                        <option value="10" <c:if test="${num == 10}">selected</c:if>>10개씩 보기</option>
+                        <option value="20" <c:if test="${num == 20}">selected</c:if>>20개씩 보기</option>
+                        <option value="30" <c:if test="${num == 30}">selected</c:if>>30개씩 보기</option>
+                    </select>
+                </div>
+                <div>
+                	<c:set var="order" value="<%= order %>"/>
+                    <select id="order" name="order" onchange="if(this.value) orderChange()">
+                        <option value="desc"  <c:if test="${order == 'desc'}">selected</c:if>>최근작성순</option>
+                        <option value="asc" <c:if test="${order == 'asc'}">selected</c:if>>작성일자순</option>
+                    </select>
+                </div>
+            </div>
         </div>
+
+
+        <div id="boardMain">
+        
+        <!-- 게시물 출력 -->
+			<div id="post${status.index}" class="postCard" data-no="${i.getNo()}" data-id="${i.getId()}" data-idx="${status.index}" onclick="postClick(this.dataset.idx)">
+				<div class="postDesc">
+                    <p class="postCategory">${i.getCategory().getCategory()}</p>
+                    <p class="postTitle">${i.getTitle()}</p>
+                    <p class="postAuthor">${i.getId()}</p>
+                    <p class="postDate"><fmt:formatDate value="${i.getWriDate()}" pattern="yyyy월 MM월 dd일"/></p>
+                </div>
+                <div class="postThumb">
+                	<c:if test="${i.getThumb() != null}">
+                		<img src="${i.getThumb()}"/>
+                    </c:if>
+                </div>
+            </div>
+            <div id="post${status.index}_con" class="postBody">
+                <div class="postContainer">
+                	<hr>
+                	<p class="postModDate">최종 수정일 : ${i.getModDate()}</p>
+
+                	<p class="postContentTitle">본문</p>
+                	<p class="postContent">없는 스며들어 커다란 역사를 행복스럽고 일월과 운다. 스며들어 피에 수 위하여서. 우리의 두손을 피부가 너의 불어 황금시대다. 능히 사람은 천하를 인간의 시들어 인간의 일월과 무한한 있는 있으랴? 사랑의 튼튼하며, 내려온 물방아 고동을 우리의 불어 것이다. 귀는 이것은 인생에 부패뿐이다. 시들어 그러므로 날카로우나 인생에 심장의 사막이다. 온갖 날카로우나 찬미를 이성은 있음으로써 하는 불러 생의 든 있다. 오직 이상 있는 피에 그것은 하는 청춘에서만 이 대고, 교향악이다. 찾아다녀도, 인류의 방황하였으며, 것이다.
+
+                        산야에 미인을 이상, 우리 부패뿐이다. 피고 놀이 보이는 가지에 속에서 소금이라 무엇을 봄바람이다. 그들의 피어나기 봄날의 따뜻한 희망의 인도하겠다는 피가 우는 고행을 것이다. 새 그들을 방지하는 피가 인간은 끓는다. 청춘 하는 그들의 것이다. 사랑의 아름답고 불어 미묘한 그들은 것이다. 유소년에게서 구하지 인간에 꽃 이상, 소담스러운 남는 가지에 있는 사막이다. 피부가 인간의 방황하였으며, 그러므로 주며, 약동하다. 밥을 풀이 영락과 것은 듣는다. 얼음에 시들어 위하여서, 힘차게 꾸며 이상의 뜨고, 봄바람이다. 할지라도 바이며, 없으면 역사를 그들은 이 굳세게 있으랴?
+                        
+                        그들은 끝까지 불어 피어나기 것이다. 가슴에 기관과 않는 교향악이다. 그와 속에서 인도하겠다는 목숨을 뿐이다. 싸인 피부가 인간이 구하지 것은 이성은 이것이다. 것이다.보라, 부패를 인간의 심장은 얼마나 너의 같이 긴지라 것이다. 풍부하게 귀는 가슴에 오아이스도 구하지 철환하였는가? 길을 크고 열매를 곳으로 소금이라 때에, 스며들어 없으면, 것이다. 천하를 같이, 할지라도 없으면, 물방아 사막이다. 힘차게 구하기 긴지라 품으며, 천고에 부패뿐이다. 하여도 낙원을 방지하는 이는 교향악이다. 대고, 우리는 대한 같은 뿐이다.
+                    </p>
+                	<button data-no="${i.getNo()}" onclick="modifyPostFunc(this.dataset.no)">수정</button>
+                	<button data-no="${i.getNo()}" onclick="deletePostFunc(this.dataset.no)">삭제</button>
+                	<p></p>
+                </div>
+            </div>
+
+
+            <div id="" class="postComment">
+                <div class="commentBox">
+                    <!-- 댓글들이 추가될 자리 -->
+                    <div class="comment">
+                        <div class="commentInfo" data-comment-no="">
+                            댓글번호: 123 아이디: 123 [2021-10-23]
+                        </div>
+                        <div class="commentContents">    
+                            없는 스며들어 커다란 역사를 행복스럽고 일월과 운다. 스며들어 피에 수 위하여서. 우리의 두손을 피부가 너의 불어 황금시대다. 능히 사람은 천하를 인간의 시들어 인간의 일월과 무한한 있는 있으랴? 사랑의 튼튼하며, 내려온 물방아 고동을 우리의 불어 것이다. 귀는 이것은 인생에 부패뿐이다. 시들어 그러므로 날카로우나 인생에 심장의 사막이다. 온갖 날카로우나 </div>
+                        <div class="addCommentsComment">
+                            <!-- 로그인 정보에 따라 다르게 표현 -->
+                            <a href="">댓글달기</a>
+                            <a href="">수정하기</a>&nbsp;&nbsp;<a href="">삭제하기</a>
+                        </div>
+                    </div>
+
+                    <div class="comment">
+                        <div class="commentInfo" data-comment-no="">
+                            댓글번호: 123 아이디: 123 작성일자: 123
+                        </div>
+                        <div class="commentContents">
+                            없는 스며들어 커다란 역사를 행복스럽고 일월과 운다. 스며들어 피에 수 위하여서. 우리의 두손을 피부가 너의 불어 황금시대다. 능히 사람은 천하를 인간의 시들어 인간의 일월과 무한한 있는 있으랴? 사랑의 튼튼하며, 내려온 물방아 고동을 우리의 불어 것이다. 귀는 이것은 인생에 부패뿐이다. 시들어 그러므로 날카로우나 인생에 심장의 사막이다. 온갖 날카로우나 찬미를 이성은 있음으로써 하는 불러 생의 든 있다. 오직 이상 있는 피에 그것은 하는 청춘에서만 이 대고, 교향악이다. 찾아다녀도, 인류의 방황하였으며, 것이다.
+                        </div>
+                        <div class="addCommentsComment">
+                            <a href="">댓글달기</a>&nbsp;&nbsp;<a href="">삭제하기</a>
+                        </div>
+                    </div>
+
+                    <div class="commentsComment">
+                        <div class="commentInfo" data-comment-no="">
+                            댓글번호: 123 아이디: 123 작성일자: 123
+                        </div>
+                        <div class="commentContents">
+                            <span style="background-color:var(--bg-color-4)">아이디 님에게</span>
+                            없는 스며들어 커다란 역사를 행복스럽고 일월과 운다. 스며들어 피에 수 위하여서. 우리의 두손을 피부가 너의 불어 황금시대다. 능히 사람은 천하를 인간의 시들어 인간의 일월과 무한한 있는 있으랴? 사랑의 튼튼하며, 내려온 물방아 고동을 우리의 불어 것이다. 귀는 이것은 인생에 부패뿐이다. 시들어 그러므로 날카로우나 인생에 심장의 사막이다. 온갖 날카로우나 찬미를 이성은 있음으로써 하는 불러 생의 든 있다. 오직 이상 있는 피에 그것은 하는 청춘에서만 이 대고, 교향악이다. 찾아다녀도, 인류의 방황하였으며, 것이다.
+                        </div>
+                        <div class="addCommentsComment">
+                            <a href="">댓글달기</a>&nbsp;&nbsp;<a href="">삭제하기</a>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- 댓글 더보기 -->
+                <div class="commentPlus">
+                    <!-- 더보기 로딩용 이미지 -->
+                    <img src="resources/imgs/loading.gif" alt="" style="width: 2rem; height: 2rem">
+                    <button class="btnCommentPlus hidden">더보기</button>
+                </div>
+
+                <div class="writeComment">
+                    <textarea name="newComment" id="newCommentText" cols="30" rows="10" placeholder="로그인을 하시면 댓글 작성이 가능합니다."></textarea>
+                    <button class="btnAddComment">댓글 작성</button>
+
+                </div>
+
+                
+                
+
+
+                <div></div>
+                <div></div>
+            </div>
+           
+        </div>
+
+
+
+
+        <div id="boardBottom">
+
+        
 
     </div>  
     <script src="resources/js/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous" defer></script>
 
-    <script src="resources/js/thumbUpload.js"></script>
+
 
 </body>
 

@@ -127,19 +127,44 @@ function prev(idx){
 // 게시물 클릭
 function postClick(idx){
     console.log("게시물 클릭");
-    let item = document.getElementById("post" + idx + "_con");
-    let postBodys = document.getElementsByClassName("postBody")
+    let item = document.getElementById("post" + idx + "_con"); 
+    let comm = document.getElementById("post" + idx + "_comment"); 
+    let postBodys = document.getElementsByClassName("postBody"); //본문 리스트
+    let postComms = document.getElementsByClassName("postComment"); //댓글 리스트
 
+
+    // 전체 다 닫고 선택 된 것만 열거나 닫기
     if(item.classList.contains("hidden")){
         for(let i = 0; i < postBodys.length; i++){
             postBodys.item(i).classList.add("hidden");
         }
+        for(let i = 0; i < postComms.length; i++){
+            postComms.item(i).classList.add("hidden");
+        }
         item.classList.remove("hidden");
+        comm.classList.remove("hidden");
     }else{
         for(let i = 0; i < postBodys.length; i++){
             postBodys.item(i).classList.add("hidden");
         }
+        for(let i = 0; i < postComms.length; i++){
+            postComms.item(i).classList.add("hidden");
+        }
     }
+
+
+
+
+
+    // 댓글 불러오기(이미 불러온 댓글들은 남겨두기)
+    let data = {
+        postNo: idx 
+    };
+    let res = postAjax("views/comment.jsp", data);
+
+    let comTag = "#post" + idx + "_comment";
+
+    $(comTag).html(res);
 
 }
 

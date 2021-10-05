@@ -106,9 +106,9 @@
 
         <div id="boardMain">
         
-        <!-- 게시물 출력 -->
+        <!-- 게시물 출력  status.index to -->
 		<c:forEach var="i" items='${map.get("list")}' varStatus="status">
-			<div id="post${status.index}" class="postCard" data-no="${i.getNo()}" data-id="${i.getId()}" data-idx="${status.index}" onclick="postClick(this.dataset.idx)">
+			<div id="post${i.getNo()}" class="postCard" data-no="${i.getNo()}" data-id="${i.getId()}" data-idx="${status.index}" onclick="postClick(this.dataset.no)">
 				<div class="postDesc">
                     <p class="postCategory">${i.getCategory().getCategory()}</p>
                     <p class="postTitle">${i.getTitle()}</p>
@@ -121,7 +121,7 @@
                     </c:if>
                 </div>
             </div>
-            <div id="post${status.index}_con" class="postBody hidden">
+            <div id="post${i.getNo()}_con" class="postBody hidden">
                 <div class="postContainer">
                 	<hr>
                 	<p class="postModDate">최종 수정일 : ${i.getModDate()}</p>
@@ -133,9 +133,20 @@
                 	<p></p>
                 </div>
             </div>
+            <div id="post${i.getNo()}_comment" class="postComment">
+				<!-- 댓글들이 추가될 자리 -->
+				<!-- <img src="resources/imgs/loading.gif" alt="" style="width: 2rem; height: 2rem">			 -->
+            </div>
+            
         </c:forEach>
            
         </div>
+        
+        
+        
+        
+        
+        
         <div id="boardBottom">
 
         
