@@ -11,12 +11,6 @@
     outline: none;
 }
 
-#wpThumbHolder {
-    background-size: contain;
-    background-color: white;
-}
-
-
 .writePostCategory {
     margin-top: 3rem;
 }

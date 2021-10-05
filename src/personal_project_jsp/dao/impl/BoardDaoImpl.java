@@ -61,6 +61,7 @@ public class BoardDaoImpl implements BoardDao {
 			if(rs1.next() && rs1.getInt(1) <= 0) {
 				return null;
 			}
+			
 			pstmt2.setInt(1, (idx-1)*num);
 			pstmt2.setInt(2, num);
 			try(ResultSet rs2 = pstmt2.executeQuery();){

@@ -1,19 +1,67 @@
 #sidebarWrap {
     margin-top: 3rem;
+    text-align: center;
 }
 
-ul {
-    list-style: none;
-    text-align: center;
-    padding: 0;
+.sidebarNoContent {
+    padding: 2rem 1rem;
+    border: 0.1rem solid black;
+    border-width: 0 0 0.1rem 0;
+    font-size: var(--font-base);
+    display: inline-block;
+    width: 70%;
 }
-li.category {
-    cursor: pointer;
+
+.sidebarContent{
+    padding: 2rem 1rem;
+    border: 0.1rem solid black;
+    border-width: 0 0 0.1rem 0;
     font-size: var(--font-lg);
+    cursor: pointer;
+    display: inline-block;
+    width: 70%;
 }
-li.category:hover{
-    font-weight: bold;
+
+.sidebarContent:hover{
+    background-color: var(--bg-color-2);
+    color: var(--txt-color-5);
 }
+
+
+
+#btnOpenLogin{
+    font-size: var(--font-xl);
+    padding: 1.5rem 5rem;
+    border-radius: 0;
+    background-color: var(--bg-color-2);
+    color: var(--txt-color-5);
+    border: 0;
+    cursor: pointer;
+}
+
+#btnOpenLogout{
+    font-size: var(--font-xl);
+    padding: 1.5rem 5rem;
+    border-radius: 0;
+    background-color: var(--bg-color-5);
+    color: var(--txt-color-1);
+    border: 1;
+    cursor: pointer;
+}
+
+#btnOpenLogin:hover{
+    background-color: var(--bg-color-5);
+    color: var(--txt-color-1);
+    border: 1;
+}
+
+#btnOpenLogout:hover{
+    background-color: var(--bg-color-2);
+    color: var(--txt-color-5);
+    border: 0;
+}
+
+
 
 .searchInput{
     padding: 0.5rem 0.5rem 0.5rem 3rem;

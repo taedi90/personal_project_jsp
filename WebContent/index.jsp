@@ -34,7 +34,9 @@
                 <div id="loginStat" class="afterLogin">${name}님 안녕하세요!</div>
             </c:if>
             <c:if test='${user eq null}'>
-                <div id="loginStat" class="afterLogin hidden"></div>
+                <!-- <div id="loginStat" class="afterLogin hidden"></div> -->
+                <div id="loginStat" class="afterLogin">테스트 계정 id: test1 & pass: 1234</div>
+
             </c:if>
 
         </div>

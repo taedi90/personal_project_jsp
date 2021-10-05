@@ -1,3 +1,4 @@
+<%@page import="personal_project_jsp.dto.User"%>
 <%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -16,13 +17,12 @@
 	int num = request.getParameter("num") == null ? 10 : Integer.parseInt(request.getParameter("num"));
 	String order = request.getParameter("order") == null ? "desc" : request.getParameter("order");
 	String category = request.getParameter("category") == null ? "전체" : request.getParameter("category");
+	int myPost = request.getParameter("myPost") == null ? 0 : Integer.parseInt(request.getParameter("myPost")); // 내글확인 
+	System.out.println(myPost);
 	
 	// 키워드 검색인지 확인
 	String keyword = request.getParameter("keyword");
 	int keywordLength = 0;
-
-	// 내 글 검색인지 확인
-	String myPost = request.getParameter("myPost");
 
 
 	BoardDao dao = BoardDaoImpl.getInstance();
@@ -35,14 +35,20 @@
 		keywordLength = keyword.length();
 	}
 	
-	
-	if(keywordLength > 0){
-		System.out.println("키워드로 검색");
+	if(myPost == 1){ // 내 글 보기
+		User user = new User();
+		user.setId((String)session.getAttribute("user"));
+		map = dao.selectBoardById(user, idx, num, order);
+	}
+	else if(keywordLength > 0){ // 키워드로 보기
+		//System.out.println("키워드로 검색");
 		map = dao.selectBoardByKeyword(keyword, idx, num, order);
-	}else if(category.equals("전체")){
-		System.out.println("전체 리스트 검색");
+	}
+	
+	else if(category.equals("전체")){ // 전체 리스트 보기
+		//System.out.println("전체 리스트 검색");
 		map = dao.selectBoardByAll(idx, num, order);
-	}else{
+	}else{ // 카테고리 검색
 		System.out.println("카테고리 검색");
 		Category ca = new Category(category);
 		map = dao.selectBoardByCategory(ca, idx, num, order);
@@ -54,7 +60,11 @@
 	<c:set var="category" value="<%= category %>"/>
 
 	<div id="categoryWrap">
-		<c:if test="<%= keywordLength <= 0 %>">
+		<c:if test="<%= keywordLength <= 0 && myPost == 1 %>">
+			<div id="myPost" class="hidden">1</div>
+			<span id="category">내 게시물 검색</span>
+		</c:if>
+		<c:if test="<%= keywordLength <= 0 && myPost != 1 %>">
 			<span id="category">${category}</span>
 		</c:if>
 		<c:if test="<%= keywordLength > 0 %>">

@@ -4,10 +4,14 @@ let lastNum = 10;
 
 // 게시물 수 변경
 function numChange(){
+	
+	let nowPageIdx = Math.ceil(($("#nowPost").text() - lastNum + 1) / $("#num").val());
+	
     let data = {
-        idx : Math.ceil(($("#nowPost").text() - lastNum + 1) / $("#num").val()),
+        idx : nowPageIdx < 1 ? 1 : nowPageIdx,
         num : $("#num").val(),
         order : $("#order").val(),
+        myPost : document.getElementById("myPost") == null ? 0 : document.getElementById("myPost").textContent,
         category : lastCategory,
         keyword : $("#keyword").text()
 
@@ -19,12 +23,13 @@ function numChange(){
     lastNum = $("#num").val();
 }
 
-// 정렬 변경
+// 정렬 변경(오름차순, 내림차순)
 function orderChange(){
     let data = {
         idx : 1,
         num : $("#num").val(),
         order : $("#order").val(),
+        myPost : document.getElementById("myPost") == null ? 0 : document.getElementById("myPost").textContent,
         category : lastCategory,
         //keyword : $("#keyword").text()
     }
@@ -34,7 +39,24 @@ function orderChange(){
     $('#main').animate({scrollTop:0}, 200);
 }
 
-// 카테고리 변경
+// 내 게시물 검색
+function myPostSearch(category){
+
+    let data = {
+        idx : 1,
+        num : $("#num").val(),
+        order : $("#order").val(),
+        myPost : 1
+        //keyword : $("#keyword").text()
+    }
+    let res = postAjax("views/board.jsp", data);
+
+    $('#main').html(res);
+    $('#main').animate({scrollTop:0}, 200);
+    sidebar.classList.add("hidden");
+}
+
+// 카테고리 검색
 function categoryChange(category){
 
     lastCategory = category;
@@ -59,6 +81,7 @@ function pageSwap(idx){
         idx : idx,
         num : $("#num").val(),
         order : $("#order").val(),
+        myPost : document.getElementById("myPost") == null ? 0 : document.getElementById("myPost").textContent,
         category : lastCategory,
         //keyword : $("#keyword").text()
     }
@@ -74,6 +97,7 @@ function next(idx){
         idx : idx,
         num : $("#num").val(),
         order : $("#order").val(),
+        myPost : document.getElementById("myPost") == null ? 0 : document.getElementById("myPost").textContent,
         category : lastCategory,
         keyword : $("#keyword").text()
     }
@@ -90,6 +114,7 @@ function prev(idx){
         idx : idx,
         num : $("#num").val(),
         order : $("#order").val(),
+        myPost : document.getElementById("myPost") == null ? 0 : document.getElementById("myPost").textContent,
         category : lastCategory,
         keyword : $("#keyword").text()
     }
