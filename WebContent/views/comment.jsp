@@ -82,5 +82,11 @@
     
     <textarea name="newComment" id="ct<%= postNo %>" cols="30" rows="7" <c:if test="${empty sessionId}">placeholder="로그인을 하시면 댓글 작성이 가능합니다."</c:if>></textarea>
     <!-- Comment(long postNo, long pCno, String id, String comment) -->
-    <button id="commentBtnNo-<%= postNo %>"  class="btnAddComment" data-post-no="<%= postNo %>" data-parent-no="" data-modify-no="" data-comment-text="ct<%= postNo %>" onclick="insertCommentFunc(this)">댓글 작성</button>
+    <c:if test="<%= sessionId != null %>">
+        <button id="commentBtnNo-<%= postNo %>" type="button" class="btnAddComment" data-post-no="<%= postNo %>" data-parent-no="" data-modify-no="" data-comment-text="ct<%= postNo %>" onclick="insertCommentFunc(this)">댓글 작성</button>
+    </c:if>
+    <c:if test="<%= sessionId == null %>">
+        <button id="commentBtnNo-<%= postNo %>" type="button" class="btnAddComment" data-post-no="<%= postNo %>" data-parent-no="" data-modify-no="" data-comment-text="ct<%= postNo %>" onclick="openLoginModal()">로그인 하기</button>
+    </c:if>
+
 </div>

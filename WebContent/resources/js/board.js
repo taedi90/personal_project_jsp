@@ -262,6 +262,15 @@ function deleteCommentConfirm(){
 // 댓글 작성 버튼 클릭
 function insertCommentFunc(elem) {
 
+    // document.getElementById("ct2460").value.replace(/ /g,"").length
+    let length = document.getElementById(elem.dataset.commentText).value.replace(/\s+/g,"").length;
+    // 내용 비었는지 확인하기
+    if(length < 5){
+        console.log(length);
+        openModal("공백 제외 5자 이상 작성해주세요!");
+        return;
+    }
+
     // 로그인 확인(나중에)
 
     // 수정인지 확인하기
