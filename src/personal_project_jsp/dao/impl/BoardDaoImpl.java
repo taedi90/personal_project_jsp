@@ -274,7 +274,7 @@ public class BoardDaoImpl implements BoardDao {
 			pstmt.setString(1, board.getTitle());
 			pstmt.setString(2, board.getCategory().getCategory());
 			pstmt.setString(3, board.getContent());
-			pstmt.setString(4, board.getThumb() == null ? "" : board.getThumb());
+			pstmt.setString(4, board.getThumb().equals("")? null : board.getThumb());
 			pstmt.setLong(5, board.getNo());
 			
 			

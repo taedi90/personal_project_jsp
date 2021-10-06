@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.LinkedList;
 
 import personal_project_jsp.dao.CommentDao;
@@ -59,16 +60,19 @@ public class CommentDaoImpl implements CommentDao {
 					list = new LinkedList<Comment>(); 
 					long parent = 0;
 					do {
+
 						comment = getComment(rs);
-						if(comment.getDepth() == 1) { // 최상위 댓글들은 리스트 앞으로 추가
-							list.add(0, comment);  // (내림차순 -> 오름차순)
-						}else {// 하위 댓글들은 상위 댓글 뒤에 끼워넣기
+						
+						// 댓글들 순서대로 정렬하기
+						if(comment.getDepth() == 1) { 
+							list.add(0, comment);  // 최상위 댓글들은 리스트 앞에 추가 (내림차순 -> 오름차순)
+						}else {
 							parent = comment.getpCno(); //
 							int i = 0;
 							
 							for(Comment c : list) {
 								if(parent == c.getCno()) {
-									list.add(i+1, comment); // (내림차순 -> 오름차순)
+									list.add(i+1, comment); // 하위 댓글들은 상위 댓글 뒤에 끼워넣기 (내림차순 -> 오름차순)
 									break;
 								}
 								i++;
@@ -92,20 +96,96 @@ public class CommentDaoImpl implements CommentDao {
 
 	@Override
 	public int insertComment(Comment comment) {
-		// TODO Auto-generated method stub
+
+		String sql = "insert into comment(`post_no`, `p_cno`, `id`, `comment`, `depth`) values (?, ?, ?, ?, ?)";
+
+		try (Connection con = JdbcUtil.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
+			
+			pstmt.setLong(1, comment.getPostNo());
+						
+			if(comment.getpCno() == 0) {
+				pstmt.setNull(2, Types.BIGINT);
+			}else {
+				pstmt.setLong(2, comment.getpCno());
+			}
+
+//			pstmt.setLong(2, comment.getpCno() == 0 ? null : comment.getpCno());
+			pstmt.setString(3, comment.getId());
+			pstmt.setString(4, comment.getComment());
+			pstmt.setInt(5, comment.getDepth());
+			
+			return pstmt.executeUpdate();
+
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		return 0;
 	}
 
 	@Override
 	public int updateComment(Comment comment) {
-		// TODO Auto-generated method stub
+		String sql = "update comment set comment = ? where cno = ? and id = ?";
+
+		try (Connection con = JdbcUtil.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
+			
+			pstmt.setString(1, comment.getComment());
+			pstmt.setLong(2, comment.getCno());
+			pstmt.setString(3, comment.getId());
+						
+			return pstmt.executeUpdate();
+
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		return 0;
 	}
 
 	@Override
-	public int deleteComment(Comment comment) {
-		// TODO Auto-generated method stub
+	public int deleteComment(Comment comment) { // 실제로는 내용만 지움
+		
+		String sql = "update comment set `delete` = 1 where `cno` = ? and `id` = ?";
+
+		try (Connection con = JdbcUtil.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
+			
+			pstmt.setLong(1, comment.getCno());
+			pstmt.setString(2, comment.getId());
+						
+			return pstmt.executeUpdate();
+
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		return 0;
+	}
+
+	@Override
+	public Comment selectCommentByCommentNo(Comment comment) {
+
+		String sql = "select * from comment where cno = ?";
+
+		try (Connection con = JdbcUtil.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
+
+			pstmt.setLong(1, comment.getCno());
+			try (ResultSet rs = pstmt.executeQuery();) {
+				if (rs.next()) {
+					comment = getComment(rs);
+
+				}
+
+				return comment;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 
 }

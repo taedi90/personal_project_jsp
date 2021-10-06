@@ -215,6 +215,12 @@ select {
 	padding-top: 2rem;
 }
 
+.nestedComment{
+	width: 100%;
+	text-align: left;
+	margin-top: 3rem;
+	font-size: var(--font-sm);
+}
 
 
 

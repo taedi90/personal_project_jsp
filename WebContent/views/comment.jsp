@@ -32,26 +32,39 @@
 
 <div class="commentBox">    
     <c:forEach var="i" items='${list}'>
-    <div class="comment depth" style="margin-left: ${ (i.getDepth() - 1) * 3 }rem">
-        <div class="commentInfo" data-comment-no="${i.getCno()}" data-comment-depth="${i.getDepth()}">
-            #${i.getCno()}&nbsp;&nbsp;
-            ${i.getId()}&nbsp;&nbsp;
-            [<fmt:formatDate value="${i.getWriDate()}" pattern="yyyy-MM-dd a KK시mm분"/>]
-        </div>
-        <div class="commentContents">   
-            <c:if test="${i.getDepth() > 1}">
-                <span style="background-color: var(--bg-color-4)">#${i.getpCno()}에 대한 답글</span>&nbsp;
-            </c:if>
-            ${i.getComment()}
-        </div>
-        <div class="addCommentsComment">
-            <!-- 로그인 정보에 따라 다르게 표현 -->
-            <a href="">댓글달기</a>
-            <c:if test="${sessionId eq i.getId()}">
-                &nbsp;&nbsp;<a href="">수정하기</a>&nbsp;&nbsp;<a href="">삭제하기</a>
-            </c:if>
-        </div>
-    </div>
+        <c:if test="${i.isDelete() ne true}">
+            <div class="comment depth" style="margin-left: ${ (i.getDepth() - 1) * 3 }rem">
+                <div class="commentInfo" data-comment-no="${i.getCno()}" data-comment-depth="${i.getDepth()}">
+                    #${i.getCno()}&nbsp;&nbsp;
+                    ${i.getId()}&nbsp;&nbsp;
+                    [<fmt:formatDate value="${i.getWriDate()}" pattern="yyyy-MM-dd a KK시mm분ss초"/>]
+                    <c:if test="${not empty i.getModDate()}">
+                        &nbsp;&nbsp;<span style="color: rgb(214, 97, 51)">[수정됨]</span>
+                    </c:if>
+                </div>
+                <div class="commentContents">   
+                    <c:if test="${i.getDepth() > 1}">
+                        <span style="background-color: var(--bg-color-4)">#${i.getpCno()}에 대한 답글</span>&nbsp;
+                    </c:if>
+                    <span id="cc${i.getCno()}">${i.getComment()}</span>
+                </div>
+                <div class="addCommentsComment">
+                    <!-- 로그인 정보에 따라 다르게 표현 -->
+                    <a href="#" onclick=" openNestedComment('<%= postNo %>','${i.getCno()}')">댓글달기</a>&nbsp;
+                    <c:if test="${sessionId eq i.getId()}">
+                        <a href="#" onclick="modifyCommentFunc('<%= postNo %>','${i.getCno()}')">수정하기</a>&nbsp;
+                        <a href="#" onclick="deleteCommentFunc('<%= postNo %>', '${i.getCno()}')">삭제하기</a>
+                    </c:if>
+                </div>
+            </div>
+        </c:if>
+        <c:if test="${i.isDelete() eq true}">
+            <div class="comment depth" style="margin-left: ${ (i.getDepth() - 1) * 3 }rem">
+                <div class="commentContents" style="color: var(--txt-color-3); padding: 2rem;">   
+                    삭제 된 게시물입니다.
+                </div>
+            </div>
+        </c:if>
     </c:forEach>
 </div>
 
@@ -63,6 +76,11 @@
 <!-- </div> -->
 
 <div class="writeComment">
-    <textarea name="newComment" id="newCommentText" cols="30" rows="7" <c:if test="${empty sessionId}">placeholder="로그인을 하시면 댓글 작성이 가능합니다."</c:if>></textarea>
-    <button class="btnAddComment">댓글 작성</button>
+    <div id="nestedComment-<%= postNo %>" class="nestedComment hidden">
+        <span id="nestedNum-<%= postNo %>"></span> <button onclick="cancelNestedComment('<%= postNo %>', 'nestedComment-<%= postNo %>')">취소</button>
+    </div>
+    
+    <textarea name="newComment" id="ct<%= postNo %>" cols="30" rows="7" <c:if test="${empty sessionId}">placeholder="로그인을 하시면 댓글 작성이 가능합니다."</c:if>></textarea>
+    <!-- Comment(long postNo, long pCno, String id, String comment) -->
+    <button id="commentBtnNo-<%= postNo %>"  class="btnAddComment" data-post-no="<%= postNo %>" data-parent-no="" data-modify-no="" data-comment-text="ct<%= postNo %>" onclick="insertCommentFunc(this)">댓글 작성</button>
 </div>

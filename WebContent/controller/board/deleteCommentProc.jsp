@@ -1,5 +1,4 @@
-<%@page import="java.util.LinkedList"%>
-<%@page import="personal_project_jsp.dto.Board"%>
+<%@page import="personal_project_jsp.dto.Comment"%>
 <%@page import="personal_project_jsp.dao.impl.CommentDaoImpl"%>
 <%@page import="personal_project_jsp.dao.CommentDao"%>
 <%@page import="java.util.Map"%>
@@ -12,22 +11,22 @@
 
 <% 
 
-	long postNo = Long.parseLong(request.getParameter("postNo"));
-	
-	Board board = new Board(); 
-	board.setNo(postNo);
+	String id = (String)session.getAttribute("user");
+	long cno = Long.parseLong(request.getParameter("cno"));
 
 	CommentDao dao = CommentDaoImpl.getInstance();
-	
-	LinkedList list = dao.selectCommentByPostNo(board);
-	
-	int res = 0;
-	
-	if(list != null){
-		res = 1;
-	}else{
-		res = 0;
-	}
 
+	// 코멘트 생성
+	Comment comm = new Comment(); 
+	comm.setCno(cno);
+	comm.setId(id);
+
+
+	int res = dao.deleteComment(comm);
+	System.out.println("댓글 삭제-" + res );
 
 %>
+
+[
+{"res" : "<%= res %>"}
+]

@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class Comment {
 	private long cno;	//댓글번호
 	private long postNo; //게시물번호 -> board 객체로? 설마?
-	private long pCno; //상위댓글
+	private long pCno; //상위댓글 -> Long 자료형은 null이 전달된다?
 	private String id; //작성자 -> user 객체로 받아야 하는건가?
 	private String comment; //댓글 내용
 	private Timestamp wriDate; //작성일
@@ -20,12 +20,13 @@ public class Comment {
 	}
 
 
-	public Comment(long postNo, long pCno, String id, String comment) {
+	public Comment(long postNo, long pCno, String id, String comment, int depth) {
 		super();
 		this.postNo = postNo;
 		this.pCno = pCno;
 		this.id = id;
 		this.comment = comment;
+		this.depth = depth;
 	}
 
 

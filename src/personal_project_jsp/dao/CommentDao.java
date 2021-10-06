@@ -11,6 +11,9 @@ public interface CommentDao {
 	// 코멘트 검색
 	LinkedList<Comment> selectCommentByPostNo(Board board);
 	
+	// 코멘트 번호로 검색
+	Comment selectCommentByCommentNo(Comment comment);
+	
 	// 코멘트 입력
 	int insertComment(Comment comment);
 	

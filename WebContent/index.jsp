@@ -9,13 +9,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>자유 게시판</title>
-    <link href="resources/css/main.css" rel="stylesheet">
-    <link href="resources/css/board.css" rel="stylesheet">
-    <link href="resources/css/sidebar.css" rel="stylesheet">
-    <link href="resources/css/modal.css" rel="stylesheet">
-    <link href="resources/css/writePost.css" rel="stylesheet">
-    <link href="resources/css/login.css" rel="stylesheet">
-    <link href="resources/css/uploadThumb.css" rel="stylesheet">
+    <link href="resources/css/main.css?ver=1" rel="stylesheet">
+    <link href="resources/css/board.css?ver=2" rel="stylesheet">
+    <link href="resources/css/sidebar.css?ver=1" rel="stylesheet">
+    <link href="resources/css/modal.css?ver=1" rel="stylesheet">
+    <link href="resources/css/writePost.css?ver=1" rel="stylesheet">
+    <link href="resources/css/login.css?ver=1" rel="stylesheet">
+    <link href="resources/css/uploadThumb.css?ver=1" rel="stylesheet">
     <script src="resources/js/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous" defer></script>
 </head>
@@ -51,16 +51,16 @@
         <div id="footer">Copyright 2021. Author all rights reserved.</div>
     </div>
 
-    <script type="text/javascript" src="resources/js/main.js" defer></script>
-    <script type="text/javascript" src="resources/js/board.js" defer></script>
-    <script type="text/javascript" src="resources/js/login.js" defer></script>
-    <script type="text/javascript" src="resources/js/modal.js" defer></script>
-    <script type="text/javascript" src="resources/js/sidebar.js" defer></script>
-    <script type="text/javascript" src="resources/js/jAjax.js" defer></script>
+    <script type="text/javascript" src="resources/js/main.js?ver=1" defer></script>
+    <script type="text/javascript" src="resources/js/board.js?ver=5" defer></script>
+    <script type="text/javascript" src="resources/js/login.js?ver=1" defer></script>
+    <script type="text/javascript" src="resources/js/modal.js?ver=1" defer></script>
+    <script type="text/javascript" src="resources/js/sidebar.js?ver=1" defer></script>
+    <script type="text/javascript" src="resources/js/jAjax.js?ver=1" defer></script>
     <!-- SmartEditor2 라이브러리 -->
     <script type="text/javascript" src="se2/js/HuskyEZCreator.js" charset="utf-8" defer></script>
-    <script type="text/javascript" src = "resources/js/writePost.js" defer></script>
-    <script type="text/javascript" src="resources/js/thumbUpload.js" defer></script>
+    <script type="text/javascript" src = "resources/js/writePost.js?ver=1" defer></script>
+    <script type="text/javascript" src="resources/js/thumbUpload.js?ver=1" defer></script>
 </body>
 
 </html>
