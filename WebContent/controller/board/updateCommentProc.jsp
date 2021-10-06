@@ -1,4 +1,5 @@
 <%@page import="personal_project_jsp.dto.Comment"%>
+<%@page import="personal_project_jsp.dto.User"%>
 <%@page import="personal_project_jsp.dao.impl.CommentDaoImpl"%>
 <%@page import="personal_project_jsp.dao.CommentDao"%>
 <%@page import="java.util.Map"%>
@@ -21,7 +22,7 @@
 	Comment comm = new Comment(); 
 	comm.setCno(cno);
 	comm.setComment(comment);
-	comm.setId(id);
+	comm.setUser(new User(id));
 
 
 	int res = dao.updateComment(comm);

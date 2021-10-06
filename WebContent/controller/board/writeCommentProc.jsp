@@ -1,4 +1,5 @@
 <%@page import="personal_project_jsp.dto.Comment"%>
+<%@page import="personal_project_jsp.dto.User"%>
 <%@page import="personal_project_jsp.dao.impl.CommentDaoImpl"%>
 <%@page import="personal_project_jsp.dao.CommentDao"%>
 <%@page import="java.util.Map"%>
@@ -30,7 +31,7 @@
 	
 
 	// 코멘트 생성
-	Comment newCom = new Comment(postNo, pCno, id, comment, depth); 
+	Comment newCom = new Comment(postNo, pCno, new User(id), comment, depth); 
 
 	int res = dao.insertComment(newCom);
 

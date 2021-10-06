@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import personal_project_jsp.dao.CommentDao;
 import personal_project_jsp.dto.Board;
 import personal_project_jsp.dto.Comment;
+import personal_project_jsp.dto.User;
 import personal_project_jsp.util.JdbcUtil;
 
 public class CommentDaoImpl implements CommentDao {
@@ -22,11 +23,16 @@ public class CommentDaoImpl implements CommentDao {
 	
 	private Comment getComment(ResultSet rs) throws SQLException {
 		Comment comment = new Comment();
+		User user = new User();
 		
 		comment.setCno(rs.getLong("cno"));
 		comment.setPostNo(rs.getLong("post_no"));
 		comment.setpCno(rs.getLong("p_cno"));
-		comment.setId(rs.getString("id"));
+		
+		user.setId(rs.getString("id"));
+		user.setName(rs.getString("name"));
+		comment.setUser(user);
+		
 		comment.setComment(rs.getString("comment"));
 		comment.setWriDate(rs.getTimestamp("wri_date"));
 		comment.setModDate(rs.getTimestamp("mod_date"));
@@ -42,7 +48,8 @@ public class CommentDaoImpl implements CommentDao {
 	public LinkedList<Comment> selectCommentByPostNo(Board board) {
 		
 		// 게시물 번호에 해당하는 댓글(계층 오름차순, 번호 내림차순 정렬)
-		String sql = "select * from comment where post_no = ? order by depth, cno desc";
+		// String sql = "select * from comment where post_no = ? order by depth, cno desc";
+		String sql = "select `cno`, `post_no`, `p_cno`, `c`.`id` id, `comment`, `wri_date`, `mod_date`, `delete`, `depth`, `name` from `comment` c left join `user` u on c.id = u.id where post_no = ? order by depth, cno desc";
 		
 		// 댓글들을 저장할 배열(LL)
 		LinkedList<Comment> list = null;
@@ -110,7 +117,7 @@ public class CommentDaoImpl implements CommentDao {
 			}
 
 //			pstmt.setLong(2, comment.getpCno() == 0 ? null : comment.getpCno());
-			pstmt.setString(3, comment.getId());
+			pstmt.setString(3, comment.getUser().getId());
 			pstmt.setString(4, comment.getComment());
 			pstmt.setInt(5, comment.getDepth());
 			
@@ -132,7 +139,7 @@ public class CommentDaoImpl implements CommentDao {
 			
 			pstmt.setString(1, comment.getComment());
 			pstmt.setLong(2, comment.getCno());
-			pstmt.setString(3, comment.getId());
+			pstmt.setString(3, comment.getUser().getId());
 						
 			return pstmt.executeUpdate();
 
@@ -152,7 +159,7 @@ public class CommentDaoImpl implements CommentDao {
 		try (Connection con = JdbcUtil.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
 			
 			pstmt.setLong(1, comment.getCno());
-			pstmt.setString(2, comment.getId());
+			pstmt.setString(2, comment.getUser().getId());
 						
 			return pstmt.executeUpdate();
 

@@ -13,6 +13,15 @@ public class User {
 	public User() {
 	}
 	
+	
+	
+	public User(String id) {
+		super();
+		this.id = id;
+	}
+
+
+
 	public User(String id, String name, String password, String email) {
 		this.id = id;
 		this.name = name;

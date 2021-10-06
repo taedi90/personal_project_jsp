@@ -21,10 +21,29 @@
 	LinkedList<Comment> list = dao.selectCommentByPostNo(board);
 	
 	String sessionId = (String)session.getAttribute("user");
+	
+	
+	int maxDepth = 0;
+	double margin = 3.0; // 대댓글 간격
+	if(list != null){
+		for (Comment c : list){
+			if(c.getDepth() >  maxDepth){
+				maxDepth = c.getDepth();
+			}
+		}
+		margin = 40.0 / maxDepth;
+
+		if (margin > 3){
+			margin = 3;
+		}
+		System.out.println("최대 깊이" + maxDepth + "마진 사이즈" + margin);
+	}
+
 %>
 
 <c:set var="list" value="<%= list %>"/>
 <c:set var="sessionId" value="<%= sessionId %>"/>
+<c:set var="margin" value="<%= margin %>"/>
 
 <div>
     <p class="postCommentTitle">댓글</p>
@@ -33,10 +52,10 @@
 <div class="commentBox">    
     <c:forEach var="i" items='${list}'>
         <c:if test="${i.isDelete() ne true}">
-            <div class="comment depth" style="margin-left: ${ (i.getDepth() - 1) * 3 }rem">
+            <div class="comment depth" style="margin-left: ${ (i.getDepth() - 1) * margin }%">
                 <div class="commentInfo" data-comment-no="${i.getCno()}" data-comment-depth="${i.getDepth()}">
                     #${i.getCno()}&nbsp;&nbsp;
-                    ${i.getId()}&nbsp;&nbsp;
+                    ${i.getUser().getName()}(${i.getUser().getId()})&nbsp;&nbsp;
                     [<fmt:formatDate value="${i.getWriDate()}" pattern="yyyy-MM-dd a KK시mm분ss초"/>]
                     <c:if test="${not empty i.getModDate()}">
                         &nbsp;&nbsp;<span style="color: rgb(214, 97, 51)">[수정됨]</span>
@@ -51,7 +70,7 @@
                 <div class="addCommentsComment">
                     <!-- 로그인 정보에 따라 다르게 표현 -->
                     <a href="#" onclick=" openNestedComment('<%= postNo %>','${i.getCno()}')">댓글달기</a>&nbsp;
-                    <c:if test="${sessionId eq i.getId()}">
+                    <c:if test="${sessionId eq i.getUser().getId()}">
                         <a href="#" onclick="modifyCommentFunc('<%= postNo %>','${i.getCno()}')">수정하기</a>&nbsp;
                         <a href="#" onclick="deleteCommentFunc('<%= postNo %>', '${i.getCno()}')">삭제하기</a>
                     </c:if>
@@ -59,7 +78,7 @@
             </div>
         </c:if>
         <c:if test="${i.isDelete() eq true}">
-            <div class="comment depth" style="margin-left: ${ (i.getDepth() - 1) * 3 }rem">
+            <div class="comment depth" style="margin-left: ${ (i.getDepth() - 1) * margin }%">
                 <div class="commentContents" style="color: var(--txt-color-3); padding: 2rem;">   
                     삭제 된 게시물입니다.
                 </div>

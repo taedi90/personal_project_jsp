@@ -185,6 +185,7 @@ function selectCommentFunc(idx){
     let comTag = "#post" + idx + "_comment";
 
     $(comTag).html(res);
+
 }
 
 // 대댓글 쓰기 (글에서 벗어날 때 비워줄지 고민)
