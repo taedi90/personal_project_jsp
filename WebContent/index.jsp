@@ -16,6 +16,7 @@
     <link href="resources/css/writePost.css?ver=1" rel="stylesheet">
     <link href="resources/css/login.css?ver=1" rel="stylesheet">
     <link href="resources/css/uploadThumb.css?ver=1" rel="stylesheet">
+    <link rel="shortcut icon" href="resources/imgs/favicon.svg">
     <script src="resources/js/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous" defer></script>
 </head>
@@ -48,7 +49,8 @@
                 <jsp:include page="views/board.jsp?num=10&order=desc" flush="true"></jsp:include>
             </div>
         </div>
-        <div id="footer">Copyright 2021. Author all rights reserved.</div>
+        <div id="footer"><a style="text-decoration: none; color: white" href="https://github.com/taedi90/personal_project_jsp" target="_self">https://github.com/taedi90/personal_project_jsp</a></div>
+		<!-- <div id="footer">Copyright 2021. Author all rights reserved.</div> -->
     </div>
 
     <script type="text/javascript" src="resources/js/main.js?ver=1" defer></script>
