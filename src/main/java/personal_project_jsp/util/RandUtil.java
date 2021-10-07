@@ -21,9 +21,9 @@ public class RandUtil {
         
         StringBuffer sb = new StringBuffer();
 
-		SecureRandom sr = null;
+		SecureRandom rnd = null;
 		try {
-			sr = SecureRandom.getInstance("SHA1PRNG");
+			rnd = SecureRandom.getInstance("SHA1PRNG");
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
@@ -32,7 +32,7 @@ public class RandUtil {
         int len = charSet.length;
         
         for (int i=0; i<20; i++) {
-            idx = sr.nextInt(len);    // 강력한 난수를 발생시키기 위해 SecureRandom을 사용한다.
+            idx = rnd.nextInt(len);    // 강력한 난수를 발생시키기 위해 SecureRandom을 사용한다.
             sb.append(charSet[idx]);
         }
 

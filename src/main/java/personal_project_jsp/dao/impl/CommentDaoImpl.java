@@ -30,7 +30,10 @@ public class CommentDaoImpl implements CommentDao {
 		comment.setpCno(rs.getLong("p_cno"));
 		
 		user.setId(rs.getString("id"));
-		user.setName(rs.getString("name"));
+		try {
+			user.setName(rs.getString("name"));
+		}catch (SQLException e){}
+
 		comment.setUser(user);
 		
 		comment.setComment(rs.getString("comment"));

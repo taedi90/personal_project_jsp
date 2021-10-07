@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-@WebServlet({"/test4", "/test5", "/test6"})
+// 모든 servlet 상위 클래스는 HttpServlet 이어야함
+@WebServlet({"/test7", "/test5", "/test6"})
 public class Test extends HttpServlet {
    private static final long serialVersionUID = 1L;
        
@@ -22,8 +22,6 @@ public class Test extends HttpServlet {
 	   PrintWriter out = response.getWriter();
 	   out.print("Hello world!");
 	   out.close();
-
-	   
    }
 
    

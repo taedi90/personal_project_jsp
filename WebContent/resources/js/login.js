@@ -321,7 +321,7 @@ function registerProc(){
         name: name,
         email: email
 	};
-    let data = postAjax("controller/registerProc.jsp", param);
+    let data = postAjax("/register", param);
     if (data === 0){
         return;
     }else if (data[0].res == 1) {

@@ -27,7 +27,7 @@
 		absPath = Paths.get(path).getParent().getFileName().toAbsolutePath().toString()
 				+ File.separator +"personal_project_file_storage" + File.separator + "upload";
 	}else {
-		// 작업환경일 경우(parentPath.equals("wtpwebapps"))
+		// 작업환경일 경우(wtpwebapps, artifacts)
 		absPath = path + "upload";
 	}
 			

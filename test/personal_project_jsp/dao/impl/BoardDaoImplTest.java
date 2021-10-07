@@ -76,12 +76,12 @@ public class BoardDaoImplTest {
 
 	@Test
 	public void testInsertBoard() {
-		Board board = new Board("root","테스트","수다","이 내용은 나도 몰라요");
-		for(int i = 1; i <= 2; i++) {
-			board.setTitle("제목" + i);	
-			dao.insertBoard(board);
-		}
-	
+//		Board board = new Board("root","테스트","수다","이 내용은 나도 몰라요");
+//		for(int i = 1; i <= 2; i++) {
+//			board.setTitle("제목" + i);
+//			dao.insertBoard(board);
+//		}
+//
 		fail("Not yet implemented");
 	}
 
