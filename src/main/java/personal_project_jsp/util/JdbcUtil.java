@@ -23,7 +23,7 @@ public class JdbcUtil {
 		encryptor.setPassword(System.getenv("TAEDI_ENC_KEY"));
 		encryptor.setIvGenerator(new RandomIvGenerator());
 		encryptor.setAlgorithm("PBEWithHmacSHA512AndAES_256");
-		encryptor.setKeyObtentionIterations(100000);
+		encryptor.setKeyObtentionIterations(100);
 
 		
 		try (InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(propPath);){

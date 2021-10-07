@@ -13,13 +13,13 @@ public class EncryptProperties {
         encryptor.setPassword(System.getenv("TAEDI_ENC_KEY"));
         encryptor.setIvGenerator(new RandomIvGenerator());
         encryptor.setAlgorithm("PBEWithHmacSHA512AndAES_256");
-        encryptor.setKeyObtentionIterations(100000);
+        encryptor.setKeyObtentionIterations(100); //해싱 횟수
 
         ArrayList<String> Strings = new ArrayList<>();
 
         Strings.add("jdbc:mysql://taedi.iptime.org:20111/my_board2?useSSL=false");
         Strings.add("아이디");
-        Strings.add("비밀번호");
+        Strings.add("패스");
 
         for (String str : Strings) {
             String encStr = encryptor.encrypt(str);

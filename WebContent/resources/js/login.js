@@ -232,11 +232,11 @@ function loginProc() {
     let id = document.loginForm.id.value;
     let password = document.loginForm.password.value;
 
-    let data = postAjax('controller/loginProc.jsp', {id: id, password: password})
+    let data = postAjax('/login', {id: id, password: password})
 
     if (data === 0){
         return;
-    }else if(data[0].res === '1') {
+    }else if(data.res === '1') {
         // 로그인 성공 시 관련요소들 표출
         for(let i = 0; i < afterLogins.length; i++){
             afterLogins.item(i).classList.remove("hidden");
@@ -248,11 +248,11 @@ function loginProc() {
         }
 
         location.reload();
-        document.getElementById("loginStat").textContent = data[1].name + "님 안녕하세요!"
+        document.getElementById("loginStat").textContent = data.name + "님 안녕하세요!"
 
         closeLoginModal();
     }else {
-        openModal(data[0].comment);
+        openModal(data.comment);
 
         // 가입하지 않은 아이디라면 회원가입 화면으로 유도
         if(!idExistChk()){
@@ -272,7 +272,7 @@ function logoutConfirm(){
     let data = postAjax("controller/logoutProc.jsp");
     if (data === 0){
         return;
-    }else if (data[0].res == 1) {
+    }else if (data.res == 1) {
         openModal("로그아웃 완료!");
         // 로그아웃 시 로그인 이후 요소 감추기
         for(let i = 0; i < afterLogins.length; i++){
@@ -324,16 +324,16 @@ function registerProc(){
     let data = postAjax("/register", param);
     if (data === 0){
         return;
-    }else if (data[0].res == 1) {
-        openModal(data[0].comment);
-        location.reload();
-        document.getElementById("loginStat").classList.remove("hidden");
-        document.getElementById("loginStat").textContent = data[1].name + "님 안녕하세요!"
-        btnOpenLogin.classList.add("hidden");
-        btnOpenLogout.classList.remove("hidden");
-        closeLoginModal();
+    }else if (data.res == 1) {
+        openModal(data);
+        // location.reload();
+        // document.getElementById("loginStat").classList.remove("hidden");
+        // document.getElementById("loginStat").textContent = data[1].name + "님 안녕하세요!"
+        // btnOpenLogin.classList.add("hidden");
+        // btnOpenLogout.classList.remove("hidden");
+        // closeLoginModal();
     }else{
-        openModal(data[0].comment);
+        openModal(data.comment);
     }
 
 }

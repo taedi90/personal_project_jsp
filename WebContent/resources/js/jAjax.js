@@ -6,6 +6,7 @@ function postAjax(url = '', data = {}) {
         async: false,
         data : data,			
         success : function(d){ //DB접근 후 가져온 데이터
+            console.log("Ajax 결과 -> ");
             console.log(d);
             res = d;
         },		

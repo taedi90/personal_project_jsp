@@ -13,6 +13,10 @@ public class EncryptUtil {
 
 
     public String getHashing(String password, String salt) {
+
+        System.out.println("original password :" + password);
+        System.out.println("original salt :" + salt);
+
         byte[] bytePassword = password.getBytes();
 
         int stretching = 10000; // key stretching 횟수
@@ -29,6 +33,8 @@ public class EncryptUtil {
             md.update(temp.getBytes()); // temp 문자열을 해싱해 md에 저장
             bytePassword = md.digest(); // 패스워드 갱신
         }
+
+        System.out.println("hashed password :" + byteToString(bytePassword));
 
         return byteToString(bytePassword);
     }

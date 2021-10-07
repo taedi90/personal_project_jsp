@@ -6,8 +6,11 @@ public class User {
 	private String id;
 	private String name;
 	private String password;
+	private String salt;
+	private String originPass;
 	private String email;
 	private Date regDate;
+	private Date withdrawDate;
 	private int rootPermission;
 	
 	public User() {
@@ -38,60 +41,90 @@ public class User {
 		this.rootPermission = rootPermission;
 	}
 
-	public String getId() {
-		return id;
+	@Override
+	public String toString() {
+		return "User{" +
+				"id='" + id + '\'' +
+				", name='" + name + '\'' +
+				", password='" + password + '\'' +
+				", salt='" + salt + '\'' +
+				", origin_pass='" + originPass + '\'' +
+				", email='" + email + '\'' +
+				", regDate=" + regDate +
+				", withdraw_date=" + withdrawDate +
+				", rootPermission=" + rootPermission +
+				'}';
 	}
 
 	public void setId(String id) {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
-	}
-
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getPassword() {
-		return password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public String getEmail() {
-		return email;
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
+	public void setOriginPass(String originPass) {
+		this.originPass = originPass;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public Date getRegDate() {
-		return regDate;
-	}
-
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
 
-	public int getRootPermission() {
-		return rootPermission;
+	public void setWithdrawDate(Date withdrawDate) {
+		this.withdrawDate = withdrawDate;
 	}
 
 	public void setRootPermission(int rootPermission) {
 		this.rootPermission = rootPermission;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email + ", reg_date="
-				+ regDate + "]";
+	public String getId() {
+		return id;
 	}
-	
-	
-	
+
+	public String getName() {
+		return name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public String getOriginPass() {
+		return originPass;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public Date getRegDate() {
+		return regDate;
+	}
+
+	public Date getWithdrawDate() {
+		return withdrawDate;
+	}
+
+	public int getRootPermission() {
+		return rootPermission;
+	}
 }

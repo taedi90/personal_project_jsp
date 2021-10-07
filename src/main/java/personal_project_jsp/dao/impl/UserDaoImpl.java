@@ -20,12 +20,15 @@ public class UserDaoImpl implements UserDao {
 	
 	private User getUser(ResultSet rs) throws SQLException {
 		User user = new User();
-		
+
 		user.setId(rs.getString("id"));
 		user.setName(rs.getString("name"));
 		user.setPassword(rs.getString("password"));
+		user.setSalt(rs.getString("salt"));
+		user.setOriginPass(rs.getString("origin_pass"));
 		user.setEmail(rs.getString("email"));
 		user.setRegDate(rs.getDate("reg_date"));
+		user.setWithdrawDate(rs.getDate("withdraw_date"));
 		user.setRootPermission(rs.getInt("root_permission"));
 		
 		return user;
@@ -54,10 +57,12 @@ public class UserDaoImpl implements UserDao {
 		}
 		return null;
 	}
+
+
 	
 	@Override
 	public User getUserInfo(User user) {
-		String sql = "select count(*), name, email, reg_date, root_permission from user where id = ?";
+		String sql = "select * from user where id = ?";
 		
 		try(Connection con = JdbcUtil.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);
@@ -66,19 +71,15 @@ public class UserDaoImpl implements UserDao {
 			pstmt.setString(1, user.getId());
 			
 			try(ResultSet rs = pstmt.executeQuery();){
-				if(rs.next()) {		
-					user.setEmail(rs.getString("email"));
-					user.setName(rs.getString("name"));
-					user.setRegDate(rs.getDate("reg_date"));
-					user.setRootPermission(rs.getInt("root_permission"));
-					return user;
+				if(rs.next()) {
+					return getUser(rs);
 				}
 			}
 
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return user;
+		return null;
 	}
 	
 	@Override
@@ -113,7 +114,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public int insertUser(User user) {
-		String sql = "insert into user(id, name, password, email) values (?, ?, ?, ?)";
+		String sql = "insert into user(id, name, password, salt, origin_pass, email) values (?, ?, ?, ?, ?, ?)";
 		
 		try(Connection con = JdbcUtil.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);
@@ -122,8 +123,10 @@ public class UserDaoImpl implements UserDao {
 			pstmt.setString(1, user.getId());
 			pstmt.setString(2, user.getName());
 			pstmt.setString(3, user.getPassword());
-			pstmt.setString(4, user.getEmail());
-			
+			pstmt.setString(4, user.getSalt());
+			pstmt.setString(5, user.getOriginPass());
+			pstmt.setString(6, user.getEmail());
+
 			return pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
