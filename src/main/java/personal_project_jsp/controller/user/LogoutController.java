@@ -38,7 +38,7 @@ public class LogoutController extends HttpServlet {
         session.invalidate();
 
 
-        // 세션이 정상적으로 만료되었을 경우 1을 리턴
+        // 세션이 정상적으로 만료되었을 경우 1을 리턴로
         if (request.getSession(false) != null) {
             jsonObject.addProperty("res", "0");
         } else {

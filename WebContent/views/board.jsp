@@ -1,76 +1,51 @@
-<%@page import="personal_project_jsp.dto.User"%>
 <%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="personal_project_jsp.dao.BoardDao" %>
-<%@ page import="personal_project_jsp.dao.impl.BoardDaoImpl" %>
-<%@ page import="personal_project_jsp.dto.Board" %>
-<%@ page import="personal_project_jsp.dto.Category" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="personal_project_jsp.service.board.BoardService" %>
+<%@ page import="personal_project_jsp.service.board.impl.BoardServiceImpl" %>
 <%@ page session ="true" %>
 	
 <%
 
+	Map<String, Object> data = new HashMap<>();
+	data.put("action", request.getParameter("action") == null ? "normal" : request.getParameter("action")); // numChange, orderChange, myPost, newCategory, searchPost, pageSwap
+	data.put("idx", request.getParameter("idx") == null ? "1" : request.getParameter("idx")); // 페이지 기본 값 1
+	data.put("num", request.getParameter("num") == null ? "10" : request.getParameter("num")); // 화면에 표시할 갯수 기본 값 1
+	data.put("order", request.getParameter("order") == null ? "desc" : request.getParameter("order")); // 정렬순서 기본값 내림차순
+	data.put("category", request.getParameter("category") == null ? "전체" : request.getParameter("category")); // 카테고리 기본값 전체
+	data.put("myPost", request.getParameter("myPost") == null ? "0" : request.getParameter("myPost")); // 내글확인 여부
+	data.put("keyword", request.getParameter("keyword") == null ? "" : request.getParameter("keyword")); // 검색키워드
 
-	int idx = request.getParameter("idx") == null ? 1 : Integer.parseInt(request.getParameter("idx"));
-	int num = request.getParameter("num") == null ? 10 : Integer.parseInt(request.getParameter("num"));
-	String order = request.getParameter("order") == null ? "desc" : request.getParameter("order");
-	String category = request.getParameter("category") == null ? "전체" : request.getParameter("category");
-	int myPost = request.getParameter("myPost") == null ? 0 : Integer.parseInt(request.getParameter("myPost")); // 내글확인 
-	System.out.println(myPost);
-	
-	// 키워드 검색인지 확인
-	String keyword = request.getParameter("keyword");
-	int keywordLength = 0;
+	data.put("id", session.getAttribute("user")); // 로그인 아이디
 
-
-	BoardDao dao = BoardDaoImpl.getInstance();
-	Map<String, Object> map = null;
-	
-	System.out.println(keyword);
-
-	if(keyword != null){
-		keyword = keyword.trim();
-		keywordLength = keyword.length();
-	}
-	
-	if(myPost == 1){ // 내 글 보기
-		User user = new User();
-		user.setId((String)session.getAttribute("user"));
-		map = dao.selectBoardById(user, idx, num, order);
-	}
-	else if(keywordLength > 0){ // 키워드로 보기
-		//System.out.println("키워드로 검색");
-		map = dao.selectBoardByKeyword(keyword, idx, num, order);
-	}
-	
-	else if(category.equals("전체")){ // 전체 리스트 보기
-		//System.out.println("전체 리스트 검색");
-		map = dao.selectBoardByAll(idx, num, order);
-	}else{ // 카테고리 검색
-		System.out.println("카테고리 검색");
-		Category ca = new Category(category);
-		map = dao.selectBoardByCategory(ca, idx, num, order);
-	}
+	BoardService bs = new BoardServiceImpl();
+	Map<String, Object> map = bs.showPosts(data);
 
 %>
 
-	<c:set var="map" value="<%= map %>"/>
-	<c:set var="category" value="<%= category %>"/>
+	<c:set var="map" value='<%= map.get("dbResult") %>'/>
+	<c:set var="category" value='<%= map.get("category") %>'/>
+	<c:set var="myPost" value='<%= map.get("myPost") %>'/>
+	<c:set var="keyword" value='<%= map.get("keyword") %>'/>
+	<c:set var="num" value='<%= map.get("num") %>'/>
+	<c:set var="order" value='<%= map.get("order") %>'/>
 
 	<div id="categoryWrap">
-		<c:if test="<%= keywordLength <= 0 && myPost == 1 %>">
+		<c:if test='${empty keyword && myPost eq "1"}'>
 			<div id="myPost" class="hidden">1</div>
 			<span id="category">내 게시물 검색</span>
 		</c:if>
-		<c:if test="<%= keywordLength <= 0 && myPost != 1 %>">
+		<c:if test='${empty keyword && myPost ne "1"}'>
 			<span id="category">${category}</span>
 		</c:if>
-		<c:if test="<%= keywordLength > 0 %>">
-			<div id="keyword" class="hidden"><%= keyword %></div>
-			<span id="category">`<%= keyword %>` 검색 결과</span>
+		<c:if test="${ not empty keyword}">
+			<div id="keyword" class="hidden">${ keyword }</div>
+			<span id="category">`${ keyword }` 검색 결과</span>
 		</c:if>
+		<div id="lastCategory" class="hidden">${category}</div>
         <div class="writePostButton">
             <button type="button" onclick="writePost()">글쓰기</button>
         </div>
@@ -86,7 +61,7 @@
 
             <div id="option">
                 <div>
-                	<c:set var="num" value="<%= num %>"/>
+                	<c:set var="num" value="${ num }"/>
                     <select id="num" name="num" onchange="if(this.value) numChange()">
                         <option value="10" <c:if test="${num == 10}">selected</c:if>>10개씩 보기</option>
                         <option value="20" <c:if test="${num == 20}">selected</c:if>>20개씩 보기</option>
@@ -94,7 +69,7 @@
                     </select>
                 </div>
                 <div>
-                	<c:set var="order" value="<%= order %>"/>
+                	<c:set var="order" value="${order }"/>
                     <select id="order" name="order" onchange="if(this.value) orderChange()">
                         <option value="desc"  <c:if test="${order == 'desc'}">selected</c:if>>최근작성순</option>
                         <option value="asc" <c:if test="${order == 'asc'}">selected</c:if>>작성일자순</option>
@@ -141,17 +116,13 @@
            
         </div>
         
-        
-        
-        
-        
-        
+
         <div id="boardBottom">
 
         
         <c:set var="startIdx" value='${ map.get("nowPageIdx") - (map.get("nowPageIdx")%10 == 0 ? 10 : map.get("nowPageIdx")%10) + 1}' />
         <c:if test='${startIdx > 1}'>
-       		<div id="prev" onclick="prev(${startIdx - 1})">이전</div>&nbsp;&nbsp;
+       		<div id="prev" onclick="pageSwap(${startIdx - 1})">이전</div>&nbsp;&nbsp;
        	</c:if>
         <c:forEach var="i" begin='${startIdx}' end='${startIdx + 9 > map.get("maxPageIdx")? map.get("maxPageIdx"):startIdx + 9}'>
 
@@ -169,7 +140,7 @@
         	
         </c:forEach>
         <c:if test='${startIdx + 9 < map.get("maxPageIdx")}'>
-       		&nbsp;&nbsp;<div id="next" onclick="next(${startIdx + 10})">다음</div>
+       		&nbsp;&nbsp;<div id="next" onclick="pageSwap(${startIdx + 10})">다음</div>
        	</c:if>
 
         </div>
