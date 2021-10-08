@@ -3,13 +3,13 @@ package personal_project_jsp.service.user.impl;
 import personal_project_jsp.dao.UserDao;
 import personal_project_jsp.dao.impl.UserDaoImpl;
 import personal_project_jsp.dto.User;
-import personal_project_jsp.service.user.Register;
+import personal_project_jsp.service.user.RegisterService;
 import personal_project_jsp.util.EncryptUtil;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegisterImpl implements Register
+public class RegisterServiceImpl implements RegisterService
 {
     
     @Override
@@ -43,6 +43,7 @@ public class RegisterImpl implements Register
 
         map.put("res", "1");
         map.put("comment", "가입 완료!");
+        map.put("name", user.getName());
         return map;
     }
 

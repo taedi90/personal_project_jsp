@@ -123,10 +123,9 @@
             </div>
             <div id="post${i.getNo()}_con" class="postBody hidden">
                 <div class="postContainer">
-                	<hr>
                 	<p class="postModDate">최종 수정일 : ${i.getModDate()}</p>
 
-                	<p class="postContentTitle">본문</p>
+<%--                	<p class="postContentTitle">본문</p>--%>
                 	<p class="postContent">${i.getContent()}</p>
                 	<button data-no="${i.getNo()}" onclick="modifyPostFunc(this.dataset.no)">수정</button>
                 	<button data-no="${i.getNo()}" onclick="deletePostFunc(this.dataset.no)">삭제</button>

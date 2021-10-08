@@ -8,31 +8,31 @@
 			<img class="btnCloseLogin" src="resources/imgs/x.svg">
 		</div>
 		<div id="loginFormTitle">로그인</div>  <!-- 또는 회원가입 -->
-		<div id="loginWrap" class="form"></div>
+		<div id="loginWrap" class="form">
 			<form name="loginForm">
 				<div class="formRow">
 
 					<div class="formCol1">
-						<input id="id" name="id" type="text" required placeholder="id" autocomplete='username'>
+						<input id="id" name="id" type="text" onkeyup="enterkeyPress()" required placeholder="id" autocomplete='username'>
 					</div>
 					<div class="formCol2">
-						<img id="chkOkId" class="hidden" src="resources/imgs/check.svg">
+						<img id="chkOkId" class="hidden" onkeyup="enterkeyPress()" src="resources/imgs/check.svg">
 					</div>
 				</div>
 				<div id="idChkRes" class="chkRes formRow registerOption hidden">
 				</div>
 				<div class="formRow">
 					<div class="formCol1">
-						<input id="password" name="password" type="password" required placeholder="password" autocomplete="current-password"> 
+						<input id="password" name="password" type="password" onkeyup="enterkeyPress()" required placeholder="password" autocomplete="current-password">
 					</div>
 					<div class="formCol2">
-						<img id="chkOkConfirm" class="hidden" src="resources/imgs/check.svg">
+						<img id="chkOkConfirm" class="hidden" onkeyup="enterkeyPress()" src="resources/imgs/check.svg">
 					</div>
 				</div>
 				<div class="registerOption hidden">
 					<div class="formRow">
 						<div class="formCol1">
-							<input id="confirm" name="confirm" type="password" required placeholder="confirm" autocomplete="new-password"> 
+							<input id="confirm" name="confirm" type="password" onkeyup="enterkeyPress()" required placeholder="confirm" autocomplete="new-password">
 						</div>
 						<div class="formCol2">
 						</div>
@@ -41,14 +41,14 @@
 					</div>
 					<div class="formRow">
 						<div class="formCol1">
-							<input id="name" name="name" type="text" placeholder="이름" autocomplete="name">
+							<input id="name" name="name" type="text" onkeyup="enterkeyPress()" placeholder="이름" autocomplete="name">
 						</div>
 						<div class="formCol2">
 						</div>
 					</div>
 					<div class="formRow">
 						<div class="formCol1">
-							<input id="email" name="email" type="email" placeholder="email" autocomplete="email">
+							<input id="email" name="email" type="email" onkeyup="enterkeyPress()" placeholder="email" autocomplete="email">
 						</div>
 						<div class="formCol2">
 						</div>
@@ -62,6 +62,29 @@
 				</div>
 			</form>
 		</div>
+
+		<div id="passwordChangeWrap" class="form hidden">
+			<form name="passwordChangeForm">
+				<div class="formRow">
+					<div class="formCol1">
+						<input name="originPass" type="password" required placeholder="기존 비밀번호">
+					</div>
+				</div>
+				<div class="formRow">
+				<div class="formCol1">
+					<input name="newPassword" type="password" required placeholder="변경 비밀번호">
+				</div>
+				</div>
+				<div class="formRow">
+				<div class="formCol1">
+					<input name="confirm" type="password" required placeholder="확인">
+				</div>
+				</div>
+				<button type="button" class="loginFormBtns" onclick="changePassProc()">변경하기</button>
+			</form>
+		</div>
+
+
 	</div>
 </div>
 

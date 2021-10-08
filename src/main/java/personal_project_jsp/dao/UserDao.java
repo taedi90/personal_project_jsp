@@ -14,11 +14,11 @@ public interface UserDao {
 	
 	Map loginChk(User user);
 
-	
+	int withdrawUser(User user);
+
 	int idChk(User user);
 	int insertUser(User user);
 	int updateUser(User user);
 	int deleteUser(User user);
-	
 	
 }

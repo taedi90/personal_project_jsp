@@ -1,10 +1,8 @@
 package personal_project_jsp.dao.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -109,7 +107,23 @@ public class UserDaoImpl implements UserDao {
 		return map;
 	}
 
+	@Override
+	public int withdrawUser(User user) {
+		String sql = "update user set withdraw_date = ?  where id = ?";
 
+		try(Connection con = JdbcUtil.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+		){
+
+			pstmt.setTimestamp(1, new Timestamp(new Date().getTime()));
+			pstmt.setString(2, user.getId());
+
+			return pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 
 
 	@Override
@@ -137,16 +151,17 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public int updateUser(User user) {
-		String sql = "update user set password = ?, email = ?, root_permission = ?  where id = ?";
+		String sql = "update user set password = ?, origin_pass = ?, email = ?, root_permission = ?  where id = ?";
 		
 		try(Connection con = JdbcUtil.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			){
 			
 			pstmt.setString(1, user.getPassword());
-			pstmt.setString(2, user.getEmail());
-			pstmt.setInt(3, user.getRootPermission());
-			pstmt.setString(4, user.getId());
+			pstmt.setString(2, user.getOriginPass());
+			pstmt.setString(3, user.getEmail());
+			pstmt.setInt(4, user.getRootPermission());
+			pstmt.setString(5, user.getId());
 			
 			return pstmt.executeUpdate();
 		} catch(SQLException e) {

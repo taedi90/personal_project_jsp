@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>자유 게시판</title>
     <link href="resources/css/main.css?ver=1" rel="stylesheet">
-    <link href="resources/css/board.css?ver=2" rel="stylesheet">
+    <link href="resources/css/board.css?ver=3" rel="stylesheet">
     <link href="resources/css/sidebar.css?ver=1" rel="stylesheet">
     <link href="resources/css/modal.css?ver=1" rel="stylesheet">
     <link href="resources/css/writePost.css?ver=1" rel="stylesheet">

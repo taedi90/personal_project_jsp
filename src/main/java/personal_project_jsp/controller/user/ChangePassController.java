@@ -2,9 +2,8 @@ package personal_project_jsp.controller.user;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import personal_project_jsp.dto.User;
-import personal_project_jsp.service.user.LoginService;
-import personal_project_jsp.service.user.impl.LoginServiceImpl;
+import personal_project_jsp.service.user.ChangePassService;
+import personal_project_jsp.service.user.impl.ChangePassServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,10 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/login")
-public class LoginController extends HttpServlet {
+@WebServlet("/changePass")
+public class ChangePassController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,32 +30,26 @@ public class LoginController extends HttpServlet {
 
     }
 
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // request 받아오기
-        User user = new User();
-        user.setId(request.getParameter("id"));
-        user.setOriginPass(request.getParameter("password"));
+        Map<String, String> data = new HashMap<>();
+        data.put("originPass", request.getParameter("originPass"));
+        data.put("newPassword",request.getParameter("newPassword"));
+        data.put("confirm",request.getParameter("confirm"));
 
-        LoginService loginService = new LoginServiceImpl();
-        Map<String, String> map = loginService.login(user);
+        HttpSession session = request.getSession();
+        data.put("id", (String) session.getAttribute("user"));
 
 
         // 응답할 json 만들기
         Gson gson = new Gson();
         JsonObject jsonObject = new JsonObject();
 
+        ChangePassService cps = new ChangePassServiceImpl();
+        Map<String, String> map = cps.changePass(data);
+
         // 서비스 결과를 json 형식으로 담기
         for (String key : map.keySet()) {
             jsonObject.addProperty(key, map.get(key));
-        }
-
-
-        // 세션에 로그인 정보 넣어주기
-        if(map.get("res").equals("1")){
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user.getId());
-            session.setAttribute("name", map.get("name"));
         }
 
 
@@ -65,5 +59,6 @@ public class LoginController extends HttpServlet {
         response.getWriter().write(gson.toJson(jsonObject));
 
     }
+
 
 }

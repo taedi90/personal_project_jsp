@@ -39,22 +39,17 @@
 	<hr>
 	</ul> -->
 
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-	
-
-	<c:if test='${user ne null}'>
-		<button id="btnOpenLogin" class="beforeLogin hidden">로그인</button>
-		<button id="btnOpenLogout" class="afterLogin">로그아웃</button>
-	</c:if>
+	<p></p>
 
 	<c:if test='${user eq null}'>
 		<button id="btnOpenLogin" class="beforeLogin">로그인</button>
 		<button id="btnOpenLogout" class="afterLogin hidden">로그아웃</button>
 	</c:if>
-	
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-	
-	<p><img src="resources/imgs/slide.svg" style="width: 5rem"></p> 
+
+	<c:if test='${user ne null}'>
+		<button id="btnOpenLogin" class="beforeLogin hidden">로그인</button>
+		<button id="btnOpenLogout" class="afterLogin">로그아웃</button>
+		<div class="afterLogin" onclick="openChangePassword()">비밀번호 변경</div>
+		<div class="afterLogin" onclick="openWithdraw()">회원탈퇴</div>
+	</c:if>
 </div>

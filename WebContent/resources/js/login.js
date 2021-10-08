@@ -8,6 +8,11 @@ const btnCloseLogin = loginModal.querySelector(".btnCloseLogin"); // 폼 내의 
 // 로그인창 열기
 const openLoginModal = () => {
     loginModal.classList.remove("hidden");
+
+    // 비밀번호 변경 관련 요소 숨기기
+    document.getElementById("passwordChangeWrap").classList.add("hidden");
+    document.getElementById("loginWrap").classList.remove("hidden");
+
     document.body.style.overflow = "hidden"; // 스크롤 방지
     registerOff(); // 초기 화면은 로그인 창
     confirmChkFunc();
@@ -31,7 +36,7 @@ const registerOptions = document.getElementsByClassName("registerOption"); // �
 const loginOptions = document.getElementsByClassName("loginOption"); // 로그인에서 보여줄 요소들
 
 
-// 회원가입 폼 전환
+// 회원가입 폼 전환 시
 function registerOn(){
     // 회원가입 관련 요소 나타내기
     for(let i = 0; i < registerOptions.length; i++){
@@ -53,7 +58,7 @@ function registerOn(){
 }
 
 
-// 로그인 폼 전환
+// 로그인 폼 전환 시
 function registerOff(){
     // 회원가입 관련 요소 숨기기
     for(let i = 0; i < registerOptions.length; i++){
@@ -269,7 +274,8 @@ btnOpenLogout.addEventListener("click", logoutProc);
 
 
 function logoutConfirm(){
-    let data = postAjax("controller/logoutProc.jsp");
+    let data = postAjax("/logout");
+    console.log(data.res == 1);
     if (data === 0){
         return;
     }else if (data.res == 1) {
@@ -326,7 +332,7 @@ function registerProc(){
         return;
     }else if (data.res == 1) {
         openModal(data);
-        // location.reload();
+        location.reload();
         // document.getElementById("loginStat").classList.remove("hidden");
         // document.getElementById("loginStat").textContent = data[1].name + "님 안녕하세요!"
         // btnOpenLogin.classList.add("hidden");
@@ -338,6 +344,78 @@ function registerProc(){
 
 }
 
+// 엔터키 액션
+function enterkeyPress() {
+    if(window.event.keyCode == 13 && register == 0){
+        loginProc();
+    }else if(window.event.keyCode == 13 && register == 1){
+        registerProc();
+    }
+}
+
+// 비밀번호 변경 창 호출
+function openChangePassword(){
+    openLoginModal();
+    document.getElementById("loginFormTitle").innerHTML = "비밀번호 변경";
+    document.getElementById("passwordChangeWrap").classList.remove("hidden");
+    document.getElementById("loginWrap").classList.add("hidden");
+    document.passwordChangeForm.originPass.value = '';
+    document.passwordChangeForm.newPassword.value = '';
+    document.passwordChangeForm.confirm.value = '';
+}
+
+// 비밀번호 변경 요청
+function changePassProc(){
+    openModal("정말 변경하시겠습니까?", 1, changePassConfirm)
+}
+
+// 비밀번호 변경 실행
+function changePassConfirm(){
+    let originPass = document.passwordChangeForm.originPass.value;
+    let newPassword = document.passwordChangeForm.newPassword.value;
+    let confirm = document.passwordChangeForm.confirm.value;
+
+    let param = {
+        originPass: originPass,
+        newPassword: newPassword,
+        confirm: confirm
+    }
+
+    let data = postAjax('/changePass', param);
+
+    if (data === 0){
+        openModal("잠시 후에 다시 시도해주세요."); // 통신오류
+        return;
+    }else if(data.res === '1') {
+        // 새로 로그인(은 나중에 하고)
+        openModal(data.comment);
+
+        document.passwordChangeForm.originPass.value = '';
+        document.passwordChangeForm.newPassword.value = '';
+        document.passwordChangeForm.confirm.value = '';
+
+        closeLoginModal();
+    }else {
+        openModal(data.comment); // 실패메세지
+    }
+
+}
 
 
+// 탈퇴
+function openWithdraw(){
+    openModal("탈퇴하시면 복구가 불가능합니다. 계속하시겠습니까?", 1, withdrawConfirm);
+}
 
+function withdrawConfirm(){
+    let data = postAjax("/withdraw");
+    if (data === 0){
+        openModal("잠시 후에 다시 시도해주세요.")
+        return;
+    }else if (data.res == 1) {
+        logoutConfirm();
+        openModal(data.comment);
+    }else {
+        openModal(data.comment);
+    }
+}

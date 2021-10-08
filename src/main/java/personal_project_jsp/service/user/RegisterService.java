@@ -4,7 +4,7 @@ import personal_project_jsp.dto.User;
 
 import java.util.Map;
 
-public interface Register {
+public interface RegisterService {
 
     Map<String, String> insertUser(User user);
 
