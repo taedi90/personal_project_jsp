@@ -290,6 +290,7 @@ function logoutConfirm(){
             beforeLogins.item(i).classList.remove("hidden");
         }
         document.getElementById("loginStat").classList.textContent = '';
+        toggleSidebar();
     }
 }
 

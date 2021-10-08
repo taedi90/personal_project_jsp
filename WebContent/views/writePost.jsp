@@ -99,6 +99,7 @@
 	
 	<div>
 		<button type="button" onclick="openUploadModal()">썸네일 업로드</button> 
+		<button id="btnDeleteThumb" <c:if test="${thumb eq null}">class="hidden"</c:if> type="button" onclick="deleteThumb()">썸네일 삭제</button>
 		<input id="thumbSrc" name="thumb" type="text" hidden>
 	</div>
 

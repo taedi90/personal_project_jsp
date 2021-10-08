@@ -50,8 +50,10 @@ function showBoard() {
 function numChange() {
     readBoardParam();
 
-    let nowPageIdx = Math.ceil(($("#nowPost").text() - lastNum + 1) / $("#num").val());
+    let nowPageIdx = Math.ceil(($("#nowPost").text() - num + 1) / $("#num").val());
     idx = nowPageIdx < 1 ? 1 : nowPageIdx;
+
+    num = $("#num").val();
 
     showBoard();
 
@@ -83,6 +85,7 @@ function myPostSearch() {
 
     action = "myPost";
 
+    toggleSidebar();
     showBoard();
 
 }
@@ -98,6 +101,7 @@ function categoryChange(newCategory) {
     }
     category = newCategory;
 
+    toggleSidebar();
     showBoard();
 }
 
@@ -108,6 +112,7 @@ function searchPostFunc(newKeyword) {
     action = "searchPost";
     keyword = newKeyword;
 
+    toggleSidebar();
     showBoard();
 }
 

@@ -140,6 +140,7 @@ function uploadBtnEvent(){
                 document.getElementById("wpThumbHolder").style.background = "white url('" + imgPath + "') no-repeat right top/contain";
                 
                 document.getElementById("thumbSrc").value = imgPath;
+                document.getElementById("btnDeleteThumb").classList.remove("hidden");
             }else{
                 openModal(parse[0].comment);
             }
@@ -152,3 +153,9 @@ function uploadBtnEvent(){
 
 }
 uploadBtn.addEventListener("click", uploadBtnEvent);
+
+function deleteThumb(){
+    document.getElementById("wpThumbHolder").style.background = "none";
+    document.getElementById("thumbSrc").value = '';
+    document.getElementById("btnDeleteThumb").classList.add("hidden");
+}

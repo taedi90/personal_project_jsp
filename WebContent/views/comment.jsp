@@ -56,7 +56,7 @@
                 <div class="commentInfo" data-comment-no="${i.getCno()}" data-comment-depth="${i.getDepth()}">
                     #${i.getCno()}&nbsp;&nbsp;
                     ${i.getUser().getName()}(${i.getUser().getId()})&nbsp;&nbsp;
-                    [<fmt:formatDate value="${i.getWriDate()}" pattern="yyyy-MM-dd a KK시mm분ss초"/>]
+                    [<fmt:formatDate value="${i.getWriDate()}" pattern="yyyy-MM-dd a KK:mm:ss"/>]
                     <c:if test="${not empty i.getModDate()}">
                         &nbsp;&nbsp;<span style="color: rgb(214, 97, 51)">[수정됨]</span>
                     </c:if>

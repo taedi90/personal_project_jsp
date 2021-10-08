@@ -15,3 +15,11 @@
 		</div>
 	</div>
 </div>
+
+
+<div id="thumbModal" class="thumbModal hidden">
+	<div class="modalOverlay"></div>
+	<div class="thumbModalContent">
+		<img id="thumbModalImg" src="" style="width: 400px; height: 400px;"/>
+	</div>
+</div>

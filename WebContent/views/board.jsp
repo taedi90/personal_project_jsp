@@ -83,8 +83,8 @@
         
         <!-- 게시물 출력  status.index to -->
 		<c:forEach var="i" items='${map.get("list")}' varStatus="status">
-			<div id="post${i.getNo()}" class="postCard" data-no="${i.getNo()}" data-id="${i.getId()}" data-idx="${status.index}" onclick="postClick(this.dataset.no)">
-				<div class="postDesc">
+			<div id="post${i.getNo()}" class="postCard" data-no="${i.getNo()}" data-id="${i.getId()}" data-idx="${status.index}">
+				<div class="postDesc" data-no="${i.getNo()}" onclick="postClick(this.dataset.no)">
                     <p class="postCategory">${i.getCategory().getCategory()}</p>
                     <p class="postTitle">${i.getTitle()}</p>
                     <p class="postAuthor">${i.getId()}</p>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="postThumb">
                 	<c:if test="${i.getThumb() != null}">
-                		<img src="${i.getThumb()}"/>
+                		<img src="${i.getThumb()}" onclick="thumbZoom('${i.getThumb()}')" />
                     </c:if>
                 </div>
             </div>
@@ -152,5 +152,4 @@
 	<div id="noContents">게시물이 없습니다.</div>
 <hr />
 </c:if>
-
     

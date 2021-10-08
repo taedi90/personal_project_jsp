@@ -50,3 +50,19 @@ function openModal(message = '', type = 0, func = function(){}) {
     document.body.style.overflow = "hidden";
 
 }
+
+
+
+
+let thumbModal = document.getElementById("thumbModal");
+let thumbModalImg = document.getElementById("thumbModalImg");
+
+function thumbZoom(src){
+
+    thumbModal.classList.remove("hidden");
+    thumbModalImg.setAttribute("src", src);
+}
+
+thumbModal.addEventListener("click",() => {
+    thumbModal.classList.add("hidden");
+});

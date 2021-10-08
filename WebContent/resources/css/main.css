@@ -1,16 +1,28 @@
 
 @media (min-width: 768.1px) {
     html { font-size: 62.5%; }
+
+
 }
 @media (max-width: 768px)  {
     html { font-size: 54.6875%; }
+    #container{height: max-content !important;}
+    #sidebar{
+        margin: 0 !important;
+        padding: 5rem 0 5rem 0 !important;
+        width: 100vw !important;
+        max-height: 80vh !important;
+        position: fixed !important;
+        background: rgba(221, 200, 225, 0.89) !important;
+    }
+
 }
 
 html {
     --bg-color-1: #715d74;
     --bg-color-2: #a08aa3;
     --bg-color-3: #d1bad4;
-    --bg-color-4: #d1bad470;;
+    --bg-color-4: #000000;;
     --bg-color-5: #ffffff;
     --txt-color-1: black;
     --txt-color-2: rgb(59, 59, 59);

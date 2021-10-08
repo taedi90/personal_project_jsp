@@ -9,10 +9,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>자유 게시판</title>
-    <link href="resources/css/main.css?ver=1" rel="stylesheet">
-    <link href="resources/css/board.css?ver=3" rel="stylesheet">
+    <link href="resources/css/main.css?ver=3" rel="stylesheet">
+    <link href="resources/css/board.css?ver=2" rel="stylesheet">
     <link href="resources/css/sidebar.css?ver=1" rel="stylesheet">
-    <link href="resources/css/modal.css?ver=1" rel="stylesheet">
+    <link href="resources/css/modal.css?ver=3" rel="stylesheet">
     <link href="resources/css/writePost.css?ver=1" rel="stylesheet">
     <link href="resources/css/login.css?ver=1" rel="stylesheet">
     <link href="resources/css/uploadThumb.css?ver=1" rel="stylesheet">
@@ -54,10 +54,10 @@
     </div>
 
     <script type="text/javascript" src="resources/js/main.js?ver=1" defer></script>
-    <script type="text/javascript" src="resources/js/board.js?ver=5" defer></script>
+    <script type="text/javascript" src="resources/js/board.js?ver=2" defer></script>
     <script type="text/javascript" src="resources/js/login.js?ver=1" defer></script>
     <script type="text/javascript" src="resources/js/modal.js?ver=1" defer></script>
-    <script type="text/javascript" src="resources/js/sidebar.js?ver=1" defer></script>
+    <script type="text/javascript" src="resources/js/sidebar.js?ver=2" defer></script>
     <script type="text/javascript" src="resources/js/jAjax.js?ver=1" defer></script>
     <!-- SmartEditor2 라이브러리 -->
     <script type="text/javascript" src="se2/js/HuskyEZCreator.js" charset="utf-8" defer></script>
