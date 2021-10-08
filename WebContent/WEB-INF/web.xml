@@ -54,4 +54,16 @@
     <session-timeout>600</session-timeout>
     <tracking-mode>COOKIE</tracking-mode>
   </session-config> -->
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/views/errorPages/error.html</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/views/errorPages/error.html</location>
+    </error-page>
+
+
+
 </web-app>

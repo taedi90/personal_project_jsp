@@ -4,7 +4,6 @@ import personal_project_jsp.service.board.BoardService;
 import personal_project_jsp.service.board.impl.BoardServiceImpl;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,12 +19,7 @@ public class boardController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
-        response.setCharacterEncoding("UTF-8");
-        PrintWriter out = response.getWriter();
-        out.print("올바르지 않은 접근입니다.");
-        out.close();
-
+        response.sendRedirect("/wiews/errorPages/noAccess.html");
 
     }
 

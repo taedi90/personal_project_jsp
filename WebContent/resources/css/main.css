@@ -9,7 +9,7 @@
     #container{height: max-content !important;}
     #sidebar{
         margin: 0 !important;
-        padding: 5rem 0 5rem 0 !important;
+        padding: 2rem 0 2rem 0 !important;
         width: 100vw !important;
         max-height: 80vh !important;
         position: fixed !important;
@@ -22,7 +22,7 @@ html {
     --bg-color-1: #715d74;
     --bg-color-2: #a08aa3;
     --bg-color-3: #d1bad4;
-    --bg-color-4: #000000;;
+    --bg-color-4: #d1bad470;
     --bg-color-5: #ffffff;
     --txt-color-1: black;
     --txt-color-2: rgb(59, 59, 59);
@@ -186,3 +186,9 @@ select:focus {
     outline: none;
 }
 
+.userMenu {
+    margin-top: 0.2rem;
+    cursor: pointer;
+    text-decoration-line: underline;
+    font-size: var(--font-sm);
+}

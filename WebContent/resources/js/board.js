@@ -41,7 +41,11 @@ function showBoard() {
     }
     let res = postAjax("views/board.jsp", param);
 
-    document.getElementById("main").innerHTML = res;
+    if (res === 0){
+        document.getElementById("main").innerHTML = 'views/errorPages/error.html';
+    }else{
+        document.getElementById("main").innerHTML = res;
+    }
     document.getElementById("main").animate({scrollTop: 0}, 200);
 
 }

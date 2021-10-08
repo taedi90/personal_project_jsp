@@ -49,7 +49,7 @@
 	<c:if test='${user ne null}'>
 		<button id="btnOpenLogin" class="beforeLogin hidden">로그인</button>
 		<button id="btnOpenLogout" class="afterLogin">로그아웃</button>
-		<div class="afterLogin" onclick="openChangePassword()">비밀번호 변경</div>
-		<div class="afterLogin" onclick="openWithdraw()">회원탈퇴</div>
+		<div class="userMenu afterLogin" onclick="openChangePassword()">비밀번호 변경</div>
+		<div class="userMenu afterLogin" onclick="openWithdraw()">회원탈퇴</div>
 	</c:if>
 </div>
