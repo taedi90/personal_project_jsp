@@ -36,6 +36,7 @@
     background-color: var(--bg-color-2);
     color: var(--txt-color-5);
     cursor: pointer;
+    border-style: none;
 }
 
 #btnOpenLogout{
@@ -44,6 +45,7 @@
     border-radius: 0;
     background-color: var(--bg-color-5);
     color: var(--txt-color-1);
+    border-style: none;
     cursor: pointer;
 }
 
