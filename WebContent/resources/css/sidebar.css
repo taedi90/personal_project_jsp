@@ -35,7 +35,6 @@
     border-radius: 0;
     background-color: var(--bg-color-2);
     color: var(--txt-color-5);
-    border: 0;
     cursor: pointer;
 }
 
@@ -45,20 +44,17 @@
     border-radius: 0;
     background-color: var(--bg-color-5);
     color: var(--txt-color-1);
-    border: 1;
     cursor: pointer;
 }
 
 #btnOpenLogin:hover{
     background-color: var(--bg-color-5);
     color: var(--txt-color-1);
-    border: 1;
 }
 
 #btnOpenLogout:hover{
     background-color: var(--bg-color-2);
     color: var(--txt-color-5);
-    border: 0;
 }
 
 
@@ -73,6 +69,7 @@
     -webkit-appearance: none; /* 네이티브 외형 감추기 */
     -moz-appearance: none;
     appearance: none;
+    min-width: 60%;
 }
 
 .searchInput:focus {

@@ -237,7 +237,7 @@ function loginProc() {
     let id = document.loginForm.id.value;
     let password = document.loginForm.password.value;
 
-    let data = postAjax('/login', {id: id, password: password})
+    let data = postAjax('login', {id: id, password: password})
 
     if (data === 0){
         return;
@@ -328,7 +328,7 @@ function registerProc(){
         name: name,
         email: email
 	};
-    let data = postAjax("/register", param);
+    let data = postAjax("register", param);
     if (data === 0){
         return;
     }else if (data.res == 1) {
@@ -382,7 +382,7 @@ function changePassConfirm(){
         confirm: confirm
     }
 
-    let data = postAjax('/changePass', param);
+    let data = postAjax('changePass', param);
 
     if (data === 0){
         openModal("잠시 후에 다시 시도해주세요."); // 통신오류
@@ -409,7 +409,7 @@ function openWithdraw(){
 }
 
 function withdrawConfirm(){
-    let data = postAjax("/withdraw");
+    let data = postAjax("withdraw");
     if (data === 0){
         openModal("잠시 후에 다시 시도해주세요.")
         return;

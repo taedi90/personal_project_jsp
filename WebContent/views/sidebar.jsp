@@ -17,7 +17,7 @@
 
 
 	<input type="text" class="searchInput" placeholder="검색" onkeyup="if(window.event.keyCode==13){searchPostFunc(this.value)}">
-
+	<br>
 	<div onclick="myPostSearch()" class="sidebarContent afterLogin <c:if test='${user eq null}'>hidden</c:if>">
 		내 게시글
 	</div>
