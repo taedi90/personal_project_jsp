@@ -46,23 +46,29 @@
                 <jsp:include page="views/sidebar.jsp" flush="true"></jsp:include>
             </div>
             <div id="main">
-                <jsp:include page="views/board.jsp?num=10&order=desc" flush="true"></jsp:include>
+<%--                <jsp:include page="board" flush="true"></jsp:include>--%>
+<%--                <c:import url="/board"/>--%>
+<%--                <c:import url="/board" var="urlSource"/>--%>
+<%--                <c:out value="${urlSource}" escapeXml="false"/>--%>
+
+
             </div>
         </div>
         <div id="footer"><a style="text-decoration: none; color: white" href="https://github.com/taedi90/personal_project_jsp" target="_self">https://github.com/taedi90/personal_project_jsp</a></div>
 		<!-- <div id="footer">Copyright 2021. Author all rights reserved.</div> -->
     </div>
 
-    <script type="text/javascript" src="resources/js/main.js?ver=1" defer></script>
-    <script type="text/javascript" src="resources/js/board.js?ver=2" defer></script>
-    <script type="text/javascript" src="resources/js/login.js?ver=1" defer></script>
+    <script type="text/javascript" src="resources/js/ajax.js?ver=1" defer></script>
+    <script type="text/javascript" src="resources/js/main.js?ver=3" defer></script>
+    <script type="text/javascript" src="resources/js/board.js?ver=9" defer></script>
+    <script type="text/javascript" src="resources/js/login.js?ver=5" defer></script>
     <script type="text/javascript" src="resources/js/modal.js?ver=1" defer></script>
     <script type="text/javascript" src="resources/js/sidebar.js?ver=2" defer></script>
-    <script type="text/javascript" src="resources/js/jAjax.js?ver=1" defer></script>
+
     <!-- SmartEditor2 라이브러리 -->
     <script type="text/javascript" src="se2/js/HuskyEZCreator.js" charset="utf-8" defer></script>
-    <script type="text/javascript" src = "resources/js/writePost.js?ver=1" defer></script>
-    <script type="text/javascript" src="resources/js/thumbUpload.js?ver=1" defer></script>
+    <script type="text/javascript" src = "resources/js/writePost.js?ver=10" defer></script>
+    <script type="text/javascript" src="resources/js/thumbUpload.js?ver=4" defer></script>
 </body>
 
 </html>

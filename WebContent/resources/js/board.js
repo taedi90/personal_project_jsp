@@ -39,13 +39,9 @@ function showBoard() {
         category: category,
         keyword: keyword
     }
-    let res = postAjax("views/board.jsp", param);
+    let res = ajax("board", param, 'get');
 
-    if (res === 0){
-        document.getElementById("main").innerHTML = 'views/errorPages/error.html';
-    }else{
-        document.getElementById("main").innerHTML = res;
-    }
+    document.getElementById("main").innerHTML = res;
     document.getElementById("main").animate({scrollTop: 0}, 200);
 
 }
@@ -55,6 +51,7 @@ function numChange() {
     readBoardParam();
 
     let nowPageIdx = Math.ceil(($("#nowPost").text() - num + 1) / $("#num").val());
+
     idx = nowPageIdx < 1 ? 1 : nowPageIdx;
 
     num = $("#num").val();
@@ -156,13 +153,17 @@ function postClick(idx) {
 }
 
 
+
+
+
+
 // 댓글 불러오기
 function selectCommentFunc(idx) {
 
     let param = {
         postNo: idx
     };
-    let res = postAjax("views/comment.jsp", param);
+    let res = ajax("comment", param,'get');
 
     let comTag = "#post" + idx + "_comment";
 
@@ -224,9 +225,9 @@ function deleteCommentConfirm() {
         cno: deleteIdx
     }
 
-    let res = postAjax('controller/board/deleteCommentProc.jsp', param);
+    let res = ajax('comment', param, 'delete', 'json');
 
-    if (res[0].res == 1) {
+    if (res.res == 1) {
         // 댓글 리로드
         selectCommentFunc(deletePostNo);
         openModal("삭제 완료!");
@@ -277,10 +278,9 @@ function newComment(elem) {
         comment: document.getElementById(elem.dataset.commentText).value
     }
 
+    let data = ajax('comment', param, 'post', 'json');
 
-    let res = postAjax('controller/board/writeCommentProc.jsp', param);
-
-    if (res[0].res == 1) {
+    if (data.res == 1) {
         // 댓글 리로드
         selectCommentFunc(elem.dataset.postNo);
         openModal("작성 성공!");
@@ -298,9 +298,9 @@ function updateCommentFunc(elem) {
     }
 
 
-    let res = postAjax('controller/board/updateCommentProc.jsp', param);
+    let data = ajax('comment', param, 'put', 'json');
 
-    if (res[0].res == 1) {
+    if (data.res == 1) {
         // 댓글 리로드
         selectCommentFunc(elem.dataset.postNo);
         openModal("수정 성공!");

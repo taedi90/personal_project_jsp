@@ -2,6 +2,11 @@
 
 const main = document.getElementById("main");
 
+// 게시판 로드
+let boardData = ajax('board','','get');
+main.innerHTML = boardData;
+
+
 // 게시글 작성
 function writePost(){
     if(loginChk()){
@@ -9,16 +14,17 @@ function writePost(){
         return;
     }
 
-    let res = postAjax('views/writePost.jsp', {option: "new"});
-    main.innerHTML=res;
+    //let res = postAjax('views/writePost.jsp', {option: "new"});
+    let data = ajax('writer', {},'get');
+    main.innerHTML = data;
     editorInit();
 }
 
 function loginChk(){
-    let data = postAjax('controller/loginChkProc.jsp');
+    let data = postAjax('loginChk');
     if (data == 0){
         return true; // 로그인 오류가 true
-    }else if (data[0].res == 1){
+    }else if (data.res == 1){
         return false;
     }else{
         return true;
@@ -50,11 +56,10 @@ function modifyPostFunc(no){
 function modifyPostConfirm() {
     // 게시글 수정
     let param =  {
-        no: postNo,
-        option: "modify"
+        no: postNo
     };
 
-    let data = postAjax("views/writePost.jsp", param);
+    let data = ajax('writer', param, 'post');
     main.innerHTML = data;
     editorInit();
 }
@@ -86,30 +91,30 @@ function deletePostConfirm() {
         no: postNo
     };
 
-    let data = postAjax("controller/deletePostProc.jsp", param);
-    if (data[0].res == 1){
-        openModal(data[0].comment);
-        data = postAjax("views/board.jsp");
+    let data = ajax("board", param,'delete','json');
+    if (data.res == 1){
+        openModal(data.comment);
+        data = ajax('board','','get');
         main.innerHTML=data;
     }else{
-        openModal(data[0].comment);
+        openModal(data.comment);
     }
 }
 
 
 function authPostChk(){
-    let data = postAjax("controller/authPostProc.jsp", {no: postNo});
+    let data = postAjax("AuthChk", {no: postNo});
     if (data == 0){
         openModal("서버 통신 오류");
         return true;
-    }else if (data[0].res == 1){
+    }else if (data.res == 1){
         // 게시글 수정 권한 있을 경우
         return false;
-    }else if (data[0].res == 2){
+    }else if (data.res == 2){
         openModal("로그인 정보가 없습니다. 지금 로그인 하시겠습니까?", 1, openLoginModal);
         return true
     }else{
-        openModal(data[0].comment);
+        openModal(data.comment);
         return true;
     }
 }

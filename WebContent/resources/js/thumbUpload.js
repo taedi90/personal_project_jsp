@@ -115,7 +115,7 @@ function uploadBtnEvent(){
     
     $.ajax({
         type:"POST",
-        url:"controller/board/uploadThumbProc.jsp",
+        url:"thumb",
         data:formData,
         processData:false,	//
         contentType:false,	// 이 두줄이 중요!!
@@ -124,11 +124,11 @@ function uploadBtnEvent(){
             // 주소값 받아오고
             let parse = JSON.parse(result);
 
-            console.log(parse[0].res);
-            console.log(parse[0].comment);
-            console.log(parse[1].imgPath);
+            console.log(parse.res);
+            console.log(parse.comment);
+            console.log(parse.imgPath);
 
-            let res = parse[0].res;
+            let res = parse.res;
             
             
 
@@ -136,7 +136,7 @@ function uploadBtnEvent(){
             //성공 실패 창 띄우기
             if(res == 1){
                 openModal("업로드 성공!");
-                let imgPath = parse[1].imgPath;
+                let imgPath = parse.imgPath;
                 document.getElementById("wpThumbHolder").style.background = "white url('" + imgPath + "') no-repeat right top/contain";
                 
                 document.getElementById("thumbSrc").value = imgPath;

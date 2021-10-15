@@ -10,7 +10,7 @@
                 <img class="btnCloseUpload" src="resources/imgs/x.svg">
             </div>
 
-            <form action="../controller/board/uploadThumbProc.jsp" method="post" enctype="multipart/form-data">
+            <form action="../controller/board/uploadThumbProc_old.jsp" method="post" enctype="multipart/form-data">
                 <div class="dropBox">
                     <div id="firstView" class="firstView">
                         <label class="selectBtn " for="hiddenInput">*.jpg & *.png</label>

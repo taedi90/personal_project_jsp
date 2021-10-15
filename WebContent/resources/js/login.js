@@ -162,8 +162,8 @@ function idRegExChk() {
 // 아이디 중복 체크
 function idExistChk() {
     let id = idInput.value;
-    let data = postAjax('controller/idChkProc.jsp', {id: id});
-    if(data[0].res === '0') {
+    let data = postAjax('idChk', {id: id});
+    if(data.res === 0) {
         return false; // 사용 가능한 아이디
     }else{
         return true; // 사용 불가능한 아이디

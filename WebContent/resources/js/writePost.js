@@ -5,8 +5,8 @@ function cancelPostFunc() {
 }
 
 function confirmCancelPost() {
-    let res = postAjax('views/board.jsp');
-    document.getElementById("main").innerHTML = res;
+    let data = ajax("board",'', 'get');
+    document.getElementById("main").innerHTML = data;
     // $('#main', window.parent.document).html(data); 
     // window.parent.document.getElementById("main").innerHTML = data; //부모요소를 조작하려면 window.parent.document 를 활용
 }
@@ -38,20 +38,28 @@ function savePostFunc() {
 function confirmSavePost() {
     
     let param = {
+        postNo: document.writePost.postNo.value,
         category: document.writePost.category.value,
         title: document.writePost.title.value,
         content: document.writePost.content.value,
 		thumb: document.writePost.thumbSrc.value
     }
-    let data = postAjax("controller/writePostProc.jsp",param);
 
-    console.log(param);
-    if (data[0].res == 1){
-        openModal(data[0].comment, 0);
-        data = postAjax("views/board.jsp");
+    let data;
+    if(document.writePost.postNo.value !== ''){
+        data = ajax("board", param, 'put','json');
+    }else{
+        data = ajax("board", param, 'post','json');
+    }
+
+
+
+    if (data.res == 1){
+        openModal(data.comment, 0);
+        data = ajax("board",'', 'get');
         main.innerHTML=data;
     }else{
-        openModal(data[0].comment, 0);        
+        openModal(data.comment, 0);
     }
 
 }

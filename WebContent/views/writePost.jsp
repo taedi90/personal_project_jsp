@@ -11,47 +11,19 @@
 <%@ page import="personal_project_jsp.dao.CategoryDao" %>
 <%@ page import="personal_project_jsp.dto.Category" %>
 
-<%	
-	// 카테고리 목록 가져오기
-	CategoryDao dao = CategoryDaoImpl.getInstance();	
-	ArrayList<Category> arr = dao.selectCategoryByAll();
-	
-	Board board = null;
-	int res = 0;
 
-	// 수정&삭제 구별
-	if(request.getParameter("option").equals("modify")){
-		res = 1;
-		session.setAttribute("writeMod", "modify");
-		session.setAttribute("postNo", request.getParameter("no"));
-		
-		// 수정 페이지 진입은 다른 파일로 처리하자
-		board = new Board();
-		board.setNo(Long.parseLong(request.getParameter("no")));
-		
-		BoardDao boardDao = BoardDaoImpl.getInstance();
-		board = boardDao.selectBoardByNo(board);
-		
-	}else{
-		res = 0;
-		session.setAttribute("writeMod", "new");
-		session.setAttribute("postNo", "");
-	}
 
-%>
-
-<c:set var="res" value="<%= res %>"/>
-<c:set var="arr" value="<%= arr %>"/>
-<c:if test="${res eq 1}">
-	<c:set var="title" value="<%= board.getTitle() %>"/>
-	<c:set var="category" value="<%= board.getCategory().getCategory() %>"/>
-	<c:set var="content" value="<%= board.getContent() %>"/>			
-	<c:set var="thumb" value="<%= board.getThumb() %>"/>			
-
+<c:if test='${res eq "1"}'>
+	<c:set var="title" value="${board.title}"/>
+	<c:set var="category" value="${board.category.category}"/>
+	<c:set var="content" value="${board.content}"/>
+	<c:set var="thumb" value="${board.thumb}"/>
 </c:if>
 
 
 <form id="writePost" name="writePost">
+
+	<input type="text" name="postNo" value="${postNo}" hidden>
 
 	<div id="wpThumbHolder"  style='<c:if test="${thumb ne null}">background: white url("${thumb}") no-repeat right top/contain;</c:if>'>
                 		
@@ -60,7 +32,7 @@
 			<select id="selectCategory" name="category">
 			
 			<c:if test="${res eq 1}">
-				<c:forEach var="i" items="${arr}">
+				<c:forEach var="i" items="${categoryArr}">
 					<c:if test="${i.getCategory() eq category}">
 						<option value="${i.getCategory()}" selected>${i.getCategory()}</option>
 					</c:if>
@@ -71,7 +43,7 @@
 			
 			</c:if>
 			<c:if test="${res ne 1}">
-				<c:forEach var="i" items="${arr}">
+				<c:forEach var="i" items="${categoryArr}">
 					<option value="${i.getCategory()}">${i.getCategory()}</option>
 				</c:forEach>
 			</c:if>
