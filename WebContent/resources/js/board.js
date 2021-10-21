@@ -41,8 +41,14 @@ function showBoard() {
     }
     let res = ajax("board", param, 'get');
 
-    document.getElementById("main").innerHTML = res;
-    document.getElementById("main").animate({scrollTop: 0}, 200);
+    main.innerHTML = res;
+    if (window.innerWidth > 768){
+        main.scrollTo({top: 0, behavior: 'smooth'});
+    } else {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+
 
 }
 

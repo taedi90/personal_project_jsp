@@ -15,6 +15,9 @@
         position: fixed !important;
         background: rgba(221, 200, 225, 0.89) !important;
     }
+    #main{
+        overflow-y: hidden !important;
+    }
 
 }
 

@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1">
     <title>자유 게시판</title>
-    <link href="resources/css/main.css?ver=3" rel="stylesheet">
+    <link href="resources/css/main.css?ver=7" rel="stylesheet">
     <link href="resources/css/board.css?ver=2" rel="stylesheet">
     <link href="resources/css/sidebar.css?ver=1" rel="stylesheet">
     <link href="resources/css/modal.css?ver=3" rel="stylesheet">
@@ -60,7 +60,7 @@
 
     <script type="text/javascript" src="resources/js/ajax.js?ver=1" defer></script>
     <script type="text/javascript" src="resources/js/main.js?ver=3" defer></script>
-    <script type="text/javascript" src="resources/js/board.js?ver=9" defer></script>
+    <script type="text/javascript" src="resources/js/board.js?ver=4" defer></script>
     <script type="text/javascript" src="resources/js/login.js?ver=5" defer></script>
     <script type="text/javascript" src="resources/js/modal.js?ver=1" defer></script>
     <script type="text/javascript" src="resources/js/sidebar.js?ver=2" defer></script>
