@@ -274,7 +274,7 @@ btnOpenLogout.addEventListener("click", logoutProc);
 
 
 function logoutConfirm(){
-    let data = postAjax("/logout");
+    let data = postAjax("logout");
     console.log(data.res == 1);
     if (data === 0){
         return;

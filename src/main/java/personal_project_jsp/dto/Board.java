@@ -11,6 +11,7 @@ public class Board {
 	private Date wriDate;
 	private Date modDate;
 	private String thumb;
+	private Date deleteDate;
 
 	public Board() {
 	}
@@ -98,12 +99,26 @@ public class Board {
 		this.thumb = thumb;
 	}
 
+	public Date getDeleteDate() {
+		return deleteDate;
+	}
+
+	public void setDeleteDate(Date deleteDate) {
+		this.deleteDate = deleteDate;
+	}
+
 	@Override
 	public String toString() {
-		return "BoardDto [no=" + no + ", id=" + id + ", title=" + title + ", category=" + category + ", content="
-				+ content + ", wriDate=" + wriDate + ", modDate=" + modDate + ", thumb=" + thumb + "]";
+		return "Board{" +
+				"no=" + no +
+				", id='" + id + '\'' +
+				", title='" + title + '\'' +
+				", category=" + category +
+				", content='" + content + '\'' +
+				", wriDate=" + wriDate +
+				", modDate=" + modDate +
+				", thumb='" + thumb + '\'' +
+				", deleteDate=" + deleteDate +
+				'}';
 	}
-	
-	
-	
 }

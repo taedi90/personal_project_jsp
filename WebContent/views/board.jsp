@@ -11,6 +11,7 @@
 	<c:set var="keyword" value='${data.keyword}'/>
 	<c:set var="num" value='${data.num}'/>
 	<c:set var="order" value='${data.order}'/>
+	<c:set var="deleteDate" value='${data.deleteDate}'/>
 
 
 	<div id="categoryWrap">
@@ -63,6 +64,7 @@
 
         <!-- 게시물 출력  status.index to -->
 		<c:forEach var="i" items='${map.get("list")}' varStatus="status">
+            <c:if test="${empty i.deleteDate}">
 			<div id="post${i.getNo()}" class="postCard" data-no="${i.getNo()}" data-id="${i.getId()}" data-idx="${status.index}">
 				<div class="postDesc" data-no="${i.getNo()}" onclick="postClick(this.dataset.no)">
                     <p class="postCategory">${i.getCategory().getCategory()}</p>
@@ -91,7 +93,7 @@
 				<!-- 댓글들이 추가될 자리 -->
 				<!-- <img src="resources/imgs/loading.gif" alt="" style="width: 2rem; height: 2rem">			 -->
             </div>
-
+            </c:if>
         </c:forEach>
 
         </div>

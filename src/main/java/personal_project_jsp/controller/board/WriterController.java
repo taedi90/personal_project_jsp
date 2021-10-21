@@ -56,11 +56,11 @@ public class WriterController extends HttpServlet {
         board = boardDao.selectBoardByNo(board);
 
         // 권한확인
-        if(board.getId().equals((String)data.get("id"))){
+        //if(board.getId().equals((String)data.get("id"))){
             request.setAttribute("res", "1");
             request.setAttribute("postNo", (String)data.get("postNo"));
             request.setAttribute("board", board);
-        }
+        //}
 
         // 뿌리기
         RequestDispatcher rd = request.getRequestDispatcher("/views/writePost.jsp");

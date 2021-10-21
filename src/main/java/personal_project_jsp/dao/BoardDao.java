@@ -21,6 +21,9 @@ public interface BoardDao {
 	
 	int insertBoard(Board board);
 	int deleteBoard(Board board);
+
+	int deleteBoardContext(Board board);
+
 	int updateBoard(Board board);
 	
 	

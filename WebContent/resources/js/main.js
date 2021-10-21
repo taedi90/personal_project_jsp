@@ -59,6 +59,11 @@ function modifyPostConfirm() {
         no: postNo
     };
 
+    // 게시글 권한 확인
+    if(authPostChk()){
+        return;
+    }
+
     let data = ajax('writer', param, 'post');
     main.innerHTML = data;
     editorInit();
@@ -76,7 +81,7 @@ function deletePostFunc(no){
         return;
     }
 
-    // 게시글 삭제 권한 확인
+    // 게시글 권한 확인
     if(authPostChk()){
         return;
     }

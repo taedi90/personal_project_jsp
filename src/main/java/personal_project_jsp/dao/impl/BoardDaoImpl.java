@@ -1,9 +1,6 @@
 package personal_project_jsp.dao.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -30,6 +27,7 @@ public class BoardDaoImpl implements BoardDao {
 		Date wriDate = rs.getDate("wri_date");
 		Date modDate = rs.getDate("mod_date");
 		String thumb = rs.getString("thumb");
+		Date deleteDate = rs.getDate("delete_date");
 
 		return new Board(no, id, title, category, content, wriDate, modDate, thumb);
 	}
@@ -49,8 +47,8 @@ public class BoardDaoImpl implements BoardDao {
 	
 	@Override
 	public Map<String, Object> selectBoardByAll(int idx, int num, String order) {
-		String sql1 = "select count(*) FROM board";
-		String sql2 = "select R1.* FROM(SELECT * FROM board order by no " + order + " ) R1 LIMIT ?, ?";
+		String sql1 = "select count(*) FROM board where delete_date is NULL";
+		String sql2 = "select R1.* FROM(SELECT * FROM board where delete_date is NULL order by no " + order + " ) R1 LIMIT ?, ?";
 		ArrayList<Board> boardArr = null;
 		Map<String, Object> map = null;
 		
@@ -108,8 +106,8 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public Map<String, Object> selectBoardByCategory(Category category, int idx, int num, String order) {
-		String sql1 = "select count(*) FROM board where category = ?";
-		String sql2 = "select R1.* FROM(SELECT * FROM board where category = ? order by no " + order + " ) R1 LIMIT ?, ?";
+		String sql1 = "select count(*) FROM board where category = ? and delete_date is NULL";
+		String sql2 = "select R1.* FROM(SELECT * FROM board where category = ? and delete_date is NULL order by no " + order + " ) R1 LIMIT ?, ?";
 		ArrayList<Board> boardArr = null;
 		Map<String, Object> map = null;
 		
@@ -146,8 +144,8 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public Map<String, Object> selectBoardByKeyword(String keyword, int idx, int num, String order) {
-		String sql1 = "select count(*) FROM board where content like '%" + keyword + "%' or title like '%" + keyword + "%'";
-		String sql2 = "select R1.* FROM(SELECT * FROM board where content like '%" + keyword + "%' or title like '%" + keyword + "%' order by no " + order + " ) R1 LIMIT ?, ?";
+		String sql1 = "select count(*) FROM board where (content like '%" + keyword + "%' or title like '%" + keyword + "%') and delete_date is NULL ";
+		String sql2 = "select R1.* FROM(SELECT * FROM board where (content like '%" + keyword + "%' or title like '%" + keyword + "%') and delete_date is NULL order by no " + order + " ) R1 LIMIT ?, ?";
 		ArrayList<Board> boardArr = null;
 		Map<String, Object> map = null;
 		
@@ -187,7 +185,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public Map<String, Object> selectBoardById(User user, int idx, int num, String order) {
 		String sql1 = "select count(*) FROM board where id = ?";
-		String sql2 = "select R1.* FROM(SELECT * FROM board where id = ? order by no " + order + " ) R1 LIMIT ?, ?";
+		String sql2 = "select R1.* FROM(SELECT * FROM board where id = ?  and delete_date is NULL order by no " + order + " ) R1 LIMIT ?, ?";
 		ArrayList<Board> boardArr = null;
 		Map<String, Object> map = null;
 		
@@ -263,6 +261,24 @@ public class BoardDaoImpl implements BoardDao {
 			return 0;
 					
 		}
+
+	@Override
+	public int deleteBoardContext(Board board) {
+		String sql = "update board set title = '', content = '', thumb = '', delete_date = ? where no = ?";
+		try(Connection con = JdbcUtil.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+		){
+
+			pstmt.setTimestamp(1, new Timestamp(new Date().getTime()));
+			pstmt.setLong(2, board.getNo());
+
+			return pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+
+	}
 
 	@Override
 	public int updateBoard(Board board) {

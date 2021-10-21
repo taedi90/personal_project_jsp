@@ -158,7 +158,8 @@ public class BoardController extends HttpServlet {
         board.setNo(Long.parseLong((String) data.get("no")));
 
         BoardDao boardDao = BoardDaoImpl.getInstance();
-        int res = boardDao.deleteBoard(board);
+//        int res = boardDao.deleteBoard(board);
+        int res = boardDao.deleteBoardContext(board);
         String comment = null;
         if (res == 1){
             comment = "삭제 완료!";
