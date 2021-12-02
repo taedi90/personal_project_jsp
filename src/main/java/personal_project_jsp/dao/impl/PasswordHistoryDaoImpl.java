@@ -19,7 +19,7 @@ public class PasswordHistoryDaoImpl implements PasswordHistoryDao {
     public boolean isUsed(User user) {
         // 아이디랑 패스워드 넘겨서 확인하기
         // salt는 안바뀌기 때문에 password만 확인하면 됨
-        String sql = "select count(*) from user where id = ? and password = ?";
+        String sql = "select count(*) from pass_history where id = ? and password = ?";
 
         try(Connection con = JdbcUtil.getConnection();
             PreparedStatement pstmt = con.prepareStatement(sql);
