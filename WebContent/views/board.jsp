@@ -127,6 +127,9 @@
 
         </div>
     </div>
+
+<%--    <p>글 갯수 ${map.get("maxPost")}</p>--%>
+<%--    <p>페이지 갯수 ${map.get("maxPageIdx")}</p>--%>
 </c:if>
 
 <c:if test='${map.get("maxPost") == null}'>

@@ -38,7 +38,7 @@ public class BoardDaoImpl implements BoardDao {
 		
 		map.put("maxPost", rs1.getInt(1)); // 전체글 수
 		map.put("nowPost", (idx-1)*num + boardArr.size()); // 현재글 (누적 idx)
-		map.put("maxPageIdx", Math.ceil(rs1.getInt(1) / num )); // 총 페이지 인덱스
+		map.put("maxPageIdx", Math.ceil((double) rs1.getInt(1) / num )); // 총 페이지 인덱스
 		map.put("nowPageIdx", idx); // 현재 페이지 인덱스
 		map.put("list", boardArr); // 현재 페이지 글 리스트
 		
