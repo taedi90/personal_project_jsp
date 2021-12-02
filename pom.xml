@@ -5,6 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>groupId</groupId>
     <artifactId>personal_project_jsp</artifactId>
+    <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
@@ -69,15 +70,24 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.2</version>
                 <configuration>
-                    <url>${tomcat-server-url}</url>
-                    <server>tomcat-server</server>
-                    <path>/${project.artifactId}</path>
+                    <webXml>WebContent\WEB-INF\web.xml</webXml>
                 </configuration>
             </plugin>
+
+            <!--            <plugin>-->
+            <!--                <groupId>org.apache.tomcat.maven</groupId>-->
+            <!--                <artifactId>tomcat7-maven-plugin</artifactId>-->
+            <!--                <version>2.2</version>-->
+            <!--                <configuration>-->
+            <!--                    <url>${tomcat-server-url}</url>-->
+            <!--                    <server>tomcat-server</server>-->
+            <!--                    <path>/${project.artifactId}</path>-->
+            <!--                </configuration>-->
+            <!--            </plugin>-->
         </plugins>
     </build>
 
