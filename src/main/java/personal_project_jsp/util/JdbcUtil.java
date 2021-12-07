@@ -33,7 +33,7 @@ public class JdbcUtil {
 			String user = encryptor.decrypt(props.getProperty("user"));
 			String password = encryptor.decrypt(props.getProperty("password"));
 
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("org.mariadb.jdbc.Driver");
 			con = DriverManager.getConnection(url, user, password);
 		} catch (IOException e) {
 			e.printStackTrace();
