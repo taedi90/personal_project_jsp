@@ -1,6 +1,8 @@
 # personal_project_jsp
 JSP MVC 개인 웹 프로젝트
 
+<br>
+
 ## 차례
 
 [프로젝트 소개](#프로젝트-소개)  
@@ -8,9 +10,13 @@ JSP MVC 개인 웹 프로젝트
 [데모 링크](#데모-링크)  
 [외부 리소스](#외부-리소스)
 
+<br>
+
 ## 프로젝트 소개
 
 JSP로 기본 CRUD를 구현하기 위한 게시판을 만들어 보았습니다. 
+
+<br>
 
 ### 환경
 
@@ -18,9 +24,13 @@ JSP로 기본 CRUD를 구현하기 위한 게시판을 만들어 보았습니다
 - Maven 3.8.4
 - Server: CentOS8, Docker (20.10.11), Tomcat (8.5.69), MariaDB (latest), Nginx (latest), Jenkins (lts)
 
+<br>
+
 ### 기간
 
 - 약 3주
+
+<br>
 
 ## 적용해본 것
 
@@ -113,17 +123,24 @@ delimiter $$
 delimiter ;
 ```
 
+<br>
+
 ### 🧲 반응형 디자인
 
 ![반응형 디자인](image/img1.png)
 
 브라우저 크기에 따라 레이아웃이 수정되도록 구성하여 모바일과 PC 에서의 사용자 환경을 동시에 충족시키는 방법을 고려하였습니다.
 
+<br>
+
 ### 🗃 파일 업로드 및 리사이즈
 
-![파일 업로드](image/img4.gif)
+<p align="center"><img src="image/img4.gif" alt="파일 업로드" /></p>
+
 
 Drag & Drop 업로드 - 확장자 확인 - 파일 리사이즈 - 임의 폴더 생성 및 외부 저장소 저장 (패턴화 방지 및 deploy 간 데이터 유실 방지)
+
+<br>
 
 ### 📬 nested comments(대댓글)
 
@@ -159,15 +176,22 @@ if(rs.next()) {
     
 }
 ```
+
+<br>
+
 ### ⛓ 페이징 처리 & 정렬방식 변경 기능 구현
 
 페이징 처리|정렬방식 변경
 |---|---|
 ![페이징 처리](image/img5.png)|![정렬방식 변경](image/img6.png)
 
+<br>
+
 ## 데모 링크
 
 - [https://web.taedi.net/board/](https://web.taedi.net/board/)
+
+<br>
 
 ## 외부 리소스
 
