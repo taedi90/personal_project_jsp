@@ -48,7 +48,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public Map<String, Object> selectBoardByAll(int idx, int num, String order) {
 		String sql1 = "select count(*) FROM board where delete_date is NULL";
-		String sql2 = "select R1.* FROM(SELECT * FROM board where delete_date is NULL order by no " + order + " ) R1 LIMIT ?, ?";
+		String sql2 = "SELECT * FROM board where delete_date is NULL order by no " + order + " LIMIT ?, ?";
 		ArrayList<Board> boardArr = null;
 		Map<String, Object> map = null;
 		
@@ -107,7 +107,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public Map<String, Object> selectBoardByCategory(Category category, int idx, int num, String order) {
 		String sql1 = "select count(*) FROM board where category = ? and delete_date is NULL";
-		String sql2 = "select R1.* FROM(SELECT * FROM board where category = ? and delete_date is NULL order by no " + order + " ) R1 LIMIT ?, ?";
+		String sql2 = "SELECT * FROM board where category = ? and delete_date is NULL order by no " + order + " LIMIT ?, ?";
 		ArrayList<Board> boardArr = null;
 		Map<String, Object> map = null;
 		
@@ -145,7 +145,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public Map<String, Object> selectBoardByKeyword(String keyword, int idx, int num, String order) {
 		String sql1 = "select count(*) FROM board where (content like '%" + keyword + "%' or title like '%" + keyword + "%') and delete_date is NULL ";
-		String sql2 = "select R1.* FROM(SELECT * FROM board where (content like '%" + keyword + "%' or title like '%" + keyword + "%') and delete_date is NULL order by no " + order + " ) R1 LIMIT ?, ?";
+		String sql2 = "SELECT * FROM board where (content like '%" + keyword + "%' or title like '%" + keyword + "%') and delete_date is NULL order by no " + order + " LIMIT ?, ?";
 		ArrayList<Board> boardArr = null;
 		Map<String, Object> map = null;
 		
@@ -185,7 +185,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public Map<String, Object> selectBoardById(User user, int idx, int num, String order) {
 		String sql1 = "select count(*) FROM board where id = ?";
-		String sql2 = "select R1.* FROM(SELECT * FROM board where id = ?  and delete_date is NULL order by no " + order + " ) R1 LIMIT ?, ?";
+		String sql2 = "SELECT * FROM board where id = ?  and delete_date is NULL order by no " + order + " LIMIT ?, ?";
 		ArrayList<Board> boardArr = null;
 		Map<String, Object> map = null;
 		
